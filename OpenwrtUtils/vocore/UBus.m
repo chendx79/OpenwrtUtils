@@ -59,6 +59,11 @@ static BOOL _bypassAllocMethod = TRUE;
     [self SendPost:parameters CurrentAction:GetLanConfig];
 }
 
+- (void)GetWanStatus{
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[sessionToken, @"network.interface.wan", @"status", @{}]};
+    [self SendPost:parameters CurrentAction:GetWanStatus];
+}
+
 -(bool)isSuccess:(NSDictionary*)data
 {
     id t = [[data objectForKey:@"result" ] objectAtIndex:0];
@@ -93,6 +98,11 @@ static BOOL _bypassAllocMethod = TRUE;
                         case GetLanConfig:
                             lanConfig = [[result objectAtIndex:1] objectForKey:@"values"];
                             NSLog(@"lanConfig=%@", lanConfig);
+                            [self GetWanStatus];
+                            break;
+                        case GetWanStatus:
+                            wanStatus = [result objectAtIndex:1];
+                            NSLog(@"wanStatus=%@", wanStatus);
                             break;
                         default:
                             break;
