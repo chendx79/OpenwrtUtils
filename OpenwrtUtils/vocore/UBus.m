@@ -11,7 +11,7 @@
 @implementation UBus
 
 static UBus *_sharedInstance = nil;
-static BOOL _bypassAllocMethod = TRUE;
+static BOOL _bypassAllocMethod = YES;
 
 + (id)sharedInstance {
     @synchronized([UBus class]) {
@@ -24,7 +24,7 @@ static BOOL _bypassAllocMethod = TRUE;
 
 + (id)alloc {
     @synchronized([UBus class]) {
-        _bypassAllocMethod = FALSE; // EDIT #2
+        _bypassAllocMethod = NO; // EDIT #2
         if (_sharedInstance == nil) {
             _sharedInstance = [super alloc];
             return _sharedInstance;
@@ -50,27 +50,29 @@ static BOOL _bypassAllocMethod = TRUE;
 
 
 - (void)Login{
-    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[@"00000000000000000000000000000000", @"session", @"login", @{ @"username": @"root", @"password": @"yourPassword"}]};
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0",
+                                 @"id": @1,
+                                 @"method": @"call",
+                                 @"params": @[@"00000000000000000000000000000000", @"session", @"login", @{ @"username": @"root", @"password": @"yourPassword"}]};
     [self SendPost:parameters CurrentAction:Login];
 }
 
 - (void)GetLanConfig{
-    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[sessionToken, @"uci", @"get", @{ @"config": @"network", @"section": @"lan"}]};
+    // sessionToken为空的情况可能会导致"params"字段没值，所以需对sessionToken做空判断
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0",
+                                 @"id": @1,
+                                 @"method": @"call",
+                                 @"params": @[sessionToken, @"uci", @"get", @{ @"config": @"network", @"section": @"lan"}]};
     [self SendPost:parameters CurrentAction:GetLanConfig];
 }
 
-- (void)GetWanStatus{
-    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[sessionToken, @"network.interface.wan", @"status", @{}]};
-    [self SendPost:parameters CurrentAction:GetWanStatus];
-}
-
--(bool)isSuccess:(NSDictionary*)data
+- (BOOL)isSuccess:(NSDictionary*)data
 {
-    id t = [[data objectForKey:@"result" ] objectAtIndex:0];
-    if ([t longValue] == 0) {
-        return true;
+    long t = [[[data objectForKey:@"result" ] objectAtIndex:0] longValue];
+    if (t == 0) {
+        return YES;
     } else {
-        return false;
+        return NO;
     }
 }
 
@@ -80,41 +82,34 @@ static BOOL _bypassAllocMethod = TRUE;
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.requestSerializer = [AFJSONRequestSerializer serializer];
     
-    __block NSArray *result = nil;
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
-        [session POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if ([self isSuccess:responseObject]){
-                result = [responseObject objectForKey:@"result"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    //处理result
-                    switch (action) {
-                        case Login:
-                            sessionToken = [[result objectAtIndex:1] objectForKey:@"ubus_rpc_session"];
+    [session POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([self isSuccess:responseObject]){
+            NSArray *result = [responseObject objectForKey:@"result"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //处理result
+                switch (action) {
+                    case Login:
+                        sessionToken = [[result objectAtIndex:1] objectForKey:@"ubus_rpc_session"];
+                        if (sessionToken.length > 0) {
                             NSLog(@"sessionToken=%@", sessionToken);
                             [self GetLanConfig];
-                            break;
-                        case GetLanConfig:
-                            lanConfig = [[result objectAtIndex:1] objectForKey:@"values"];
-                            NSLog(@"lanConfig=%@", lanConfig);
-                            [self GetWanStatus];
-                            break;
-                        case GetWanStatus:
-                            wanStatus = [result objectAtIndex:1];
-                            NSLog(@"wanStatus=%@", wanStatus);
-                            break;
-                        default:
-                            break;
-                    }
-                });
-            };
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"请求失败");
-        }];
-    });
+                        }
+                        else {
+                            NSLog(@"sessionToken is null");
+                        }
+                        break;
+                    case GetLanConfig:
+                        lanConfig = [[result objectAtIndex:1] objectForKey:@"values"];
+                        NSLog(@"lanConfig=%@", lanConfig);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        };
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败");
+    }];
 }
-
-//Test Git Config Change 3
 
 @end
