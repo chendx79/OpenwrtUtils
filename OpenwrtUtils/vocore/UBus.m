@@ -49,7 +49,7 @@ static BOOL _bypassAllocMethod = YES;
 }
 
 
-- (void)Login{
+- (void)Login {
     NSDictionary *parameters = @{@"jsonrpc": @"2.0",
                                  @"id": @1,
                                  @"method": @"call",
@@ -57,8 +57,7 @@ static BOOL _bypassAllocMethod = YES;
     [self SendPost:parameters CurrentAction:Login];
 }
 
-- (void)GetLanConfig{
-    // sessionToken为空的情况可能会导致"params"字段没值，所以需对sessionToken做空判断
+- (void)GetLanConfig {
     NSDictionary *parameters = @{@"jsonrpc": @"2.0",
                                  @"id": @1,
                                  @"method": @"call",
@@ -66,7 +65,12 @@ static BOOL _bypassAllocMethod = YES;
     [self SendPost:parameters CurrentAction:GetLanConfig];
 }
 
-- (BOOL)isSuccess:(NSDictionary*)data
+- (void)GetWanStatus {
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[sessionToken, @"network.interface.wan", @"status", @{}]};
+    [self SendPost:parameters CurrentAction:GetWanStatus];
+}
+
+- (BOOL)isSuccess:(NSDictionary *)data
 {
     long t = [[[data objectForKey:@"result" ] objectAtIndex:0] longValue];
     if (t == 0) {
@@ -90,17 +94,17 @@ static BOOL _bypassAllocMethod = YES;
                 switch (action) {
                     case Login:
                         sessionToken = [[result objectAtIndex:1] objectForKey:@"ubus_rpc_session"];
-                        if (sessionToken.length > 0) {
-                            NSLog(@"sessionToken=%@", sessionToken);
-                            [self GetLanConfig];
-                        }
-                        else {
-                            NSLog(@"sessionToken is null");
-                        }
+                        NSLog(@"sessionToken=%@", sessionToken);
+                        [self GetLanConfig];
                         break;
                     case GetLanConfig:
                         lanConfig = [[result objectAtIndex:1] objectForKey:@"values"];
                         NSLog(@"lanConfig=%@", lanConfig);
+                        [self GetWanStatus];
+                        break;
+                    case GetWanStatus:
+                        wanStatus = [result objectAtIndex:1];
+                        NSLog(@"wanStatus=%@", wanStatus);
                         break;
                     default:
                         break;
