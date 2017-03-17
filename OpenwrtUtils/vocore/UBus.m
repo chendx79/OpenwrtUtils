@@ -70,6 +70,11 @@ static BOOL _bypassAllocMethod = YES;
     [self SendPost:parameters CurrentAction:GetWanStatus];
 }
 
+- (void)ScanWifi {
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[sessionToken, @"iwinfo", @"scan", @{@"device": @"ra0"}]};
+    [self SendPost:parameters CurrentAction:ScanWifi];
+}
+
 - (BOOL)isSuccess:(NSDictionary *)data
 {
     long t = [[[data objectForKey:@"result" ] objectAtIndex:0] longValue];
@@ -105,6 +110,11 @@ static BOOL _bypassAllocMethod = YES;
                     case GetWanStatus:
                         wanStatus = [result objectAtIndex:1];
                         NSLog(@"wanStatus=%@", wanStatus);
+                        [self ScanWifi];
+                        break;
+                    case ScanWifi:
+                        apList = [result objectAtIndex:1];
+                        NSLog(@"apList=%@", apList);
                         break;
                     default:
                         break;
