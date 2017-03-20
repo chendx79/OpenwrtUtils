@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56F3581E7BB9B700694949 /* UHomeViewController.m */; };
 		3E56F35D1E7BB9B700694949 /* USearchWiFiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56F35A1E7BB9B700694949 /* USearchWiFiViewController.m */; };
+		3EDC40141E7F74F1001700CA /* UBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40131E7F74F0001700CA /* UBaseViewController.m */; };
 		65A127271E778F880097082F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127261E778F880097082F /* main.m */; };
 		65A1272A1E778F880097082F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127291E778F880097082F /* AppDelegate.m */; };
 		65A127321E778F880097082F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A127311E778F880097082F /* Assets.xcassets */; };
 		65A127351E778F880097082F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A127331E778F880097082F /* LaunchScreen.storyboard */; };
 		65A127401E778F890097082F /* OpenwrtUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A1273F1E778F890097082F /* OpenwrtUtilsTests.m */; };
 		65AAE4A71E78DC0800C019CA /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AAE4A61E78DC0800C019CA /* libAFNetworking.a */; };
-		65AAE4A91E78E71100C019CA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 65AAE4A81E78E71100C019CA /* Podfile */; };
 		65AAE4B01E791EC200C019CA /* UBus.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AAE4AF1E791EC200C019CA /* UBus.m */; };
 		D85BC4453565E284D6762AB6 /* libPods-OpenwrtUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F99A6B209A3E4CF3D2340A5C /* libPods-OpenwrtUtils.a */; };
 /* End PBXBuildFile section */
@@ -38,6 +38,8 @@
 		3E56F3591E7BB9B700694949 /* USearchWiFiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USearchWiFiViewController.h; sourceTree = "<group>"; };
 		3E56F35A1E7BB9B700694949 /* USearchWiFiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USearchWiFiViewController.m; sourceTree = "<group>"; };
 		3E56F35E1E7BBCCB00694949 /* OpenwrtUtilsPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenwrtUtilsPrefixHeader.pch; sourceTree = "<group>"; };
+		3EDC40121E7F74F0001700CA /* UBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBaseViewController.h; sourceTree = "<group>"; };
+		3EDC40131E7F74F0001700CA /* UBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBaseViewController.m; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,7 +51,6 @@
 		65A1273F1E778F890097082F /* OpenwrtUtilsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenwrtUtilsTests.m; sourceTree = "<group>"; };
 		65A127411E778F890097082F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65AAE4A61E78DC0800C019CA /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
-		65AAE4A81E78E71100C019CA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		65AAE4AE1E791EC200C019CA /* UBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBus.h; sourceTree = "<group>"; };
 		65AAE4AF1E791EC200C019CA /* UBus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBus.m; sourceTree = "<group>"; };
 		F99A6B209A3E4CF3D2340A5C /* libPods-OpenwrtUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenwrtUtils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +79,8 @@
 		3E56F3561E7BB9B700694949 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3EDC40121E7F74F0001700CA /* UBaseViewController.h */,
+				3EDC40131E7F74F0001700CA /* UBaseViewController.m */,
 				3E56F3571E7BB9B700694949 /* UHomeViewController.h */,
 				3E56F3581E7BB9B700694949 /* UHomeViewController.m */,
 				3E56F3591E7BB9B700694949 /* USearchWiFiViewController.h */,
@@ -97,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				65A127241E778F880097082F /* OpenwrtUtils */,
-				65AAE4A81E78E71100C019CA /* Podfile */,
 				65A1273E1E778F890097082F /* OpenwrtUtilsTests */,
 				65A127231E778F880097082F /* Products */,
 				E283FFEE4F86B10227900FEC /* Pods */,
@@ -264,7 +266,6 @@
 			files = (
 				65A127351E778F880097082F /* LaunchScreen.storyboard in Resources */,
 				65A127321E778F880097082F /* Assets.xcassets in Resources */,
-				65AAE4A91E78E71100C019CA /* Podfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +336,7 @@
 				3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */,
 				65A1272A1E778F880097082F /* AppDelegate.m in Sources */,
 				65A127271E778F880097082F /* main.m in Sources */,
+				3EDC40141E7F74F1001700CA /* UBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

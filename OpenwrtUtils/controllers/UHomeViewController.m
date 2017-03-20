@@ -21,12 +21,23 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Openwrt使用工具";
     [[UBus sharedInstance] Login];
+    
+    UIButton *btn = [[UIButton alloc] init];
+    [btn setBackgroundImage:[UIImage imageNamed:@"openwrtbox"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(actionSearchWiFi) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(100);
+        make.left.mas_equalTo(100);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - actions
 
 - (void)actionSearchWiFi {
     USearchWiFiViewController *vc = [[USearchWiFiViewController alloc] init];

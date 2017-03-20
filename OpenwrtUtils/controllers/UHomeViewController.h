@@ -6,8 +6,8 @@
 //  Copyright © 2017年 陈鼎星. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "UBaseViewController.h"
 
-@interface UHomeViewController : UIViewController
+@interface UHomeViewController : UBaseViewController
 
 @end
