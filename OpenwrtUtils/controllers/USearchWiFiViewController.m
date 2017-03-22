@@ -29,8 +29,7 @@
     [self.datasource addObject:WIFI_OTHER];
     [self.view addSubview:self.tableView];
     
-    [[URouterConfig sharedInstance] setSearchRouterDelegate:self];
-    [[URouterConfig sharedInstance] searchingRouters];
+    [[URouterConfig sharedInstance] searchingRouters:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,6 +9,7 @@
 #import "URouterConfig.h"
 
 @interface URouterConfig ()
+@property (nonatomic, weak) id<URouterConfigProtocol> searchRouterDelegate;
 @property (nonatomic, strong) NSArray *searchedRouters;
 @end
 
@@ -24,8 +25,8 @@
     return instance;
 }
 
-- (void)searchingRouters {
-
+- (void)searchingRouters:(id<URouterConfigProtocol>)delegate {
+    self.searchRouterDelegate = delegate;
 }
 
 @end

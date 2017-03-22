@@ -15,9 +15,9 @@
 @end
 
 @interface URouterConfig : NSObject
-@property (nonatomic, weak) id<URouterConfigProtocol> searchRouterDelegate;
+
 + (URouterConfig *)sharedInstance;
 
-- (void)searchingRouters;
+- (void)searchingRouters:(id<URouterConfigProtocol>)delegate;
 
 @end
