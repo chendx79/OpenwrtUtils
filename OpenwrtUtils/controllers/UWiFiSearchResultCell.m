@@ -21,9 +21,8 @@
 @end
 @implementation UWiFiSearchResultCell
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 
         [self.contentView addSubview:self.nameLabel];
         [self.contentView addSubview:self.lockView];
@@ -31,7 +30,7 @@
         [self.contentView addSubview:self.detailView];
         
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
+            make.left.mas_equalTo(15);
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
         [self.detailView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,6 +62,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
+        _nameLabel.textColor = [UIColor blackColor];
     }
     return _nameLabel;
 }

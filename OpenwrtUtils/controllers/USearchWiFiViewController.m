@@ -11,7 +11,7 @@
 #import "URouterConfig.h"
 #import "UWiFiSearchResultCell.h"
 
-#define WIFI_OTHER @"其他"
+#define WIFI_OTHER @"其他..."
 
 @interface USearchWiFiViewController () <UITableViewDataSource, UITableViewDelegate, URouterConfigProtocol>
 @property (nonatomic, strong) UITableView    *tableView;
@@ -52,6 +52,7 @@
 
 - (void)routerConfig:(URouterConfig *)router didSearchRouters:(NSArray *)routers {
     [self.datasource removeAllObjects];
+    [self.datasource addObjectsFromArray:routers];
     [self.datasource addObject:WIFI_OTHER];
     [self.tableView reloadData];
 }
@@ -59,6 +60,7 @@
 #pragma mark - UITableViewDataSource && UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     id obj = [self.datasource objectAtIndex:indexPath.row];
     if ([obj isKindOfClass:[URouter class]]) {
         [self actionInputPassword:obj];
@@ -95,7 +97,6 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         NSString *text = (NSString *)obj;
         cell.textLabel.text = text;
