@@ -14,15 +14,18 @@
 
 typedef NS_OPTIONS(NSUInteger, Action)
 {
-    Login  = 0,
-    GetLanConfig  = 1,
-    GetWanStatus = 2,
-    GetWirelessConfig = 3,
-    ScanWifi = 4,
+    CheckUBus = 1,
+    Login  = 2,
+    GetLanConfig  = 3,
+    GetWanStatus = 4,
+    GetWirelessConfig = 5,
+    ScanWifi = 6,
 };
 
 @interface UBus : NSObject{
 @private
+    NSString *rootPassword;
+    
     NSString *sessionToken;
     NSDictionary *lanConfig;
     NSDictionary *wanStatus;
@@ -32,6 +35,7 @@ typedef NS_OPTIONS(NSUInteger, Action)
 
 + (id)sharedInstance;
 
+- (void)CheckUBus;
 - (void)Login;
 - (void)GetLanConfig;
 

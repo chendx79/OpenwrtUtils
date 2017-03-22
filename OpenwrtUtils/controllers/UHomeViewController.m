@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Openwrt实用工具";
-    [[UBus sharedInstance] Login];
+    [[UBus sharedInstance] CheckUBus];
     
     UIButton *btn = [[UIButton alloc] init];
     [btn setBackgroundImage:[UIImage imageNamed:@"openwrtbox"] forState:UIControlStateNormal];

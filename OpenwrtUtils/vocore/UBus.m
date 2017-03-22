@@ -44,10 +44,17 @@ static BOOL _bypassAllocMethod = YES;
         @throw [NSException exceptionWithName:@"invalid allocation" reason:@"invalid allocation" userInfo:nil];
     
     if (self = [super init]) {
-        
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
+        rootPassword = [data objectForKey: @"rootPassword"];
     }
     
     return self;
+}
+
+- (void)CheckUBus {
+    NSDictionary *parameters = @{};
+    [self SendPost:parameters CurrentAction:CheckUBus];
 }
 
 - (void)Login {
@@ -58,7 +65,7 @@ static BOOL _bypassAllocMethod = YES;
                                               @"session",
                                               @"login",
                                               @{@"username": @"root",
-                                                @"password": @"yourPassword"
+                                                @"password": rootPassword
                                                 }
                                               ]
                                  };
@@ -135,6 +142,14 @@ static BOOL _bypassAllocMethod = YES;
     session.requestSerializer = [AFJSONRequestSerializer serializer];
     
     [session POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (action==CheckUBus){
+            if ([[responseObject objectForKey:@"jsonrpc"] isEqualToString:@"2.0"]){
+                NSLog(@"路由器支持UBus访问");
+                [self Login];
+            }else{
+                NSLog(@"路由器不支持UBus访问");
+            }
+        }
         if ([self isSuccess:responseObject]){
             NSArray *result = [responseObject objectForKey:@"result"];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -171,6 +186,9 @@ static BOOL _bypassAllocMethod = YES;
         };
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"请求失败");
+        if (action==CheckUBus){
+            NSLog(@"路由器不支持UBus访问");
+        }
     }];
 }
 
