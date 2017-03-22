@@ -25,6 +25,7 @@ typedef NS_OPTIONS(NSUInteger, Action)
 @interface UBus : NSObject{
 @private
     NSString *rootPassword;
+    NSString *URLString;
     
     NSString *sessionToken;
     NSDictionary *lanConfig;

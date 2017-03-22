@@ -47,6 +47,7 @@ static BOOL _bypassAllocMethod = YES;
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
         NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
         rootPassword = [data objectForKey: @"rootPassword"];
+        URLString = [NSString stringWithFormat:@"http://%@/ubus", [[Utils sharedInstance] GetGetwayIP]];
     }
     
     return self;
@@ -136,8 +137,6 @@ static BOOL _bypassAllocMethod = YES;
 }
 
 - (void)SendPost:(NSDictionary *)parameters CurrentAction:(Action)action{
-    NSString *URLString = @"http://192.168.10.1/ubus";
-    
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.requestSerializer = [AFJSONRequestSerializer serializer];
     
