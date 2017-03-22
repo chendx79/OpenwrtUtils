@@ -10,12 +10,12 @@
 		3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56F3581E7BB9B700694949 /* UHomeViewController.m */; };
 		3E56F35D1E7BB9B700694949 /* USearchWiFiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56F35A1E7BB9B700694949 /* USearchWiFiViewController.m */; };
 		3EDC40141E7F74F1001700CA /* UBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40131E7F74F0001700CA /* UBaseViewController.m */; };
+		657C4EE81E82251800ED8218 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 657C4EE71E82251800ED8218 /* Utils.m */; };
 		65A127271E778F880097082F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127261E778F880097082F /* main.m */; };
 		65A1272A1E778F880097082F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127291E778F880097082F /* AppDelegate.m */; };
 		65A127321E778F880097082F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A127311E778F880097082F /* Assets.xcassets */; };
 		65A127351E778F880097082F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A127331E778F880097082F /* LaunchScreen.storyboard */; };
 		65A127401E778F890097082F /* OpenwrtUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A1273F1E778F890097082F /* OpenwrtUtilsTests.m */; };
-		65AAE4A71E78DC0800C019CA /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AAE4A61E78DC0800C019CA /* libAFNetworking.a */; };
 		65AAE4B01E791EC200C019CA /* UBus.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AAE4AF1E791EC200C019CA /* UBus.m */; };
 		D85BC4453565E284D6762AB6 /* libPods-OpenwrtUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F99A6B209A3E4CF3D2340A5C /* libPods-OpenwrtUtils.a */; };
 /* End PBXBuildFile section */
@@ -40,6 +40,8 @@
 		3E56F35E1E7BBCCB00694949 /* OpenwrtUtilsPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenwrtUtilsPrefixHeader.pch; sourceTree = "<group>"; };
 		3EDC40121E7F74F0001700CA /* UBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBaseViewController.h; sourceTree = "<group>"; };
 		3EDC40131E7F74F0001700CA /* UBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBaseViewController.m; sourceTree = "<group>"; };
+		657C4EE61E82251800ED8218 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		657C4EE71E82251800ED8218 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,7 +63,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65AAE4A71E78DC0800C019CA /* libAFNetworking.a in Frameworks */,
 				D85BC4453565E284D6762AB6 /* libPods-OpenwrtUtils.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +97,15 @@
 			path = managers;
 			sourceTree = "<group>";
 		};
+		657C4EE51E82251800ED8218 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				657C4EE61E82251800ED8218 /* Utils.h */,
+				657C4EE71E82251800ED8218 /* Utils.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		65A127191E778F880097082F = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +132,7 @@
 				3E56F3561E7BB9B700694949 /* controllers */,
 				3E56F35B1E7BB9B700694949 /* managers */,
 				65AAE4AD1E791EC200C019CA /* vocore */,
+				657C4EE51E82251800ED8218 /* utils */,
 				65A127281E778F880097082F /* AppDelegate.h */,
 				65A127291E778F880097082F /* AppDelegate.m */,
 				65A127311E778F880097082F /* Assets.xcassets */,
@@ -336,6 +347,7 @@
 				3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */,
 				65A1272A1E778F880097082F /* AppDelegate.m in Sources */,
 				65A127271E778F880097082F /* main.m in Sources */,
+				657C4EE81E82251800ED8218 /* Utils.m in Sources */,
 				3EDC40141E7F74F1001700CA /* UBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,10 +482,7 @@
 				INFOPLIST_FILE = OpenwrtUtils/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/AFNetworking",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = www.moredodo.com.MoreDoDo.OpenwrtUtils;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -490,10 +499,7 @@
 				INFOPLIST_FILE = OpenwrtUtils/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/AFNetworking",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = www.moredodo.com.MoreDoDo.OpenwrtUtils;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
