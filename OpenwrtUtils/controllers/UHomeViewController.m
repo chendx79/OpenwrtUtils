@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"Openwrt使用工具";
+    self.navigationItem.title = @"Openwrt实用工具";
     [[UBus sharedInstance] Login];
     
     UIButton *btn = [[UIButton alloc] init];

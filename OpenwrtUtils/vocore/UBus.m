@@ -7,6 +7,8 @@
 //
 
 #import "UBus.h"
+#import "Utils.h"
+
 
 @implementation UBus
 
@@ -48,12 +50,18 @@ static BOOL _bypassAllocMethod = YES;
     return self;
 }
 
-
 - (void)Login {
     NSDictionary *parameters = @{@"jsonrpc": @"2.0",
                                  @"id": @1,
                                  @"method": @"call",
-                                 @"params": @[@"00000000000000000000000000000000", @"session", @"login", @{ @"username": @"root", @"password": @"yourPassword"}]};
+                                 @"params": @[@"00000000000000000000000000000000",
+                                              @"session",
+                                              @"login",
+                                              @{@"username": @"root",
+                                                @"password": @"yourPassword"
+                                                }
+                                              ]
+                                 };
     [self SendPost:parameters CurrentAction:Login];
 }
 
@@ -61,17 +69,52 @@ static BOOL _bypassAllocMethod = YES;
     NSDictionary *parameters = @{@"jsonrpc": @"2.0",
                                  @"id": @1,
                                  @"method": @"call",
-                                 @"params": @[sessionToken, @"uci", @"get", @{ @"config": @"network", @"section": @"lan"}]};
+                                 @"params": @[sessionToken,
+                                              @"uci",
+                                              @"get",
+                                              @{ @"config": @"network",
+                                                 @"section": @"lan"}
+                                              ]
+                                 };
     [self SendPost:parameters CurrentAction:GetLanConfig];
 }
 
 - (void)GetWanStatus {
-    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[sessionToken, @"network.interface.wan", @"status", @{}]};
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0",
+                                 @"id": @1,
+                                 @"method": @"call",
+                                 @"params": @[sessionToken,
+                                              @"network.interface.wan",
+                                              @"status",
+                                              @{}
+                                              ]
+                                 };
     [self SendPost:parameters CurrentAction:GetWanStatus];
 }
 
+- (void)GetWirelessConfig {
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0",
+                                 @"id": @1,
+                                 @"method": @"call",
+                                 @"params": @[sessionToken,
+                                              @"uci",
+                                              @"get",
+                                              @{ @"config": @"wireless"}
+                                              ]
+                                 };
+    [self SendPost:parameters CurrentAction:GetWirelessConfig];
+}
+
 - (void)ScanWifi {
-    NSDictionary *parameters = @{@"jsonrpc": @"2.0", @"id": @1, @"method": @"call", @"params": @[sessionToken, @"iwinfo", @"scan", @{@"device": @"ra0"}]};
+    NSDictionary *parameters = @{@"jsonrpc": @"2.0",
+                                 @"id": @1,
+                                 @"method": @"call",
+                                 @"params": @[sessionToken,
+                                              @"iwinfo",
+                                              @"scan",
+                                              @{@"device": @"radio0"}
+                                              ]
+                                 };
     [self SendPost:parameters CurrentAction:ScanWifi];
 }
 
@@ -86,7 +129,7 @@ static BOOL _bypassAllocMethod = YES;
 }
 
 - (void)SendPost:(NSDictionary *)parameters CurrentAction:(Action)action{
-    NSString *URLString = @"http://192.168.10.244/ubus";
+    NSString *URLString = @"http://192.168.10.1/ubus";
     
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -110,6 +153,11 @@ static BOOL _bypassAllocMethod = YES;
                     case GetWanStatus:
                         wanStatus = [result objectAtIndex:1];
                         NSLog(@"wanStatus=%@", wanStatus);
+                        [self GetWirelessConfig];
+                        break;
+                    case GetWirelessConfig:
+                        wirelessConfig = [[result objectAtIndex:1] objectForKey:@"values"];
+                        NSLog(@"wirelessConfig=%@", wirelessConfig);
                         [self ScanWifi];
                         break;
                     case ScanWifi:
