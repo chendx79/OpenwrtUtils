@@ -114,7 +114,7 @@ static BOOL _bypassAllocMethod = YES;
                                   @"params" : @[ sessionToken,
                                                  @"iwinfo",
                                                  @"scan",
-                                                 @{@"device" : @"radio0"} ]
+                                                 @{@"device" : wifiDevice} ]
     };
     [self SendPost:parameters CurrentAction:ScanWifi];
 }
@@ -151,27 +151,54 @@ static BOOL _bypassAllocMethod = YES;
                 switch (action) {
                     case Login:
                         sessionToken = [[result objectAtIndex:1] objectForKey:@"ubus_rpc_session"];
-                        NSLog(@"sessionToken=%@", sessionToken);
+                        NSLog(@"登录成功，sessionToken=%@", sessionToken);
                         [self GetLanConfig];
                         break;
                     case GetLanConfig:
                         lanConfig = [[result objectAtIndex:1] objectForKey:@"values"];
-                        NSLog(@"lanConfig=%@", lanConfig);
+                        //NSLog(@"lanConfig=%@", lanConfig);
+                        NSLog(@"内网配置如下：");
+                        NSLog(@"网关地址=%@", [lanConfig objectForKey:@"ipaddr"]);
                         [self GetWanStatus];
                         break;
                     case GetWanStatus:
                         wanStatus = [result objectAtIndex:1];
-                        NSLog(@"wanStatus=%@", wanStatus);
+                        //NSLog(@"wanStatus=%@", wanStatus);
+                        NSLog(@"外网配置如下：");
+                        NSLog(@"类型=%@", [wanStatus objectForKey:@"proto"]);
+                        NSLog(@"IP地址=%@", [[[wanStatus objectForKey:@"ipv4-address"] objectAtIndex:0] objectForKey:@"address"]);
+                        NSLog(@"DNS地址=%@", [wanStatus objectForKey:@"dns-server"]);
                         [self GetWirelessConfig];
                         break;
                     case GetWirelessConfig:
                         wirelessConfig = [[result objectAtIndex:1] objectForKey:@"values"];
-                        NSLog(@"wirelessConfig=%@", wirelessConfig);
+                        //NSLog(@"wirelessConfig=%@", wirelessConfig);
+                        NSLog(@"Wifi配置如下：");
+                        for (int i = 0; i < [wirelessConfig allKeys].count; i++) {
+                            NSString *key = [wirelessConfig allKeys][i];
+                            NSDictionary *value = [wirelessConfig objectForKey:key];
+                            //NSLog(@"%@ = %@", key, value);
+                            if ([[value objectForKey:@".type"] isEqualToString:@"wifi-iface"]) {
+                                NSLog(@"SSID=%@", [value objectForKey:@"ssid"]);
+                                //NSLog(@"wifi设备=%@", [value objectForKey:@"device"]);
+                                NSLog(@"加密方式=%@", [value objectForKey:@"encryption"]);
+                                NSLog(@"密码=%@", [value objectForKey:@"key"]);
+                            }
+                            if ([[value objectForKey:@".type"] isEqualToString:@"wifi-device"]) {
+                                wifiDevice = [value objectForKey:@".name"];
+                                NSLog(@"设备=%@", wifiDevice);
+                            }
+                        }
                         [self ScanWifi];
                         break;
                     case ScanWifi:
-                        apList = [result objectAtIndex:1];
-                        NSLog(@"apList=%@", apList);
+                        apList = [[result objectAtIndex:1] objectForKey:@"results"];
+                        //NSLog(@"apList=%@", apList);
+                        NSLog(@"搜索到的无线热点如下：");
+                        for (int i = 0; i < apList.count; i++) {
+                            NSDictionary *ap = apList[i];
+                            NSLog(@"SSID=%@， 信号=%@/%@， MAC地址=%@， 认证方式=%@", [ap objectForKey:@"ssid"], [ap objectForKey:@"quality"], [ap objectForKey:@"quality_max"], [ap objectForKey:@"bssid"], [[[ap objectForKey:@"encryption"] objectForKey:@"authentication"] objectAtIndex:0]);
+                        }
                         break;
                     default:
                         break;
@@ -183,7 +210,7 @@ static BOOL _bypassAllocMethod = YES;
                 //处理result
                 switch (action) {
                     case Login:
-                        NSLog(@"登录出错");
+                        NSLog(@"登录失败");
                         break;
                     case GetLanConfig:
                         break;

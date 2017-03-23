@@ -31,6 +31,7 @@ typedef NS_OPTIONS(NSUInteger, Action) {
     NSDictionary *wanStatus;
     NSDictionary *wirelessConfig;
     NSArray *apList;
+    NSString *wifiDevice;
 }
 
 + (id)sharedInstance;
