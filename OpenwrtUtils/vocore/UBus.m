@@ -83,6 +83,31 @@ static BOOL _bypassAllocMethod = YES;
     [self SendPost:parameters CurrentAction:GetLanConfig];
 }
 
+- (void)GetLanDHCP {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"uci",
+                                                 @"get",
+                                                 @{@"config" : @"dhcp",
+                                                   @"section" : @"lan"} ]
+                                  };
+    [self SendPost:parameters CurrentAction:GetLanDHCP];
+}
+
+- (void)GetSSHStatus {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"uci",
+                                                 @"get",
+                                                 @{@"config" : @"dropbear"} ]
+                                  };
+    [self SendPost:parameters CurrentAction:GetSSHStatus];
+}
+
 - (void)GetWanStatus {
     NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
                                   @"id" : @1,
@@ -105,6 +130,30 @@ static BOOL _bypassAllocMethod = YES;
                                                  @{@"config" : @"wireless"} ]
     };
     [self SendPost:parameters CurrentAction:GetWirelessConfig];
+}
+
+- (void)GetShadowsocksConfig {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"uci",
+                                                 @"get",
+                                                 @{@"config" : @"shadowsocks"} ]
+                                  };
+    [self SendPost:parameters CurrentAction:GetShadowsocksConfig];
+}
+
+- (void)GetPdnsdConfig {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"file",
+                                                 @"read",
+                                                 @{@"path" : @"/etc/pdnsd.conf"} ]
+                                  };
+    [self SendPost:parameters CurrentAction:GetPdnsdConfig];
 }
 
 - (void)ScanWifi {
@@ -159,6 +208,19 @@ static BOOL _bypassAllocMethod = YES;
                         //NSLog(@"lanConfig=%@", lanConfig);
                         NSLog(@"内网配置如下：");
                         NSLog(@"网关地址=%@", [lanConfig objectForKey:@"ipaddr"]);
+                        [self GetLanDHCP];
+                        break;
+                    case GetLanDHCP:
+                        lanDHCP = [[[[result objectAtIndex:1] objectForKey:@"values"] objectForKey:@"dhcp_option"] objectAtIndex:0];
+                        //NSLog(@"lanDHCP=%@", lanDHCP);
+                        NSLog(@"DHCP=%@", lanDHCP);
+                        [self GetSSHStatus];
+                        break;
+                    case GetSSHStatus:
+                        sshStatus = [[result objectAtIndex:1] objectForKey:@"values"];
+                        sshStatus = [sshStatus objectForKey:[sshStatus allKeys][0]];
+                        //NSLog(@"sshStatus=%@", sshStatus);
+                        NSLog(@"SSH状态=%@, 端口号=%@", [sshStatus objectForKey:@"PasswordAuth"], [sshStatus objectForKey:@"Port"]);
                         [self GetWanStatus];
                         break;
                     case GetWanStatus:
@@ -173,22 +235,28 @@ static BOOL _bypassAllocMethod = YES;
                     case GetWirelessConfig:
                         wirelessConfig = [[result objectAtIndex:1] objectForKey:@"values"];
                         //NSLog(@"wirelessConfig=%@", wirelessConfig);
-                        NSLog(@"Wifi配置如下：");
                         for (int i = 0; i < [wirelessConfig allKeys].count; i++) {
                             NSString *key = [wirelessConfig allKeys][i];
                             NSDictionary *value = [wirelessConfig objectForKey:key];
                             //NSLog(@"%@ = %@", key, value);
                             if ([[value objectForKey:@".type"] isEqualToString:@"wifi-iface"]) {
-                                NSLog(@"SSID=%@", [value objectForKey:@"ssid"]);
+                                NSLog(@"Wifi配置：SSID=%@, 加密方式=%@, 密码=%@", [value objectForKey:@"ssid"], [value objectForKey:@"encryption"], [value objectForKey:@"key"]);
+                                wifiDevice = [value objectForKey:@"device"];
                                 //NSLog(@"wifi设备=%@", [value objectForKey:@"device"]);
-                                NSLog(@"加密方式=%@", [value objectForKey:@"encryption"]);
-                                NSLog(@"密码=%@", [value objectForKey:@"key"]);
-                            }
-                            if ([[value objectForKey:@".type"] isEqualToString:@"wifi-device"]) {
-                                wifiDevice = [value objectForKey:@".name"];
-                                NSLog(@"设备=%@", wifiDevice);
                             }
                         }
+                        [self GetShadowsocksConfig];
+                        break;
+                    case GetShadowsocksConfig:
+                        shadowsocksConfig = [[result objectAtIndex:1] objectForKey:@"values"];
+                        shadowsocksConfig = [shadowsocksConfig objectForKey:[shadowsocksConfig allKeys][0]];
+                        //NSLog(@"shadowsocksConfig=%@", shadowsocksConfig);
+                        NSLog(@"Shadowsocks配置：状态=%@, 服务器=%@, 服务器端口=%@, 密码=%@, 加密方式=%@", [shadowsocksConfig objectForKey:@"enable"], [shadowsocksConfig objectForKey:@"server"], [shadowsocksConfig objectForKey:@"server_port"], [shadowsocksConfig objectForKey:@"password"], [shadowsocksConfig objectForKey:@"encrypt_method"]);
+                        [self GetPdnsdConfig];
+                        break;
+                    case GetPdnsdConfig:
+                        pdnsdConfig = [[result objectAtIndex:1] objectForKey:@"data"];
+                        NSLog(@"pdnsdConfig=\n%@", pdnsdConfig);
                         [self ScanWifi];
                         break;
                     case ScanWifi:

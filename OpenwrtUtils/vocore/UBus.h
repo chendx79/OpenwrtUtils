@@ -16,9 +16,13 @@ typedef NS_OPTIONS(NSUInteger, Action) {
     CheckUBus = 1,
     Login = 2,
     GetLanConfig = 3,
-    GetWanStatus = 4,
-    GetWirelessConfig = 5,
-    ScanWifi = 6,
+    GetLanDHCP = 4,
+    GetSSHStatus = 5,
+    GetWanStatus = 6,
+    GetWirelessConfig = 7,
+    GetShadowsocksConfig = 8,
+    GetPdnsdConfig = 9,
+    ScanWifi = 10,
 };
 
 @interface UBus : NSObject {
@@ -28,8 +32,12 @@ typedef NS_OPTIONS(NSUInteger, Action) {
 
     NSString *sessionToken;
     NSDictionary *lanConfig;
+    NSString *lanDHCP;
+    NSDictionary *sshStatus;
     NSDictionary *wanStatus;
     NSDictionary *wirelessConfig;
+    NSDictionary *shadowsocksConfig;
+    NSString *pdnsdConfig;
     NSArray *apList;
     NSString *wifiDevice;
 }
