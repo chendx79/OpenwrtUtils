@@ -213,7 +213,9 @@ static BOOL _bypassAllocMethod = YES;
                     case GetLanDHCP:
                         lanDHCP = [[[[result objectAtIndex:1] objectForKey:@"values"] objectForKey:@"dhcp_option"] objectAtIndex:0];
                         //NSLog(@"lanDHCP=%@", lanDHCP);
-                        NSLog(@"DHCP=%@", lanDHCP);
+                        if ([lanDHCP componentsSeparatedByString:@","].count > 1) {
+                            NSLog(@"DHCP=%@", [lanDHCP componentsSeparatedByString:@","][1]);
+                        }
                         [self GetSSHStatus];
                         break;
                     case GetSSHStatus:
