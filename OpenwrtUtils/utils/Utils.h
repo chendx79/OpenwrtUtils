@@ -17,9 +17,8 @@
 #import <netinet/in.h>
 #import <arpa/inet.h>
 
-@interface Utils : NSObject{
-@private
-
+@interface Utils : NSObject {
+   @private
 }
 
 + (id)sharedInstance;
@@ -27,8 +26,6 @@
 - (NSString *)GetLocalIP;
 - (NSString *)GetGetwayIP;
 
-
 @end
-
 
 #endif /* UBus_h */

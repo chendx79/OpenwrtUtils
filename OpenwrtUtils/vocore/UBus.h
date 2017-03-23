@@ -12,21 +12,20 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-typedef NS_OPTIONS(NSUInteger, Action)
-{
+typedef NS_OPTIONS(NSUInteger, Action) {
     CheckUBus = 1,
-    Login  = 2,
-    GetLanConfig  = 3,
+    Login = 2,
+    GetLanConfig = 3,
     GetWanStatus = 4,
     GetWirelessConfig = 5,
     ScanWifi = 6,
 };
 
-@interface UBus : NSObject{
-@private
+@interface UBus : NSObject {
+   @private
     NSString *rootPassword;
     NSString *URLString;
-    
+
     NSString *sessionToken;
     NSDictionary *lanConfig;
     NSDictionary *wanStatus;
@@ -40,8 +39,6 @@ typedef NS_OPTIONS(NSUInteger, Action)
 - (void)Login;
 - (void)GetLanConfig;
 
-
 @end
-
 
 #endif /* UBus_h */
