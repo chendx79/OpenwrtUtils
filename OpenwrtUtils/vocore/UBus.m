@@ -47,6 +47,8 @@ static BOOL _bypassAllocMethod = YES;
         NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
         rootPassword = [data objectForKey:@"rootPassword"];
         URLString = [NSString stringWithFormat:@"http://%@/ubus", [[Utils sharedInstance] GetGetwayIP]];
+        //for test
+        URLString = @"http://192.168.20.183/ubus";
     }
 
     return self;
@@ -92,7 +94,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"get",
                                                  @{@"config" : @"dhcp",
                                                    @"section" : @"lan"} ]
-                                  };
+    };
     [self SendPost:parameters CurrentAction:GetLanDHCP];
 }
 
@@ -104,7 +106,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"uci",
                                                  @"get",
                                                  @{@"config" : @"dropbear"} ]
-                                  };
+    };
     [self SendPost:parameters CurrentAction:GetSSHStatus];
 }
 
@@ -140,7 +142,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"uci",
                                                  @"get",
                                                  @{@"config" : @"shadowsocks"} ]
-                                  };
+    };
     [self SendPost:parameters CurrentAction:GetShadowsocksConfig];
 }
 
@@ -152,7 +154,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"file",
                                                  @"read",
                                                  @{@"path" : @"/etc/pdnsd.conf"} ]
-                                  };
+    };
     [self SendPost:parameters CurrentAction:GetPdnsdConfig];
 }
 
@@ -168,9 +170,53 @@ static BOOL _bypassAllocMethod = YES;
     [self SendPost:parameters CurrentAction:ScanWifi];
 }
 
+- (void)SetShadowsocksConfig:(NSNumber *)serverPort Password:(NSString *)password {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"uci",
+                                                 @"set",
+                                                 @{@"config" : @"shadowsocks",
+                                                   @"type" : @"shadowsocks",
+                                                   @"values" : @{@"server_port" : serverPort,
+                                                                 @"password" : password
+                                                                 }
+                                                   }
+                                                 ]
+                                  };
+    [self SendPost:parameters CurrentAction:SetShadowsocksConfig];
+}
+
+- (void)Commit:(NSString *)config {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"uci",
+                                                 @"commit",
+                                                 @{@"config" : config}
+                                                 ]
+                                  };
+    [self SendPost:parameters CurrentAction:Commit];
+}
+
+- (void)Apply {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"uci",
+                                                 @"apply",
+                                                 @{}
+                                                 ]
+                                  };
+    [self SendPost:parameters CurrentAction:Apply];
+}
+
 - (BOOL)isSuccess:(NSDictionary *)data {
     long t = [[[data objectForKey:@"result"] objectAtIndex:0] longValue];
-    if (t == 0) {
+    if (t == UBUS_STATUS_OK) {
         return YES;
     } else {
         return NO;
@@ -269,6 +315,18 @@ static BOOL _bypassAllocMethod = YES;
                             NSDictionary *ap = apList[i];
                             NSLog(@"SSID=%@， 信号=%@/%@， MAC地址=%@， 认证方式=%@", [ap objectForKey:@"ssid"], [ap objectForKey:@"quality"], [ap objectForKey:@"quality_max"], [ap objectForKey:@"bssid"], [[[ap objectForKey:@"encryption"] objectForKey:@"authentication"] objectAtIndex:0]);
                         }
+                        [self SetShadowsocksConfig:[NSNumber numberWithInt:1723] Password:@"yourPassword"];
+                        break;
+                    case SetShadowsocksConfig:
+                        //pdnsdConfig = [[result objectAtIndex:1] objectForKey:@"data"];
+                        NSLog(@"设置Shadowsocks成功");
+                        [self Commit:@"shadowsocks"];
+                        break;
+                    case Commit:
+                        NSLog(@"提交成功");
+                        break;
+                    case Apply:
+                        NSLog(@"应用成功");
                         break;
                     default:
                         break;

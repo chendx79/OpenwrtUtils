@@ -23,6 +23,24 @@ typedef NS_OPTIONS(NSUInteger, Action) {
     GetShadowsocksConfig = 8,
     GetPdnsdConfig = 9,
     ScanWifi = 10,
+    SetShadowsocksConfig = 11,
+    
+    Commit = 20,
+    Apply = 21,
+};
+
+typedef NS_OPTIONS(NSUInteger, UbusError) {
+    UBUS_STATUS_OK = 0,
+    UBUS_STATUS_INVALID_COMMAND = 1,
+    UBUS_STATUS_INVALID_ARGUMENT = 2,
+    UBUS_STATUS_METHOD_NOT_FOUND = 3,
+    UBUS_STATUS_NOT_FOUND = 4,
+    UBUS_STATUS_NO_DATA = 5,
+    UBUS_STATUS_PERMISSION_DENIED = 6,
+    UBUS_STATUS_TIMEOUT = 7,
+    UBUS_STATUS_NOT_SUPPORTED = 8,
+    UBUS_STATUS_UNKNOWN_ERROR = 9,
+    UBUS_STATUS_CONNECTION_FAILED = 10,
 };
 
 @interface UBus : NSObject {
