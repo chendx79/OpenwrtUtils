@@ -24,7 +24,7 @@ typedef NS_OPTIONS(NSUInteger, Action) {
     GetPdnsdConfig = 9,
     ScanWifi = 10,
     SetShadowsocksConfig = 11,
-    
+
     Commit = 20,
     Apply = 21,
 };

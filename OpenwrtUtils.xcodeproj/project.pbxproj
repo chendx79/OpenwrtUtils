@@ -58,6 +58,7 @@
 		3EDC40621E822C4E001700CA /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		3EDC40631E822C4E001700CA /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		3EDC40661E824777001700CA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		652CBF8C1E8A45EC0029FB00 /* route.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 		3EDC40611E822C4E001700CA /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				652CBF8C1E8A45EC0029FB00 /* route.h */,
 				3EDC40621E822C4E001700CA /* Utils.h */,
 				3EDC40631E822C4E001700CA /* Utils.m */,
 			);

@@ -46,9 +46,14 @@ static BOOL _bypassAllocMethod = YES;
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
         NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
         rootPassword = [data objectForKey:@"rootPassword"];
-        URLString = [NSString stringWithFormat:@"http://%@/ubus", [[Utils sharedInstance] GetGetwayIP]];
+        NSString *gatewayIP = [[Utils sharedInstance] GetGetwayIP];
+        URLString = [NSString stringWithFormat:@"http://%@/ubus", gatewayIP];
         //for test
         URLString = @"http://192.168.20.183/ubus";
+        gatewayIP = @"192.168.20.183";
+        
+        //路由器系统做准备
+        [[Utils sharedInstance] SystemPrepare:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
     }
 
     return self;
@@ -180,11 +185,8 @@ static BOOL _bypassAllocMethod = YES;
                                                  @{@"config" : @"shadowsocks",
                                                    @"type" : @"shadowsocks",
                                                    @"values" : @{@"server_port" : serverPort,
-                                                                 @"password" : password
-                                                                 }
-                                                   }
-                                                 ]
-                                  };
+                                                                 @"password" : password}} ]
+    };
     [self SendPost:parameters CurrentAction:SetShadowsocksConfig];
 }
 
@@ -195,9 +197,8 @@ static BOOL _bypassAllocMethod = YES;
                                   @"params" : @[ sessionToken,
                                                  @"uci",
                                                  @"commit",
-                                                 @{@"config" : config}
-                                                 ]
-                                  };
+                                                 @{@"config" : config} ]
+    };
     [self SendPost:parameters CurrentAction:Commit];
 }
 
@@ -208,9 +209,9 @@ static BOOL _bypassAllocMethod = YES;
                                   @"params" : @[ sessionToken,
                                                  @"uci",
                                                  @"apply",
-                                                 @{}
-                                                 ]
-                                  };
+                                                 @{@"rollback" : @NO,
+                                                   @"timeout" : @10} ]
+    };
     [self SendPost:parameters CurrentAction:Apply];
 }
 
@@ -324,6 +325,7 @@ static BOOL _bypassAllocMethod = YES;
                         break;
                     case Commit:
                         NSLog(@"提交成功");
+                        //[self Apply];
                         break;
                     case Apply:
                         NSLog(@"应用成功");
