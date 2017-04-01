@@ -17,16 +17,19 @@ typedef NS_OPTIONS(NSUInteger, Action) {
     Login = 2,
     GetLanConfig = 3,
     GetLanDHCP = 4,
-    GetSSHStatus = 5,
-    GetWanStatus = 6,
-    GetWirelessConfig = 7,
-    GetShadowsocksConfig = 8,
-    GetPdnsdConfig = 9,
-    ScanWifi = 10,
-    SetShadowsocksConfig = 11,
+    GetDHCPLeases = 5,
+    GetSSHStatus = 6,
+    GetWanStatus = 7,
+    GetWirelessConfig = 8,
+    GetShadowsocksConfig = 9,
+    GetPdnsdConfig = 10,
 
-    Commit = 20,
-    Apply = 21,
+    ScanWifi = 20,
+
+    SetShadowsocksConfig = 30,
+
+    Commit = 40,
+    Apply = 41,
 };
 
 typedef NS_OPTIONS(NSUInteger, UbusError) {
@@ -48,9 +51,14 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
     NSString *rootPassword;
     NSString *URLString;
 
+    NSString *ssServer;
+    NSNumber *ssPort;
+    NSString *ssPassword;
+
     NSString *sessionToken;
     NSDictionary *lanConfig;
     NSString *lanDHCP;
+    NSString *DHCPLeases;
     NSDictionary *sshStatus;
     NSDictionary *wanStatus;
     NSDictionary *wirelessConfig;

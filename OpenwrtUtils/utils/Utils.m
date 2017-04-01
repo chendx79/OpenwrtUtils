@@ -142,34 +142,34 @@ static BOOL _bypassAllocMethod = YES;
     return address;
 }
 
-- (void)SystemPrepare:(NSString *) ip Port:(NSString *) port Username:(NSString *) username Password:(NSString *) password{
+- (void)SystemPrepare:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password {
     NSString *host = [NSString stringWithFormat:@"%@:%@", ip, port];
     NMSSHSession *session = [NMSSHSession connectToHost:host
                                            withUsername:username];
-    
+
     if (session.isConnected) {
         [session authenticateByPassword:password];
-        
+
         if (session.isAuthorized) {
             NSLog(@"Authentication succeeded");
         }
+
+        NSError *error = nil;
+
+        NSString *response;
+        response = [session.channel execute:@"opkg update" error:&error];
+        NSLog(@"%@", response);
+        response = [session.channel execute:@"opkg install rpcd-mod-iwinfo rpcd-mod-file iwinfo" error:&error];
+        NSLog(@"%@", response);
+        response = [session.channel execute:@"echo \"{\n    \\\"superuser\\\": {\n        \\\"description\\\": \\\"Super user access role\\\",\n        \\\"read\\\": {\n            \\\"ubus\\\": {\n                \\\"*\\\": [ \\\"*\\\" ]\n            },\n            \\\"uci\\\": [ \\\"*\\\" ]\n        },\n        \\\"write\\\": {\n            \\\"ubus\\\": {\n                \\\"*\\\": [ \\\"*\\\" ]\n            },\n            \\\"uci\\\": [ \\\"*\\\" ]\n        }\n    }\n}\n\" > /usr/share/rpcd/acl.d/superuser.json" error:&error];
+
+        NSLog(@"%@", response);
+        response = [session.channel execute:@"reboot" error:&error];
+        NSLog(@"%@", response);
+        //BOOL success = [session.channel uploadFile:@"~/index.html" to:@"/usr/share/rpcd/acl.d/superuser.json"];
+
+        [session disconnect];
     }
-    
-    NSError *error = nil;
-    
-    NSString *response;
-    response = [session.channel execute:@"opkg update" error:&error];
-    NSLog(@"%@", response);
-    response = [session.channel execute:@"opkg install rpcd-mod-iwinfo rpcd-mod-file" error:&error];
-    NSLog(@"%@", response);
-    response = [session.channel execute:@"echo \"{\n    \\\"superuser\\\": {\n        \\\"description\\\": \\\"Super user access role\\\",\n        \\\"read\\\": {\n            \\\"ubus\\\": {\n                \\\"*\\\": [ \\\"*\\\" ]\n            },\n            \\\"uci\\\": [ \\\"*\\\" ]\n        },\n        \\\"write\\\": {\n            \\\"ubus\\\": {\n                \\\"*\\\": [ \\\"*\\\" ]\n            },\n            \\\"uci\\\": [ \\\"*\\\" ]\n        }\n    }\n}\n\" > /usr/share/rpcd/acl.d/superuser.json" error:&error];
-    
-    NSLog(@"%@", response);
-    response = [session.channel execute:@"reboot" error:&error];
-    NSLog(@"%@", response);
-    //BOOL success = [session.channel uploadFile:@"~/index.html" to:@"/usr/share/rpcd/acl.d/superuser.json"];
-    
-    [session disconnect];
 }
 
 @end

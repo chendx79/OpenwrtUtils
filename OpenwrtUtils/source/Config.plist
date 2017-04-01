@@ -2,7 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ssPassword</key>
+	<string></string>
+	<key>ssPort</key>
+	<integer>0</integer>
+	<key>ssServer</key>
+	<string></string>
 	<key>rootPassword</key>
-	<string>yourPassword</string>
+	<string></string>
 </dict>
 </plist>

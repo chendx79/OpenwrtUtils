@@ -46,14 +46,17 @@ static BOOL _bypassAllocMethod = YES;
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
         NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
         rootPassword = [data objectForKey:@"rootPassword"];
+        ssServer = [data objectForKey:@"ssServer"];
+        ssPort = [data objectForKey:@"ssPort"];
+        ssPassword = [data objectForKey:@"ssPassword"];
         NSString *gatewayIP = [[Utils sharedInstance] GetGetwayIP];
         URLString = [NSString stringWithFormat:@"http://%@/ubus", gatewayIP];
         //for test
-        URLString = @"http://192.168.20.183/ubus";
-        gatewayIP = @"192.168.20.183";
-        
+        //URLString = @"http://192.168.20.183/ubus";
+        //gatewayIP = @"192.168.20.183";
+
         //路由器系统做准备
-        [[Utils sharedInstance] SystemPrepare:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
+        //[[Utils sharedInstance] SystemPrepare:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
     }
 
     return self;
@@ -175,7 +178,7 @@ static BOOL _bypassAllocMethod = YES;
     [self SendPost:parameters CurrentAction:ScanWifi];
 }
 
-- (void)SetShadowsocksConfig:(NSNumber *)serverPort Password:(NSString *)password {
+- (void)SetShadowsocksConfig:(NSString *)serverAddr ServerPort:(NSNumber *)serverPort Password:(NSString *)password {
     NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
                                   @"id" : @1,
                                   @"method" : @"call",
@@ -184,10 +187,23 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"set",
                                                  @{@"config" : @"shadowsocks",
                                                    @"type" : @"shadowsocks",
-                                                   @"values" : @{@"server_port" : serverPort,
+                                                   @"values" : @{@"server" : serverAddr,
+                                                                 @"server_port" : serverPort,
                                                                  @"password" : password}} ]
     };
     [self SendPost:parameters CurrentAction:SetShadowsocksConfig];
+}
+
+- (void)GetDHCPLeases {
+    NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
+                                  @"id" : @1,
+                                  @"method" : @"call",
+                                  @"params" : @[ sessionToken,
+                                                 @"file",
+                                                 @"read",
+                                                 @{@"path" : @"/tmp/dhcp.leases"} ]
+    };
+    [self SendPost:parameters CurrentAction:GetDHCPLeases];
 }
 
 - (void)Commit:(NSString *)config {
@@ -228,6 +244,7 @@ static BOOL _bypassAllocMethod = YES;
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.requestSerializer = [AFJSONRequestSerializer serializer];
 
+    NSLog(@"Sending POST request to %@, parameters = %@", URLString, parameters);
     [session POST:URLString
         parameters:parameters
         progress:nil
@@ -263,6 +280,11 @@ static BOOL _bypassAllocMethod = YES;
                         if ([lanDHCP componentsSeparatedByString:@","].count > 1) {
                             NSLog(@"DHCP=%@", [lanDHCP componentsSeparatedByString:@","][1]);
                         }
+                        [self GetDHCPLeases];
+                        break;
+                    case GetDHCPLeases:
+                        DHCPLeases = [[result objectAtIndex:1] objectForKey:@"data"];
+                        NSLog(@"DHCPLeases=\n%@", DHCPLeases);
                         [self GetSSHStatus];
                         break;
                     case GetSSHStatus:
@@ -316,7 +338,7 @@ static BOOL _bypassAllocMethod = YES;
                             NSDictionary *ap = apList[i];
                             NSLog(@"SSID=%@， 信号=%@/%@， MAC地址=%@， 认证方式=%@", [ap objectForKey:@"ssid"], [ap objectForKey:@"quality"], [ap objectForKey:@"quality_max"], [ap objectForKey:@"bssid"], [[[ap objectForKey:@"encryption"] objectForKey:@"authentication"] objectAtIndex:0]);
                         }
-                        [self SetShadowsocksConfig:[NSNumber numberWithInt:1723] Password:@"yourPassword"];
+                        [self SetShadowsocksConfig:ssServer ServerPort:ssPort Password:ssPassword];
                         break;
                     case SetShadowsocksConfig:
                         //pdnsdConfig = [[result objectAtIndex:1] objectForKey:@"data"];

@@ -20,6 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Openwrt实用工具";
+    NSLog(@"CheckUBus started...");
     [[UBus sharedInstance] CheckUBus];
     
     UIButton *btn = [[UIButton alloc] init];

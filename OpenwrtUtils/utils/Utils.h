@@ -25,8 +25,7 @@
 
 - (NSString *)GetLocalIP;
 - (NSString *)GetGetwayIP;
-- (void) ssh;
-- (void)SystemPrepare:(NSString *) ip Port:(NSString *) port Username:(NSString *) username Password:(NSString *) password;
+- (void)SystemPrepare:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
 
 @end
 
