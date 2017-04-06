@@ -8,6 +8,7 @@
 
 #import "UBus.h"
 #import "Utils.h"
+#import "UWrtHttpEngine.h"
 
 @implementation UBus
 
@@ -64,7 +65,7 @@ static BOOL _bypassAllocMethod = YES;
 
 - (void)CheckUBus {
     NSDictionary *parameters = @{};
-    [self SendPost:parameters CurrentAction:CheckUBus];
+    [self SendPost:parameters CurrentAction:CheckUBus result:NULL];
 }
 
 - (void)Login {
@@ -77,7 +78,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @{@"username" : @"root",
                                                    @"password" : rootPassword} ]
     };
-    [self SendPost:parameters CurrentAction:Login];
+    [self SendPost:parameters CurrentAction:Login result:NULL];
 }
 
 - (void)GetLanConfig {
@@ -90,7 +91,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @{@"config" : @"network",
                                                    @"section" : @"lan"} ]
     };
-    [self SendPost:parameters CurrentAction:GetLanConfig];
+    [self SendPost:parameters CurrentAction:GetLanConfig result:NULL];
 }
 
 - (void)GetLanDHCP {
@@ -103,7 +104,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @{@"config" : @"dhcp",
                                                    @"section" : @"lan"} ]
     };
-    [self SendPost:parameters CurrentAction:GetLanDHCP];
+    [self SendPost:parameters CurrentAction:GetLanDHCP result:NULL];
 }
 
 - (void)GetSSHStatus {
@@ -115,7 +116,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"get",
                                                  @{@"config" : @"dropbear"} ]
     };
-    [self SendPost:parameters CurrentAction:GetSSHStatus];
+    [self SendPost:parameters CurrentAction:GetSSHStatus result:NULL];
 }
 
 - (void)GetWanStatus {
@@ -127,7 +128,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"status",
                                                  @{} ]
     };
-    [self SendPost:parameters CurrentAction:GetWanStatus];
+    [self SendPost:parameters CurrentAction:GetWanStatus result:NULL];
 }
 
 - (void)GetWirelessConfig {
@@ -139,7 +140,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"get",
                                                  @{@"config" : @"wireless"} ]
     };
-    [self SendPost:parameters CurrentAction:GetWirelessConfig];
+    [self SendPost:parameters CurrentAction:GetWirelessConfig result:NULL];
 }
 
 - (void)GetShadowsocksConfig {
@@ -151,7 +152,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"get",
                                                  @{@"config" : @"shadowsocks"} ]
     };
-    [self SendPost:parameters CurrentAction:GetShadowsocksConfig];
+    [self SendPost:parameters CurrentAction:GetShadowsocksConfig result:NULL];
 }
 
 - (void)GetPdnsdConfig {
@@ -163,7 +164,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"read",
                                                  @{@"path" : @"/etc/pdnsd.conf"} ]
     };
-    [self SendPost:parameters CurrentAction:GetPdnsdConfig];
+    [self SendPost:parameters CurrentAction:GetPdnsdConfig result:NULL];
 }
 
 - (void)ScanWifi {
@@ -175,7 +176,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"scan",
                                                  @{@"device" : wifiDevice} ]
     };
-    [self SendPost:parameters CurrentAction:ScanWifi];
+    [self SendPost:parameters CurrentAction:ScanWifi result:NULL];
 }
 
 - (void)SetShadowsocksConfig:(NSString *)serverAddr ServerPort:(NSNumber *)serverPort Password:(NSString *)password {
@@ -191,7 +192,7 @@ static BOOL _bypassAllocMethod = YES;
                                                                  @"server_port" : serverPort,
                                                                  @"password" : password}} ]
     };
-    [self SendPost:parameters CurrentAction:SetShadowsocksConfig];
+    [self SendPost:parameters CurrentAction:SetShadowsocksConfig result:NULL];
 }
 
 - (void)GetDHCPLeases {
@@ -203,7 +204,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"read",
                                                  @{@"path" : @"/tmp/dhcp.leases"} ]
     };
-    [self SendPost:parameters CurrentAction:GetDHCPLeases];
+    [self SendPost:parameters CurrentAction:GetDHCPLeases result:NULL];
 }
 
 - (void)Commit:(NSString *)config {
@@ -215,7 +216,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @"commit",
                                                  @{@"config" : config} ]
     };
-    [self SendPost:parameters CurrentAction:Commit];
+    [self SendPost:parameters CurrentAction:Commit result:NULL];
 }
 
 - (void)Apply {
@@ -228,7 +229,7 @@ static BOOL _bypassAllocMethod = YES;
                                                  @{@"rollback" : @NO,
                                                    @"timeout" : @10} ]
     };
-    [self SendPost:parameters CurrentAction:Apply];
+    [self SendPost:parameters CurrentAction:Apply result:NULL];
 }
 
 - (BOOL)isSuccess:(NSDictionary *)data {
@@ -240,10 +241,10 @@ static BOOL _bypassAllocMethod = YES;
     }
 }
 
-- (void)SendPost:(NSDictionary *)parameters CurrentAction:(Action)action {
+- (void)SendPost:(NSDictionary *)parameters CurrentAction:(Action)action result:(void (^)(BOOL rst, id obj))result {
     AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
     session.requestSerializer = [AFJSONRequestSerializer serializer];
-
+    
     NSLog(@"Sending POST request to %@, parameters = %@", URLString, parameters);
     [session POST:URLString
         parameters:parameters
@@ -384,6 +385,28 @@ static BOOL _bypassAllocMethod = YES;
               NSLog(@"路由器不支持UBus访问");
           }
         }];
+}
+
+#pragma mark - public methods
+
+- (void)checkUBusAvailable:(void (^)(BOOL available))result {
+    UWrtCheckUBusApi *api = [UWrtCheckUBusApi new];
+    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtCheckUBusApi *obj) {
+        if (result) {
+            result(obj.isAvailable);
+        }
+    }];
+}
+
+- (void)scanWiFi:(void (^)(NSArray *list))result {
+    UWrtScanWiFiApi *api = [UWrtScanWiFiApi new];
+    api.sessionToken = sessionToken;
+    api.wifiDevice = wifiDevice;
+    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtScanWiFiApi *obj) {
+        if (result) {
+            result(obj.apList);
+        }
+    }];
 }
 
 @end

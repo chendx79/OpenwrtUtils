@@ -7,6 +7,7 @@
 //
 
 #import "URouterConfig.h"
+#import "UBus.h"
 
 @interface URouterConfig ()
 @property (nonatomic, weak) id<URouterConfigProtocol> searchRouterDelegate;
@@ -35,18 +36,18 @@
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate {
     self.searchRouterDelegate = delegate;
     
-    // 测试代码，模拟搜索到wifi
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        URouter *router = [URouter new];
-        router.ssid = @"wanda";
-        router.isEncrypt = YES;
-        router.isConnected = NO;
+    [[UBus sharedInstance] scanWiFi:^(NSArray *list) {
+        NSMutableArray *temp = [NSMutableArray array];
+        for (NSDictionary *ap in list) {
+            URouter *router = [URouter routerWithInfo:ap];
+            [temp addObject:router];
+        }
         [self.searchedRouters removeAllObjects];
-        [self.searchedRouters addObject:router];
+        [self.searchedRouters addObjectsFromArray:temp];
         if ([self.searchRouterDelegate respondsToSelector:@selector(routerConfig:didSearchRouters:)]) {
             [self.searchRouterDelegate routerConfig:self didSearchRouters:self.searchedRouters];
         }
-    });
+    }];
 }
 
 @end

@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class UEncryption;
 @interface URouter : NSObject
-@property (nonatomic, copy) NSString *ssid;
+
+@property (nonatomic, readonly) NSString *ssid;
 @property (nonatomic, assign) BOOL isConnected;
 @property (nonatomic, assign) BOOL isEncrypt;
+
 + (URouter *)routerWithInfo:(NSDictionary *)info;
 @end

@@ -75,7 +75,6 @@
  * are set by making entries for all directly connected interfaces.
  */
 
-#if !TARGET_IPHONE_SIMULATOR
 /*
  * A route consists of a destination address and a reference
  * to a routing entry.  These are often held by protocols
@@ -100,7 +99,6 @@ struct rt_metrics {
 	u_int32_t	rmx_pksent;	/* packets sent using this route */
 	u_int32_t	rmx_filler[4];	/* will be used for T/TCP later */
 };
-#endif
 
 /*
  * rmx_rtt and rmx_rttvar are stored as microseconds;
@@ -145,8 +143,6 @@ struct rt_metrics {
 #define RTF_CONDEMNED	0x2000000	/* defunct; no longer modifiable */
 /* 0x4000000 and up unassigned */
 
-#if !TARGET_IPHONE_SIMULATOR
-
 /*
  * Routing statistics.
  */
@@ -190,7 +186,6 @@ struct rt_msghdr2 {
 	u_int32_t rtm_inits;		/* which metrics we are initializing */
 	struct rt_metrics rtm_rmx;	/* metrics themselves */
 };
-#endif
 
 #define RTM_VERSION	5	/* Up the ante and ignore older versions */
 
@@ -254,8 +249,6 @@ struct rt_msghdr2 {
 #define RTAX_BRD	7	/* for NEWADDR, broadcast or p-p dest addr */
 #define RTAX_MAX	8	/* size of array to allocate */
 
-#if !TARGET_IPHONE_SIMULATOR
-
 struct rt_addrinfo {
 	int	rti_addrs;
 	struct	sockaddr *rti_info[RTAX_MAX];
@@ -269,7 +262,5 @@ struct route_cb {
 	int	iso_count;
 	int	any_count;
 };
-
-#endif
 
 #endif

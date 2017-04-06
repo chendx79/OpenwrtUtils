@@ -9,6 +9,21 @@
 /* Begin PBXBuildFile section */
 		3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56F3581E7BB9B700694949 /* UHomeViewController.m */; };
 		3E56F35D1E7BB9B700694949 /* USearchWiFiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E56F35A1E7BB9B700694949 /* USearchWiFiViewController.m */; };
+		3E5DFC731E9628E100D0CB2A /* UWrtHttpEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC721E9628E100D0CB2A /* UWrtHttpEngine.m */; };
+		3E5DFC761E96296D00D0CB2A /* UWrtCheckUBusApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC751E96296D00D0CB2A /* UWrtCheckUBusApi.m */; };
+		3E5DFC7A1E962B9B00D0CB2A /* UWrtLoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC791E962B9B00D0CB2A /* UWrtLoginApi.m */; };
+		3E5DFC7D1E962BA800D0CB2A /* UWrtGetLanConfigApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC7C1E962BA800D0CB2A /* UWrtGetLanConfigApi.m */; };
+		3E5DFC801E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC7F1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m */; };
+		3E5DFC831E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC821E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m */; };
+		3E5DFC861E962BED00D0CB2A /* UWrtGetWanStatusApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC851E962BED00D0CB2A /* UWrtGetWanStatusApi.m */; };
+		3E5DFC891E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC881E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m */; };
+		3E5DFC8C1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC8B1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m */; };
+		3E5DFC8F1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC8E1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.m */; };
+		3E5DFC921E962C2A00D0CB2A /* UWrtScanWiFiApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC911E962C2A00D0CB2A /* UWrtScanWiFiApi.m */; };
+		3E5DFC951E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC941E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.m */; };
+		3E5DFC981E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC971E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.m */; };
+		3E5DFC9B1E962C6A00D0CB2A /* UWrtApplyApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC9A1E962C6A00D0CB2A /* UWrtApplyApi.m */; };
+		3E5DFC9E1E962C7A00D0CB2A /* UWrtCommitApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC9D1E962C7A00D0CB2A /* UWrtCommitApi.m */; };
 		3EDC40141E7F74F1001700CA /* UBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40131E7F74F0001700CA /* UBaseViewController.m */; };
 		3EDC40171E7F75E6001700CA /* UWiFiPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40161E7F75E6001700CA /* UWiFiPwdViewController.m */; };
 		3EDC401A1E7FA648001700CA /* URouterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40191E7FA648001700CA /* URouterConfig.m */; };
@@ -44,6 +59,38 @@
 		3E56F3591E7BB9B700694949 /* USearchWiFiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USearchWiFiViewController.h; sourceTree = "<group>"; };
 		3E56F35A1E7BB9B700694949 /* USearchWiFiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USearchWiFiViewController.m; sourceTree = "<group>"; };
 		3E56F35E1E7BBCCB00694949 /* OpenwrtUtilsPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenwrtUtilsPrefixHeader.pch; sourceTree = "<group>"; };
+		3E5DFC6B1E95CD7500D0CB2A /* route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
+		3E5DFC711E9628E100D0CB2A /* UWrtHttpEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtHttpEngine.h; sourceTree = "<group>"; };
+		3E5DFC721E9628E100D0CB2A /* UWrtHttpEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtHttpEngine.m; sourceTree = "<group>"; };
+		3E5DFC741E96296D00D0CB2A /* UWrtCheckUBusApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtCheckUBusApi.h; sourceTree = "<group>"; };
+		3E5DFC751E96296D00D0CB2A /* UWrtCheckUBusApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtCheckUBusApi.m; sourceTree = "<group>"; };
+		3E5DFC771E9629AD00D0CB2A /* UWrtApiProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtApiProtocol.h; sourceTree = "<group>"; };
+		3E5DFC781E962B9B00D0CB2A /* UWrtLoginApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtLoginApi.h; sourceTree = "<group>"; };
+		3E5DFC791E962B9B00D0CB2A /* UWrtLoginApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtLoginApi.m; sourceTree = "<group>"; };
+		3E5DFC7B1E962BA800D0CB2A /* UWrtGetLanConfigApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetLanConfigApi.h; sourceTree = "<group>"; };
+		3E5DFC7C1E962BA800D0CB2A /* UWrtGetLanConfigApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetLanConfigApi.m; sourceTree = "<group>"; };
+		3E5DFC7E1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetLanDHCPApi.h; sourceTree = "<group>"; };
+		3E5DFC7F1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetLanDHCPApi.m; sourceTree = "<group>"; };
+		3E5DFC811E962BCC00D0CB2A /* UWrtGetSSHStatusApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetSSHStatusApi.h; sourceTree = "<group>"; };
+		3E5DFC821E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetSSHStatusApi.m; sourceTree = "<group>"; };
+		3E5DFC841E962BED00D0CB2A /* UWrtGetWanStatusApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetWanStatusApi.h; sourceTree = "<group>"; };
+		3E5DFC851E962BED00D0CB2A /* UWrtGetWanStatusApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetWanStatusApi.m; sourceTree = "<group>"; };
+		3E5DFC871E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetWirelessConfigApi.h; sourceTree = "<group>"; };
+		3E5DFC881E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetWirelessConfigApi.m; sourceTree = "<group>"; };
+		3E5DFC8A1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetShadowsocksConfigApi.h; sourceTree = "<group>"; };
+		3E5DFC8B1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetShadowsocksConfigApi.m; sourceTree = "<group>"; };
+		3E5DFC8D1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetPdnsdConfigApi.h; sourceTree = "<group>"; };
+		3E5DFC8E1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetPdnsdConfigApi.m; sourceTree = "<group>"; };
+		3E5DFC901E962C2A00D0CB2A /* UWrtScanWiFiApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtScanWiFiApi.h; sourceTree = "<group>"; };
+		3E5DFC911E962C2A00D0CB2A /* UWrtScanWiFiApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtScanWiFiApi.m; sourceTree = "<group>"; };
+		3E5DFC931E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtSetShadowsocksConfigApi.h; sourceTree = "<group>"; };
+		3E5DFC941E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtSetShadowsocksConfigApi.m; sourceTree = "<group>"; };
+		3E5DFC961E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetDHCPLeasesApi.h; sourceTree = "<group>"; };
+		3E5DFC971E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetDHCPLeasesApi.m; sourceTree = "<group>"; };
+		3E5DFC991E962C6A00D0CB2A /* UWrtApplyApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtApplyApi.h; sourceTree = "<group>"; };
+		3E5DFC9A1E962C6A00D0CB2A /* UWrtApplyApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtApplyApi.m; sourceTree = "<group>"; };
+		3E5DFC9C1E962C7A00D0CB2A /* UWrtCommitApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtCommitApi.h; sourceTree = "<group>"; };
+		3E5DFC9D1E962C7A00D0CB2A /* UWrtCommitApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtCommitApi.m; sourceTree = "<group>"; };
 		3EDC40121E7F74F0001700CA /* UBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBaseViewController.h; sourceTree = "<group>"; };
 		3EDC40131E7F74F0001700CA /* UBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBaseViewController.m; sourceTree = "<group>"; };
 		3EDC40151E7F75E6001700CA /* UWiFiPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWiFiPwdViewController.h; sourceTree = "<group>"; };
@@ -58,7 +105,6 @@
 		3EDC40621E822C4E001700CA /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		3EDC40631E822C4E001700CA /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		3EDC40661E824777001700CA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
-		652CBF8C1E8A45EC0029FB00 /* route.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +169,44 @@
 			path = managers;
 			sourceTree = "<group>";
 		};
+		3E5DFC701E96289E00D0CB2A /* api */ = {
+			isa = PBXGroup;
+			children = (
+				3E5DFC771E9629AD00D0CB2A /* UWrtApiProtocol.h */,
+				3E5DFC711E9628E100D0CB2A /* UWrtHttpEngine.h */,
+				3E5DFC721E9628E100D0CB2A /* UWrtHttpEngine.m */,
+				3E5DFC741E96296D00D0CB2A /* UWrtCheckUBusApi.h */,
+				3E5DFC751E96296D00D0CB2A /* UWrtCheckUBusApi.m */,
+				3E5DFC781E962B9B00D0CB2A /* UWrtLoginApi.h */,
+				3E5DFC791E962B9B00D0CB2A /* UWrtLoginApi.m */,
+				3E5DFC7B1E962BA800D0CB2A /* UWrtGetLanConfigApi.h */,
+				3E5DFC7C1E962BA800D0CB2A /* UWrtGetLanConfigApi.m */,
+				3E5DFC7E1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.h */,
+				3E5DFC7F1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m */,
+				3E5DFC811E962BCC00D0CB2A /* UWrtGetSSHStatusApi.h */,
+				3E5DFC821E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m */,
+				3E5DFC841E962BED00D0CB2A /* UWrtGetWanStatusApi.h */,
+				3E5DFC851E962BED00D0CB2A /* UWrtGetWanStatusApi.m */,
+				3E5DFC871E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.h */,
+				3E5DFC881E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m */,
+				3E5DFC8A1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.h */,
+				3E5DFC8B1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m */,
+				3E5DFC8D1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.h */,
+				3E5DFC8E1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.m */,
+				3E5DFC901E962C2A00D0CB2A /* UWrtScanWiFiApi.h */,
+				3E5DFC911E962C2A00D0CB2A /* UWrtScanWiFiApi.m */,
+				3E5DFC931E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.h */,
+				3E5DFC941E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.m */,
+				3E5DFC961E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.h */,
+				3E5DFC971E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.m */,
+				3E5DFC9C1E962C7A00D0CB2A /* UWrtCommitApi.h */,
+				3E5DFC9D1E962C7A00D0CB2A /* UWrtCommitApi.m */,
+				3E5DFC991E962C6A00D0CB2A /* UWrtApplyApi.h */,
+				3E5DFC9A1E962C6A00D0CB2A /* UWrtApplyApi.m */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
 		3EDC405E1E822901001700CA /* define */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +218,7 @@
 		3EDC40611E822C4E001700CA /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				652CBF8C1E8A45EC0029FB00 /* route.h */,
+				3E5DFC6B1E95CD7500D0CB2A /* route.h */,
 				3EDC40621E822C4E001700CA /* Utils.h */,
 				3EDC40631E822C4E001700CA /* Utils.m */,
 			);
@@ -172,6 +256,7 @@
 		65A127241E778F880097082F /* OpenwrtUtils */ = {
 			isa = PBXGroup;
 			children = (
+				3E5DFC701E96289E00D0CB2A /* api */,
 				3EDC40651E824777001700CA /* source */,
 				3EDC40611E822C4E001700CA /* utils */,
 				3EDC405E1E822901001700CA /* define */,
@@ -285,8 +370,7 @@
 				TargetAttributes = {
 					65A127211E778F880097082F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = FQZ2R3UT9T;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					65A1273A1E778F890097082F = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -388,17 +472,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E5DFC7A1E962B9B00D0CB2A /* UWrtLoginApi.m in Sources */,
+				3E5DFC981E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.m in Sources */,
 				3E56F35D1E7BB9B700694949 /* USearchWiFiViewController.m in Sources */,
+				3E5DFC921E962C2A00D0CB2A /* UWrtScanWiFiApi.m in Sources */,
+				3E5DFC9B1E962C6A00D0CB2A /* UWrtApplyApi.m in Sources */,
+				3E5DFC861E962BED00D0CB2A /* UWrtGetWanStatusApi.m in Sources */,
 				3EDC40641E822C4E001700CA /* Utils.m in Sources */,
 				3EDC40171E7F75E6001700CA /* UWiFiPwdViewController.m in Sources */,
+				3E5DFC951E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.m in Sources */,
+				3E5DFC9E1E962C7A00D0CB2A /* UWrtCommitApi.m in Sources */,
+				3E5DFC801E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m in Sources */,
 				3EDC401D1E7FA7D6001700CA /* URouter.m in Sources */,
+				3E5DFC8C1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m in Sources */,
 				65AAE4B01E791EC200C019CA /* UBus.m in Sources */,
 				3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */,
 				65A1272A1E778F880097082F /* AppDelegate.m in Sources */,
 				65A127271E778F880097082F /* main.m in Sources */,
+				3E5DFC831E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m in Sources */,
+				3E5DFC8F1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.m in Sources */,
+				3E5DFC891E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m in Sources */,
 				3EDC405D1E821F37001700CA /* UWiFiSearchResultCell.m in Sources */,
+				3E5DFC7D1E962BA800D0CB2A /* UWrtGetLanConfigApi.m in Sources */,
 				3EDC401A1E7FA648001700CA /* URouterConfig.m in Sources */,
+				3E5DFC761E96296D00D0CB2A /* UWrtCheckUBusApi.m in Sources */,
 				3EDC40141E7F74F1001700CA /* UBaseViewController.m in Sources */,
+				3E5DFC731E9628E100D0CB2A /* UWrtHttpEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +552,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ze chen (22M2F87737)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ze chen (22M2F87737)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -475,6 +575,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "283f8ca6-4c1b-416a-bdbf-56bf74e98e8c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -501,7 +602,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ze chen (22M2F87737)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ze chen (22M2F87737)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -516,6 +618,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "283f8ca6-4c1b-416a-bdbf-56bf74e98e8c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -527,7 +630,8 @@
 			baseConfigurationReference = 03AF1138173C4FB82EA085FD /* Pods-OpenwrtUtils.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FQZ2R3UT9T;
+				CODE_SIGN_IDENTITY = "iPhone Developer: ze chen (22M2F87737)";
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OpenwrtUtils/OpenwrtUtilsPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -540,8 +644,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = www.moredodo.com.MoreDoDo.OpenwrtUtils;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iFishing.feifan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "283f8ca6-4c1b-416a-bdbf-56bf74e98e8c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -551,7 +656,8 @@
 			baseConfigurationReference = 21AC1C9BD45D423C6F4B4763 /* Pods-OpenwrtUtils.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = FQZ2R3UT9T;
+				CODE_SIGN_IDENTITY = "iPhone Developer: ze chen (22M2F87737)";
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/OpenwrtUtils/OpenwrtUtilsPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -564,8 +670,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = www.moredodo.com.MoreDoDo.OpenwrtUtils;
+				PRODUCT_BUNDLE_IDENTIFIER = com.iFishing.feifan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "283f8ca6-4c1b-416a-bdbf-56bf74e98e8c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
