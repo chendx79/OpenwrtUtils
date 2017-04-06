@@ -36,18 +36,21 @@
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate {
     self.searchRouterDelegate = delegate;
     
-    [[UBus sharedInstance] scanWiFi:^(NSArray *list) {
-        NSMutableArray *temp = [NSMutableArray array];
-        for (NSDictionary *ap in list) {
-            URouter *router = [URouter routerWithInfo:ap];
-            [temp addObject:router];
-        }
-        [self.searchedRouters removeAllObjects];
-        [self.searchedRouters addObjectsFromArray:temp];
-        if ([self.searchRouterDelegate respondsToSelector:@selector(routerConfig:didSearchRouters:)]) {
-            [self.searchRouterDelegate routerConfig:self didSearchRouters:self.searchedRouters];
-        }
+    [[UBus sharedInstance] wirelessConfig:^{
+        [[UBus sharedInstance] scanWiFi:^(NSArray *list) {
+            NSMutableArray *temp = [NSMutableArray array];
+            for (NSDictionary *ap in list) {
+                URouter *router = [URouter routerWithInfo:ap];
+                [temp addObject:router];
+            }
+            [self.searchedRouters removeAllObjects];
+            [self.searchedRouters addObjectsFromArray:temp];
+            if ([self.searchRouterDelegate respondsToSelector:@selector(routerConfig:didSearchRouters:)]) {
+                [self.searchRouterDelegate routerConfig:self didSearchRouters:self.searchedRouters];
+            }
+        }];
     }];
+    
 }
 
 @end

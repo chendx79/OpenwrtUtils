@@ -10,6 +10,11 @@
 #import "Utils.h"
 #import "UWrtHttpEngine.h"
 
+@interface UBus ()
+@property (nonatomic, copy) NSString *sessionToken;
+@property (nonatomic, copy) NSString *wifiDevice;
+@end
+
 @implementation UBus
 
 static UBus *_sharedInstance = nil;
@@ -398,10 +403,32 @@ static BOOL _bypassAllocMethod = YES;
     }];
 }
 
+- (void)loginWithPassword:(NSString *)password result:(void (^)(BOOL success))result {
+    UWrtLoginApi *api = [UWrtLoginApi new];
+    api.rootPassword = password;
+    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtLoginApi *obj) {
+        self.sessionToken = obj.sessionToken;
+        if (result) {
+            result(rst);
+        }
+    }];
+}
+
+- (void)wirelessConfig:(void (^)(void))result {
+    UWrtGetWirelessConfigApi *api = [UWrtGetWirelessConfigApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtGetWirelessConfigApi *obj) {
+        self.wifiDevice = obj.wifiDevice;
+        if (result) {
+            result();
+        }
+    }];
+}
+
 - (void)scanWiFi:(void (^)(NSArray *list))result {
     UWrtScanWiFiApi *api = [UWrtScanWiFiApi new];
-    api.sessionToken = sessionToken;
-    api.wifiDevice = wifiDevice;
+    api.sessionToken = self.sessionToken;
+    api.wifiDevice = self.wifiDevice;
     [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtScanWiFiApi *obj) {
         if (result) {
             result(obj.apList);

@@ -54,7 +54,9 @@
             requestResult = YES;
         }
         else {
-            [api decodeError:nil];
+            if ([api respondsToSelector:@selector(decodeError:)]) {
+                [api decodeError:responseObject];
+            }
             requestResult = NO;
         }
         if (result) {
