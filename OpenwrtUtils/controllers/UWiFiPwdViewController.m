@@ -9,10 +9,17 @@
 #import "UWiFiPwdViewController.h"
 
 @interface UWiFiPwdViewController ()
-
+@property (nonatomic, strong) URouter *router;
 @end
 
 @implementation UWiFiPwdViewController
+
+- (instancetype)initWithRouter:(URouter *)router {
+    if (self = [super init]) {
+        self.router = router;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -8,6 +8,11 @@
 
 #import "Utils.h"
 #import <NMSSH/NMSSH.h>
+#if TARGET_IPHONE_SIMULATOR
+#include <net/route.h>
+#else
+#include "route.h"
+#endif
 
 @implementation Utils
 

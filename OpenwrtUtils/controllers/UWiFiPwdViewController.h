@@ -7,7 +7,8 @@
 //
 
 #import "UBaseViewController.h"
+#import "URouter.h"
 
 @interface UWiFiPwdViewController : UBaseViewController
-
+- (instancetype)initWithRouter:(URouter *)router;
 @end
