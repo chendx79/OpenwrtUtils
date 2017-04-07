@@ -6,4 +6,5 @@ target 'OpenwrtUtils' do
     pod 'Masonry', '~> 1.0.2'
     pod 'ReactiveObjC', '~> 2.1.0'
     pod 'NMSSH'
+    pod 'MBProgressHUD', '~> 1.0.0'
 end
