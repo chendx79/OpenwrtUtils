@@ -14,5 +14,6 @@
 
 #import "Masonry.h"
 #import "ReactiveObjC.h"
+#import "MBProgressHUD.h"
 
 #endif /* OpenwrtUtilsPrefixHeader_pch */

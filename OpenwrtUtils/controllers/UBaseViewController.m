@@ -25,6 +25,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)showLoading {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)hideLoading {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 /*
 #pragma mark - Navigation
 

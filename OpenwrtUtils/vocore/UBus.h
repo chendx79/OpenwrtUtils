@@ -55,24 +55,24 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
     NSNumber *ssPort;
     NSString *ssPassword;
 
-    NSString *sessionToken;
+//    NSString *sessionToken;
     NSDictionary *lanConfig;
     NSString *lanDHCP;
     NSString *DHCPLeases;
     NSDictionary *sshStatus;
     NSDictionary *wanStatus;
-    NSDictionary *wirelessConfig;
+//    NSDictionary *wirelessConfig;
     NSDictionary *shadowsocksConfig;
     NSString *pdnsdConfig;
-    NSArray *apList;
-    NSString *wifiDevice;
+//    NSArray *apList;
+//    NSString *wifiDevice;
 }
 
 + (id)sharedInstance;
 
-- (void)CheckUBus;
-- (void)Login;
-- (void)GetLanConfig;
+//- (void)CheckUBus;
+//- (void)Login;
+//- (void)GetLanConfig;
 
 - (void)checkUBusAvailable:(void (^)(BOOL available))result;
 - (void)loginWithPassword:(NSString *)password result:(void (^)(BOOL success))result;

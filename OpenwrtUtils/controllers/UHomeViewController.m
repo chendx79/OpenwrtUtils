@@ -22,7 +22,18 @@
     self.navigationItem.title = @"Openwrt实用工具";
     NSLog(@"CheckUBus started...");
     
+    UIButton *btn = [[UIButton alloc] init];
+    [btn setBackgroundImage:[UIImage imageNamed:@"openwrtbox"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(actionSearchWiFi) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(100);
+        make.left.mas_equalTo(100);
+    }];
+    
+    [self showLoading];
     [[UBus sharedInstance] checkUBusAvailable:^(BOOL available) {
+        [self hideLoading];
         NSString *message = nil;
         if (available) {
             message = @"路由器支持UBus访问";
@@ -31,15 +42,6 @@
             message = @"路由器不支持UBus访问";
         }
         [self toast:message];
-    }];
-    
-    UIButton *btn = [[UIButton alloc] init];
-    [btn setBackgroundImage:[UIImage imageNamed:@"openwrtbox"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(actionSearchWiFi) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(100);
-        make.left.mas_equalTo(100);
     }];
 }
 

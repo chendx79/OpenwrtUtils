@@ -68,6 +68,7 @@ static BOOL _bypassAllocMethod = YES;
     return self;
 }
 
+/**
 - (void)CheckUBus {
     NSDictionary *parameters = @{};
     [self SendPost:parameters CurrentAction:CheckUBus result:NULL];
@@ -391,6 +392,7 @@ static BOOL _bypassAllocMethod = YES;
           }
         }];
 }
+*/
 
 #pragma mark - public methods
 

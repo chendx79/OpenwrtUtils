@@ -10,7 +10,9 @@
 #define Utils_h
 
 #import <Foundation/Foundation.h>
-#if !TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
+#include <net/route.h>
+#else
 #include "route.h"
 #endif
 #include <ifaddrs.h>

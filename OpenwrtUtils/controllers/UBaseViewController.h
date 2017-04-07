@@ -10,4 +10,8 @@
 
 @interface UBaseViewController : UIViewController
 
+- (void)showLoading;
+- (void)hideLoading;
+
+
 @end
