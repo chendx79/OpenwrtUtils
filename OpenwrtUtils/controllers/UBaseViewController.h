@@ -13,5 +13,7 @@
 - (void)showLoading;
 - (void)hideLoading;
 
+- (void)showLoadingWithMessage:(NSString *)message;
+- (void)hidMessageLoading;
 
 @end

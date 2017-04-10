@@ -12,6 +12,9 @@
 @interface URouterConfig ()
 @property (nonatomic, weak) id<URouterConfigProtocol> searchRouterDelegate;
 @property (nonatomic, strong) NSMutableArray *searchedRouters;
+@property (nonatomic, assign) BOOL isBoxAvailable;
+@property (nonatomic, assign) BOOL isBoxLoggedin;
+@property (nonatomic, assign) BOOL isWiFiConnected;
 @end
 
 @implementation URouterConfig
@@ -33,6 +36,24 @@
     return self;
 }
 
+- (void)checkBoxAvailable:(void (^)(BOOL available))resultBlock {
+    [[UBus sharedInstance] checkUBusAvailable:^(BOOL available) {
+        self.isBoxAvailable = available;
+        if (resultBlock) {
+            resultBlock(available);
+        }
+    }];
+}
+
+- (void)loginWithPassword:(NSString *)pwd result:(void (^)(BOOL))resultBlock {
+    [[UBus sharedInstance] loginWithPassword:pwd result:^(BOOL success) {
+        self.isBoxLoggedin = success;
+        if (resultBlock) {
+            resultBlock(success);
+        }
+    }];
+}
+
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate {
     self.searchRouterDelegate = delegate;
     
@@ -50,7 +71,6 @@
             }
         }];
     }];
-    
 }
 
 @end

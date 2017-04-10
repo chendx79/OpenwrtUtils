@@ -18,6 +18,12 @@
 
 + (URouterConfig *)sharedInstance;
 
+- (void)checkBoxAvailable:(void (^)(BOOL available))resultBlock;
+- (void)loginWithPassword:(NSString *)pwd result:(void (^)(BOOL))resultBlock;
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate;
+
+- (BOOL)isBoxAvailable;
+- (BOOL)isBoxLoggedin;
+- (BOOL)isWiFiConnected;
 
 @end

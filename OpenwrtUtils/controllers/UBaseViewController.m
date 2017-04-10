@@ -9,7 +9,7 @@
 #import "UBaseViewController.h"
 
 @interface UBaseViewController ()
-
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation UBaseViewController
@@ -31,6 +31,16 @@
 
 - (void)hideLoading {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
+- (void)showLoadingWithMessage:(NSString *)message {
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    self.hud.label.text = message;
+}
+
+- (void)hidMessageLoading {
+    [self.hud hideAnimated:YES];
 }
 
 /*
