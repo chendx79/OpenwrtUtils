@@ -31,6 +31,7 @@
 		3EDC405D1E821F37001700CA /* UWiFiSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC405C1E821F37001700CA /* UWiFiSearchResultCell.m */; };
 		3EDC40641E822C4E001700CA /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40631E822C4E001700CA /* Utils.m */; };
 		3EDC40671E824777001700CA /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC40661E824777001700CA /* Config.plist */; };
+		653CD00B1EBC5E2500CCB0A4 /* UAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD00A1EBC5E2500CCB0A4 /* UAboutViewController.m */; };
 		65A127271E778F880097082F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127261E778F880097082F /* main.m */; };
 		65A1272A1E778F880097082F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127291E778F880097082F /* AppDelegate.m */; };
 		65A127321E778F880097082F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A127311E778F880097082F /* Assets.xcassets */; };
@@ -106,6 +107,8 @@
 		3EDC40621E822C4E001700CA /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		3EDC40631E822C4E001700CA /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		3EDC40661E824777001700CA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		653CD0091EBC5E2500CCB0A4 /* UAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAboutViewController.h; sourceTree = "<group>"; };
+		653CD00A1EBC5E2500CCB0A4 /* UAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAboutViewController.m; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 				3EDC405C1E821F37001700CA /* UWiFiSearchResultCell.m */,
 				3EDC40151E7F75E6001700CA /* UWiFiPwdViewController.h */,
 				3EDC40161E7F75E6001700CA /* UWiFiPwdViewController.m */,
+				653CD0091EBC5E2500CCB0A4 /* UAboutViewController.h */,
+				653CD00A1EBC5E2500CCB0A4 /* UAboutViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -490,6 +495,7 @@
 				3E5DFC9E1E962C7A00D0CB2A /* UWrtCommitApi.m in Sources */,
 				3E5DFC801E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m in Sources */,
 				3EDC401D1E7FA7D6001700CA /* URouter.m in Sources */,
+				653CD00B1EBC5E2500CCB0A4 /* UAboutViewController.m in Sources */,
 				3E5DFC8C1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m in Sources */,
 				65AAE4B01E791EC200C019CA /* UBus.m in Sources */,
 				3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */,
