@@ -392,7 +392,7 @@ static BOOL _bypassAllocMethod = YES;
           }
         }];
 }
-*/OpenwrtUtils/api/UWrtScanWiFiApi.h
+*/
 
 #pragma mark - public methods
 
