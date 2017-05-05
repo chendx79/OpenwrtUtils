@@ -8,6 +8,7 @@
 
 #import "UHomeViewController.h"
 #import "USearchWiFiViewController.h"
+#import "UBoxViewController.h"
 #import "URouterConfig.h"
 
 #define IMAGE_INTERNET [UIImage imageNamed:@"internet"]
@@ -159,7 +160,6 @@
 #pragma mark - actions
 
 - (void)actionInternet:(id)sender {
-
     if ([[URouterConfig sharedInstance] isBoxLoggedin]) {
         [[URouterConfig sharedInstance] showWanStatus:^(NSDictionary *wanStatus) {
           [self hideLoading];
@@ -175,9 +175,14 @@
 }
 
 - (void)actionBox:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"done", nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert show];
+    if ([[URouterConfig sharedInstance] isBoxLoggedin]) {
+        UBoxViewController *vc = [[UBoxViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"done", nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

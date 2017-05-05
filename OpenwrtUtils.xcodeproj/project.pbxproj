@@ -38,6 +38,7 @@
 		65A127401E778F890097082F /* OpenwrtUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A1273F1E778F890097082F /* OpenwrtUtilsTests.m */; };
 		65AAE4A71E78DC0800C019CA /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65AAE4A61E78DC0800C019CA /* libAFNetworking.a */; };
 		65AAE4B01E791EC200C019CA /* UBus.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AAE4AF1E791EC200C019CA /* UBus.m */; };
+		65C7D89E1EBC46C200ED47B1 /* UBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C7D89D1EBC46C200ED47B1 /* UBoxViewController.m */; };
 		D85BC4453565E284D6762AB6 /* libPods-OpenwrtUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F99A6B209A3E4CF3D2340A5C /* libPods-OpenwrtUtils.a */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,8 @@
 		65AAE4A61E78DC0800C019CA /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
 		65AAE4AE1E791EC200C019CA /* UBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBus.h; sourceTree = "<group>"; };
 		65AAE4AF1E791EC200C019CA /* UBus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBus.m; sourceTree = "<group>"; };
+		65C7D89C1EBC46C200ED47B1 /* UBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UBoxViewController.h; sourceTree = "<group>"; };
+		65C7D89D1EBC46C200ED47B1 /* UBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UBoxViewController.m; sourceTree = "<group>"; };
 		F99A6B209A3E4CF3D2340A5C /* libPods-OpenwrtUtils.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenwrtUtils.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -148,6 +151,8 @@
 				3EDC40131E7F74F0001700CA /* UBaseViewController.m */,
 				3E56F3571E7BB9B700694949 /* UHomeViewController.h */,
 				3E56F3581E7BB9B700694949 /* UHomeViewController.m */,
+				65C7D89C1EBC46C200ED47B1 /* UBoxViewController.h */,
+				65C7D89D1EBC46C200ED47B1 /* UBoxViewController.m */,
 				3E56F3591E7BB9B700694949 /* USearchWiFiViewController.h */,
 				3E56F35A1E7BB9B700694949 /* USearchWiFiViewController.m */,
 				3EDC405B1E821F37001700CA /* UWiFiSearchResultCell.h */,
@@ -488,6 +493,7 @@
 				3E5DFC8C1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m in Sources */,
 				65AAE4B01E791EC200C019CA /* UBus.m in Sources */,
 				3E56F35C1E7BB9B700694949 /* UHomeViewController.m in Sources */,
+				65C7D89E1EBC46C200ED47B1 /* UBoxViewController.m in Sources */,
 				65A1272A1E778F880097082F /* AppDelegate.m in Sources */,
 				65A127271E778F880097082F /* main.m in Sources */,
 				3E5DFC831E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m in Sources */,
