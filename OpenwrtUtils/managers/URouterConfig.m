@@ -73,4 +73,12 @@
     }];
 }
 
+- (void)showWanStatus:(void (^)(NSDictionary * wanStatus))resultBlock {
+    [[UBus sharedInstance] getWanStatus:^(NSDictionary *wanStatus) {
+        if (resultBlock) {
+            resultBlock(wanStatus);
+        }
+    }];
+}
+
 @end

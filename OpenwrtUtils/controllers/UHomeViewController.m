@@ -103,21 +103,23 @@
       }
     }];
 
-    [self actionInternet:nil];
-    
+    //启动时自动检测盒子是否存在
+    [[URouterConfig sharedInstance] checkBoxAvailable:^(BOOL available){
+
+    }];
+
     //启动时自动用之前存储的密码来尝试登陆路由器
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"];
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithContentsOfFile:plistPath];
     NSString *rootPassword = [data objectForKey:@"rootPassword"];
-    
+
     [[URouterConfig sharedInstance] loginWithPassword:rootPassword
-                                               result:^(BOOL success) {
-                                                   [self hideLoading];
+                                               result:^(BOOL success){
                                                }];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];OpenwrtUtils/controllers/UHomeViewController.m
+    [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
@@ -157,17 +159,14 @@
 #pragma mark - actions
 
 - (void)actionInternet:(id)sender {
-    [self showLoading];
-    [[URouterConfig sharedInstance] checkBoxAvailable:^(BOOL available) {
-      [self hideLoading];
-      NSString *message = nil;
-      if (available) {
-          message = @"路由器支持UBus访问";
-      } else {
-          message = @"路由器不支持UBus访问";
-      }
-      [self toast:message];
-    }];
+
+    if ([[URouterConfig sharedInstance] isBoxLoggedin]) {
+        [[URouterConfig sharedInstance] showWanStatus:^(NSDictionary *wanStatus) {
+          [self hideLoading];
+          NSString *message = [[[wanStatus objectForKey:@"ipv4-address"] objectAtIndex:0] objectForKey:@"address"];
+          [self toast:message];
+        }];
+    }
 }
 
 - (void)actionWiFi:(id)sender {

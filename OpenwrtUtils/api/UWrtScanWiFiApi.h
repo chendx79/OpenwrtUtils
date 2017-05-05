@@ -15,4 +15,5 @@
 @property (nonatomic, copy) NSString *wifiDevice;
 // response
 @property (nonatomic, strong) NSArray *apList;
+@property (nonatomic, strong) NSDictionary *wanStatus;
 @end

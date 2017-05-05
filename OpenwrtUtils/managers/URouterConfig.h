@@ -21,6 +21,7 @@
 - (void)checkBoxAvailable:(void (^)(BOOL available))resultBlock;
 - (void)loginWithPassword:(NSString *)pwd result:(void (^)(BOOL))resultBlock;
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate;
+- (void)showWanStatus:(void (^)(NSDictionary *wanStatus))resultBlock;
 
 - (BOOL)isBoxAvailable;
 - (BOOL)isBoxLoggedin;

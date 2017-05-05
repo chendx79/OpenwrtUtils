@@ -78,6 +78,7 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
 - (void)loginWithPassword:(NSString *)password result:(void (^)(BOOL success))result;
 - (void)wirelessConfig:(void (^)(void))result;
 - (void)scanWiFi:(void (^)(NSArray *list))result;
+- (void)getWanStatus:(void (^)(NSDictionary *wanStatus))result;
 
 @end
 

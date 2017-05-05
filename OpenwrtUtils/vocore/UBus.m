@@ -392,50 +392,65 @@ static BOOL _bypassAllocMethod = YES;
           }
         }];
 }
-*/
+*/OpenwrtUtils/api/UWrtScanWiFiApi.h
 
 #pragma mark - public methods
 
 - (void)checkUBusAvailable:(void (^)(BOOL available))result {
     UWrtCheckUBusApi *api = [UWrtCheckUBusApi new];
-    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtCheckUBusApi *obj) {
-        if (result) {
-            result(obj.isAvailable);
-        }
-    }];
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtCheckUBusApi *obj) {
+                                     if (result) {
+                                         result(obj.isAvailable);
+                                     }
+                                   }];
 }
 
 - (void)loginWithPassword:(NSString *)password result:(void (^)(BOOL success))result {
     UWrtLoginApi *api = [UWrtLoginApi new];
     api.rootPassword = password;
-    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtLoginApi *obj) {
-        self.sessionToken = obj.sessionToken;
-        if (result) {
-            result(rst);
-        }
-    }];
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtLoginApi *obj) {
+                                     self.sessionToken = obj.sessionToken;
+                                     if (result) {
+                                         result(rst);
+                                     }
+                                   }];
 }
 
 - (void)wirelessConfig:(void (^)(void))result {
     UWrtGetWirelessConfigApi *api = [UWrtGetWirelessConfigApi new];
     api.sessionToken = self.sessionToken;
-    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtGetWirelessConfigApi *obj) {
-        self.wifiDevice = obj.wifiDevice;
-        if (result) {
-            result();
-        }
-    }];
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetWirelessConfigApi *obj) {
+                                     self.wifiDevice = obj.wifiDevice;
+                                     if (result) {
+                                         result();
+                                     }
+                                   }];
 }
 
 - (void)scanWiFi:(void (^)(NSArray *list))result {
     UWrtScanWiFiApi *api = [UWrtScanWiFiApi new];
     api.sessionToken = self.sessionToken;
     api.wifiDevice = self.wifiDevice;
-    [[UWrtHttpEngine sharedInstance] post:api result:^(BOOL rst, UWrtScanWiFiApi *obj) {
-        if (result) {
-            result(obj.apList);
-        }
-    }];
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtScanWiFiApi *obj) {
+                                     if (result) {
+                                         result(obj.apList);
+                                     }
+                                   }];
+}
+
+- (void)getWanStatus:(void (^)(NSDictionary *wanStatus))result {
+    UWrtGetWanStatusApi *api = [UWrtGetWanStatusApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetWanStatusApi *obj) {
+                                     if (result) {
+                                         result(obj.wanStatus);
+                                     }
+                                   }];
 }
 
 @end
