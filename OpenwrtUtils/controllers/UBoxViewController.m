@@ -138,5 +138,16 @@
     return nil;
 }
 
+#pragma mark -
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.tableFooterView = [UIView new];
+    }
+    return _tableView;
+}
 
 @end
