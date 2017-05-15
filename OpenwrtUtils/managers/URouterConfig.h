@@ -22,6 +22,9 @@
 - (void)loginWithPassword:(NSString *)pwd result:(void (^)(BOOL))resultBlock;
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate;
 - (void)showWanStatus:(void (^)(NSDictionary *wanStatus))resultBlock;
+- (void)showSystemInfo:(void (^)(NSDictionary * systemInfo))resultBlock;
+- (void)showSystemBoard:(void (^)(NSDictionary * systemBoard))resultBlock;
+- (void)showDiskInfo:(void (^)(NSDictionary *diskInfo))resultBlock;
 
 - (BOOL)isBoxAvailable;
 - (BOOL)isBoxLoggedin;

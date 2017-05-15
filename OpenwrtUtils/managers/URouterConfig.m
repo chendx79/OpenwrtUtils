@@ -21,7 +21,7 @@
 
 + (URouterConfig *)sharedInstance {
     static URouterConfig *instance = nil;
-    @synchronized (self) {
+    @synchronized(self) {
         if (!instance) {
             instance = [[[self class] alloc] init];
         }
@@ -38,47 +38,73 @@
 
 - (void)checkBoxAvailable:(void (^)(BOOL available))resultBlock {
     [[UBus sharedInstance] checkUBusAvailable:^(BOOL available) {
-        self.isBoxAvailable = available;
-        if (resultBlock) {
-            resultBlock(available);
-        }
+      self.isBoxAvailable = available;
+      if (resultBlock) {
+          resultBlock(available);
+      }
     }];
 }
 
 - (void)loginWithPassword:(NSString *)pwd result:(void (^)(BOOL))resultBlock {
-    [[UBus sharedInstance] loginWithPassword:pwd result:^(BOOL success) {
-        self.isBoxLoggedin = success;
-        if (resultBlock) {
-            resultBlock(success);
-        }
-    }];
+    [[UBus sharedInstance] loginWithPassword:pwd
+                                      result:^(BOOL success) {
+                                        self.isBoxLoggedin = success;
+                                        if (resultBlock) {
+                                            resultBlock(success);
+                                        }
+                                      }];
 }
 
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate {
     self.searchRouterDelegate = delegate;
-    
+
     [[UBus sharedInstance] wirelessConfig:^{
-        [[UBus sharedInstance] scanWiFi:^(NSArray *list) {
-            NSMutableArray *temp = [NSMutableArray array];
-            for (NSDictionary *ap in list) {
-                URouter *router = [URouter routerWithInfo:ap];
-                [temp addObject:router];
-            }
-            [self.searchedRouters removeAllObjects];
-            [self.searchedRouters addObjectsFromArray:temp];
-            if ([self.searchRouterDelegate respondsToSelector:@selector(routerConfig:didSearchRouters:)]) {
-                [self.searchRouterDelegate routerConfig:self didSearchRouters:self.searchedRouters];
-            }
-        }];
+      [[UBus sharedInstance] scanWiFi:^(NSArray *list) {
+        NSMutableArray *temp = [NSMutableArray array];
+        for (NSDictionary *ap in list) {
+            URouter *router = [URouter routerWithInfo:ap];
+            [temp addObject:router];
+        }
+        [self.searchedRouters removeAllObjects];
+        [self.searchedRouters addObjectsFromArray:temp];
+        if ([self.searchRouterDelegate respondsToSelector:@selector(routerConfig:didSearchRouters:)]) {
+            [self.searchRouterDelegate routerConfig:self didSearchRouters:self.searchedRouters];
+        }
+      }];
     }];
 }
 
-- (void)showWanStatus:(void (^)(NSDictionary * wanStatus))resultBlock {
+- (void)showWanStatus:(void (^)(NSDictionary *wanStatus))resultBlock {
     [[UBus sharedInstance] getWanStatus:^(NSDictionary *wanStatus) {
+      if (resultBlock) {
+          resultBlock(wanStatus);
+      }
+    }];
+}
+
+- (void)showSystemInfo:(void (^)(NSDictionary *systemInfo))resultBlock {
+    [[UBus sharedInstance] getSystemInfo:^(NSDictionary *systemInfo) {
+      if (resultBlock) {
+          resultBlock(systemInfo);
+      }
+    }];
+}
+
+- (void)showSystemBoard:(void (^)(NSDictionary *systemBoard))resultBlock {
+    [[UBus sharedInstance] getSystemBoard:^(NSDictionary *systemBoard) {
+      if (resultBlock) {
+          resultBlock(systemBoard);
+      }
+    }];
+}
+
+- (void)showDiskInfo:(void (^)(NSDictionary *diskInfo))resultBlock {
+    [[UBus sharedInstance] getDiskInfo:^(NSDictionary *diskInfo) {
         if (resultBlock) {
-            resultBlock(wanStatus);
+            resultBlock(diskInfo);
         }
     }];
 }
+
 
 @end

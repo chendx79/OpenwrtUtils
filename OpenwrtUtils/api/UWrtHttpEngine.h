@@ -22,6 +22,8 @@
 #import "UWrtGetDHCPLeasesApi.h"
 #import "UWrtCommitApi.h"
 #import "UWrtApplyApi.h"
+#import "UWrtGetSystemInfoApi.h"
+#import "UWrtGetSystemBoardApi.h"
 
 @interface UWrtHttpEngine : NSObject
 + (UWrtHttpEngine *)sharedInstance;

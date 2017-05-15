@@ -453,4 +453,32 @@ static BOOL _bypassAllocMethod = YES;
                                    }];
 }
 
+- (void)getSystemInfo:(void (^)(NSDictionary *systemInfo))result {
+    UWrtGetSystemInfoApi *api = [UWrtGetSystemInfoApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetSystemInfoApi *obj) {
+                                       if (result) {
+                                           result(obj.systemInfo);
+                                       }
+                                   }];
+}
+
+- (void)getSystemBoard:(void (^)(NSDictionary *systemBoard))result {
+    UWrtGetSystemBoardApi *api = [UWrtGetSystemBoardApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetSystemBoardApi *obj) {
+                                       if (result) {
+                                           result(obj.systemBoard);
+                                       }
+                                   }];
+}
+
+- (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result {
+    NSString *gatewayIP = @"192.168.20.1";
+    NSDictionary *diskInfo = [[Utils sharedInstance] GetDiskInfo:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
+    result(diskInfo);
+}
+
 @end

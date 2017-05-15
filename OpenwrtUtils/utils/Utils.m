@@ -172,4 +172,35 @@ static BOOL _bypassAllocMethod = YES;
     }
 }
 
+- (NSDictionary *)GetDiskInfo:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password {
+    NSString *host = [NSString stringWithFormat:@"%@:%@", ip, port];
+    NMSSHSession *session = [NMSSHSession connectToHost:host
+                                           withUsername:username];
+    if (session.isConnected) {
+        [session authenticateByPassword:password];
+        
+        if (session.isAuthorized) {
+            NSLog(@"Authentication succeeded");
+        }
+        
+        NSError *error = nil;
+        
+        NSString *response;
+        response = [session.channel execute:@"df -h|grep rootfs" error:&error];
+        NSArray* respArray = [response componentsSeparatedByString: @" "];
+        NSMutableArray* diskInfoArray = [[NSMutableArray alloc] init];
+        for(NSString *s in respArray){
+            if (![s isEqual: @""]) {
+                [diskInfoArray addObject:s];
+            }
+        }
+        NSDictionary *diskInfo = [[NSDictionary alloc]initWithObjectsAndKeys:diskInfoArray[1], @"total", diskInfoArray[2], @"used", diskInfoArray[3] , @"available", diskInfoArray[4], @"usedPercent", nil];
+        
+        [session disconnect];
+        
+        return diskInfo;
+    }
+    return nil;
+}
+
 @end

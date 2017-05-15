@@ -32,6 +32,8 @@
 		3EDC40641E822C4E001700CA /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40631E822C4E001700CA /* Utils.m */; };
 		3EDC40671E824777001700CA /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC40661E824777001700CA /* Config.plist */; };
 		653CD00B1EBC5E2500CCB0A4 /* UAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD00A1EBC5E2500CCB0A4 /* UAboutViewController.m */; };
+		653CD00E1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD00D1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m */; };
+		653CD0111EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD0101EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m */; };
 		65A127271E778F880097082F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127261E778F880097082F /* main.m */; };
 		65A1272A1E778F880097082F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127291E778F880097082F /* AppDelegate.m */; };
 		65A127321E778F880097082F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A127311E778F880097082F /* Assets.xcassets */; };
@@ -109,6 +111,10 @@
 		3EDC40661E824777001700CA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		653CD0091EBC5E2500CCB0A4 /* UAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAboutViewController.h; sourceTree = "<group>"; };
 		653CD00A1EBC5E2500CCB0A4 /* UAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAboutViewController.m; sourceTree = "<group>"; };
+		653CD00C1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetSystemInfoApi.h; sourceTree = "<group>"; };
+		653CD00D1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetSystemInfoApi.m; sourceTree = "<group>"; };
+		653CD00F1EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetSystemBoardApi.h; sourceTree = "<group>"; };
+		653CD0101EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetSystemBoardApi.m; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -213,6 +219,10 @@
 				3E5DFC9D1E962C7A00D0CB2A /* UWrtCommitApi.m */,
 				3E5DFC991E962C6A00D0CB2A /* UWrtApplyApi.h */,
 				3E5DFC9A1E962C6A00D0CB2A /* UWrtApplyApi.m */,
+				653CD00C1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.h */,
+				653CD00D1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m */,
+				653CD00F1EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.h */,
+				653CD0101EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m */,
 			);
 			path = api;
 			sourceTree = "<group>";
@@ -489,6 +499,7 @@
 				3E5DFC921E962C2A00D0CB2A /* UWrtScanWiFiApi.m in Sources */,
 				3E5DFC9B1E962C6A00D0CB2A /* UWrtApplyApi.m in Sources */,
 				3E5DFC861E962BED00D0CB2A /* UWrtGetWanStatusApi.m in Sources */,
+				653CD00E1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m in Sources */,
 				3EDC40641E822C4E001700CA /* Utils.m in Sources */,
 				3EDC40171E7F75E6001700CA /* UWiFiPwdViewController.m in Sources */,
 				3E5DFC951E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.m in Sources */,
@@ -507,6 +518,7 @@
 				3E5DFC891E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m in Sources */,
 				3EDC405D1E821F37001700CA /* UWiFiSearchResultCell.m in Sources */,
 				3E5DFC7D1E962BA800D0CB2A /* UWrtGetLanConfigApi.m in Sources */,
+				653CD0111EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m in Sources */,
 				3EDC401A1E7FA648001700CA /* URouterConfig.m in Sources */,
 				3E5DFC761E96296D00D0CB2A /* UWrtCheckUBusApi.m in Sources */,
 				3EDC40141E7F74F1001700CA /* UBaseViewController.m in Sources */,
