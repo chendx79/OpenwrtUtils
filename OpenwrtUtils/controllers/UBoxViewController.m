@@ -11,6 +11,10 @@
 #import "URouterConfig.h"
 #import "UWiFiSearchResultCell.h"
 #import "UAboutViewController.h"
+#import "UWanViewController.h"
+#import "ULanViewController.h"
+#import "UWifiViewController.h"
+#import "UShadowsocksViewController.h"
 
 @interface UBoxViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -64,6 +68,26 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0){
             UAboutViewController *vc = [[UAboutViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0){
+            UWanViewController *vc = [[UWanViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (indexPath.row == 1){
+            ULanViewController *vc = [[ULanViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (indexPath.row == 2){
+            UWifiViewController *vc = [[UWifiViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    if (indexPath.section == 2) {
+        if (indexPath.row == 0){
+            UShadowsocksViewController *vc = [[UShadowsocksViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

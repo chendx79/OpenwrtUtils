@@ -2,14 +2,12 @@
 //  UAboutViewController.m
 //  OpenwrtUtils
 //
-//  Created by lujingyu on 2017/3/17.
+//  Created by 陈鼎星 on 2017/5/5.
 //  Copyright © 2017年 陈鼎星. All rights reserved.
 //
 
 #import "UAboutViewController.h"
-#import "UWiFiPwdViewController.h"
 #import "URouterConfig.h"
-#import "UWiFiSearchResultCell.h"
 
 @interface UAboutViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -87,9 +85,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"Cell";
-    UWiFiSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UWiFiSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
