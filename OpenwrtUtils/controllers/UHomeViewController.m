@@ -88,6 +88,7 @@
                        }] subscribeNext:^(NSNumber *rst) {
       if (rst.boolValue) {
           self.wifiButton.hidden = NO;
+          [[URouterConfig sharedInstance] getRouterInfo];
       } else {
           self.wifiButton.hidden = YES;
       }
@@ -161,11 +162,9 @@
 
 - (void)actionInternet:(id)sender {
     if ([[URouterConfig sharedInstance] isBoxLoggedin]) {
-        [[URouterConfig sharedInstance] showWanStatus:^(NSDictionary *wanStatus) {
-          [self hideLoading];
-          NSString *message = [[[wanStatus objectForKey:@"ipv4-address"] objectAtIndex:0] objectForKey:@"address"];
-          [self toast:message];
-        }];
+            [self hideLoading];
+            NSString *message = [[[[[URouterConfig sharedInstance] wanStatus] objectForKey:@"ipv4-address"] objectAtIndex:0] objectForKey:@"address"];
+            [self toast:message];
     }
 }
 

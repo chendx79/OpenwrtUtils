@@ -15,6 +15,10 @@
 @property (nonatomic, assign) BOOL isBoxAvailable;
 @property (nonatomic, assign) BOOL isBoxLoggedin;
 @property (nonatomic, assign) BOOL isWiFiConnected;
+@property (nonatomic, strong) NSDictionary *wanStatus;
+@property (nonatomic, strong) NSDictionary *systemInfo;
+@property (nonatomic, strong) NSDictionary *systemBoard;
+@property (nonatomic, strong) NSDictionary *diskInfo;
 @end
 
 @implementation URouterConfig
@@ -74,35 +78,34 @@
     }];
 }
 
-- (void)showWanStatus:(void (^)(NSDictionary *wanStatus))resultBlock {
+- (void)getRouterInfo{
+    [self getWanStatus];
+    [self getSystemInfo];
+    [self getSystemBoard];
+    [self getDiskInfo];
+}
+
+- (void)getWanStatus{
     [[UBus sharedInstance] getWanStatus:^(NSDictionary *wanStatus) {
-      if (resultBlock) {
-          resultBlock(wanStatus);
-      }
+        self.wanStatus = wanStatus;
     }];
 }
 
-- (void)showSystemInfo:(void (^)(NSDictionary *systemInfo))resultBlock {
+- (void)getSystemInfo{
     [[UBus sharedInstance] getSystemInfo:^(NSDictionary *systemInfo) {
-      if (resultBlock) {
-          resultBlock(systemInfo);
-      }
+        self.systemInfo = systemInfo;
     }];
 }
 
-- (void)showSystemBoard:(void (^)(NSDictionary *systemBoard))resultBlock {
+- (void)getSystemBoard{
     [[UBus sharedInstance] getSystemBoard:^(NSDictionary *systemBoard) {
-      if (resultBlock) {
-          resultBlock(systemBoard);
-      }
+        self.systemBoard = systemBoard;
     }];
 }
 
-- (void)showDiskInfo:(void (^)(NSDictionary *diskInfo))resultBlock {
+- (void)getDiskInfo{
     [[UBus sharedInstance] getDiskInfo:^(NSDictionary *diskInfo) {
-        if (resultBlock) {
-            resultBlock(diskInfo);
-        }
+        self.diskInfo = diskInfo;
     }];
 }
 

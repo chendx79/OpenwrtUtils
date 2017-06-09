@@ -29,24 +29,7 @@
 
     [self.view addSubview:self.tableView];
 
-//    [[URouterConfig sharedInstance] showSystemInfo:^(NSDictionary *systemInfo) {
-//      self.systemInfo = systemInfo;
-//    }];
-//
-//    [[URouterConfig sharedInstance] showSystemBoard:^(NSDictionary *systemBoard) {
-//      self.systemBoard = systemBoard;
-//      [self.tableView reloadData];
-//    }];
-    
-    //在多线程里执行长时间操作，在主线程刷新界面
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [[URouterConfig sharedInstance] showDiskInfo:^(NSDictionary *diskInfo) {
-//            self.diskInfo = diskInfo;
-//        }];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.tableView reloadData];
-//        });
-//    });
+    self.wanStatus = [[URouterConfig sharedInstance] wanStatus];
 }
 
 - (void)backBarButtonPressed:(UIButton *)sender {

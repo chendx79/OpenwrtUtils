@@ -21,13 +21,19 @@
 - (void)checkBoxAvailable:(void (^)(BOOL available))resultBlock;
 - (void)loginWithPassword:(NSString *)pwd result:(void (^)(BOOL))resultBlock;
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate;
-- (void)showWanStatus:(void (^)(NSDictionary *wanStatus))resultBlock;
-- (void)showSystemInfo:(void (^)(NSDictionary * systemInfo))resultBlock;
-- (void)showSystemBoard:(void (^)(NSDictionary * systemBoard))resultBlock;
-- (void)showDiskInfo:(void (^)(NSDictionary *diskInfo))resultBlock;
+- (void)getRouterInfo;
+- (void)getWanStatus;
+- (void)getSystemInfo;
+- (void)getSystemBoard;
+- (void)getDiskInfo;
 
 - (BOOL)isBoxAvailable;
 - (BOOL)isBoxLoggedin;
 - (BOOL)isWiFiConnected;
+
+- (NSDictionary *)wanStatus;
+- (NSDictionary *)systemInfo;
+- (NSDictionary *)systemBoard;
+- (NSDictionary *)diskInfo;
 
 @end
