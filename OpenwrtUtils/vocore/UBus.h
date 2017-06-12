@@ -54,6 +54,7 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
     NSString *ssServer;
     NSNumber *ssPort;
     NSString *ssPassword;
+    NSString *gatewayIP;
 
 //    NSString *sessionToken;
     NSDictionary *lanConfig;
@@ -82,6 +83,8 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
 - (void)getSystemInfo:(void (^)(NSDictionary *systemInfo))result;
 - (void)getSystemBoard:(void (^)(NSDictionary *systemInfo))result;
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result;
+- (void)getNetworkState:(void (^)(NSDictionary *networkState))result;
+- (void)getLanDHCP:(void (^)(NSString *lanDHCP))result;
 
 @end
 

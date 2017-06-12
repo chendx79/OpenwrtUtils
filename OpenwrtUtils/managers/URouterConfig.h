@@ -35,5 +35,7 @@
 - (NSDictionary *)systemInfo;
 - (NSDictionary *)systemBoard;
 - (NSDictionary *)diskInfo;
+- (NSDictionary *)networkState;
+- (NSString *)lanDHCP;
 
 @end

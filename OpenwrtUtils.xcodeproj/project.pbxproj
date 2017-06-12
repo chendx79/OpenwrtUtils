@@ -13,7 +13,6 @@
 		3E5DFC761E96296D00D0CB2A /* UWrtCheckUBusApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC751E96296D00D0CB2A /* UWrtCheckUBusApi.m */; };
 		3E5DFC7A1E962B9B00D0CB2A /* UWrtLoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC791E962B9B00D0CB2A /* UWrtLoginApi.m */; };
 		3E5DFC7D1E962BA800D0CB2A /* UWrtGetLanConfigApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC7C1E962BA800D0CB2A /* UWrtGetLanConfigApi.m */; };
-		3E5DFC801E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC7F1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m */; };
 		3E5DFC831E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC821E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m */; };
 		3E5DFC861E962BED00D0CB2A /* UWrtGetWanStatusApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC851E962BED00D0CB2A /* UWrtGetWanStatusApi.m */; };
 		3E5DFC891E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5DFC881E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m */; };
@@ -38,6 +37,10 @@
 		653CD01C1EC9A2C400CCB0A4 /* UWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD0191EC9A2C400CCB0A4 /* UWifiViewController.m */; };
 		653CD01D1EC9A2C400CCB0A4 /* ULanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD01B1EC9A2C400CCB0A4 /* ULanViewController.m */; };
 		653CD0231EC9A68B00CCB0A4 /* UShadowsocksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD0211EC9A68B00CCB0A4 /* UShadowsocksViewController.m */; };
+		653FD1031EEE273100E2FA57 /* pdnsd.conf in Resources */ = {isa = PBXBuildFile; fileRef = 653FD1021EEE273100E2FA57 /* pdnsd.conf */; };
+		653FD1051EEE296B00E2FA57 /* show_wifi_clients.sh in Resources */ = {isa = PBXBuildFile; fileRef = 653FD1041EEE296B00E2FA57 /* show_wifi_clients.sh */; };
+		653FD1081EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653FD1071EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m */; };
+		653FD10B1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653FD10A1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m */; };
 		65A127271E778F880097082F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127261E778F880097082F /* main.m */; };
 		65A1272A1E778F880097082F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127291E778F880097082F /* AppDelegate.m */; };
 		65A127321E778F880097082F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A127311E778F880097082F /* Assets.xcassets */; };
@@ -77,8 +80,6 @@
 		3E5DFC791E962B9B00D0CB2A /* UWrtLoginApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtLoginApi.m; sourceTree = "<group>"; };
 		3E5DFC7B1E962BA800D0CB2A /* UWrtGetLanConfigApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetLanConfigApi.h; sourceTree = "<group>"; };
 		3E5DFC7C1E962BA800D0CB2A /* UWrtGetLanConfigApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetLanConfigApi.m; sourceTree = "<group>"; };
-		3E5DFC7E1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetLanDHCPApi.h; sourceTree = "<group>"; };
-		3E5DFC7F1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetLanDHCPApi.m; sourceTree = "<group>"; };
 		3E5DFC811E962BCC00D0CB2A /* UWrtGetSSHStatusApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetSSHStatusApi.h; sourceTree = "<group>"; };
 		3E5DFC821E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetSSHStatusApi.m; sourceTree = "<group>"; };
 		3E5DFC841E962BED00D0CB2A /* UWrtGetWanStatusApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetWanStatusApi.h; sourceTree = "<group>"; };
@@ -127,6 +128,12 @@
 		653CD01B1EC9A2C400CCB0A4 /* ULanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ULanViewController.m; sourceTree = "<group>"; };
 		653CD0211EC9A68B00CCB0A4 /* UShadowsocksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UShadowsocksViewController.m; sourceTree = "<group>"; };
 		653CD0221EC9A68B00CCB0A4 /* UShadowsocksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UShadowsocksViewController.h; sourceTree = "<group>"; };
+		653FD1021EEE273100E2FA57 /* pdnsd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pdnsd.conf; sourceTree = "<group>"; };
+		653FD1041EEE296B00E2FA57 /* show_wifi_clients.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = show_wifi_clients.sh; sourceTree = "<group>"; };
+		653FD1061EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetNetworkStateApi.h; sourceTree = "<group>"; };
+		653FD1071EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetNetworkStateApi.m; sourceTree = "<group>"; };
+		653FD1091EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetLanDHCPApi.h; sourceTree = "<group>"; };
+		653FD10A1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetLanDHCPApi.m; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -208,6 +215,7 @@
 		3E5DFC701E96289E00D0CB2A /* api */ = {
 			isa = PBXGroup;
 			children = (
+				3EDC405E1E822901001700CA /* define */,
 				3E5DFC771E9629AD00D0CB2A /* UWrtApiProtocol.h */,
 				3E5DFC711E9628E100D0CB2A /* UWrtHttpEngine.h */,
 				3E5DFC721E9628E100D0CB2A /* UWrtHttpEngine.m */,
@@ -217,10 +225,12 @@
 				3E5DFC791E962B9B00D0CB2A /* UWrtLoginApi.m */,
 				3E5DFC7B1E962BA800D0CB2A /* UWrtGetLanConfigApi.h */,
 				3E5DFC7C1E962BA800D0CB2A /* UWrtGetLanConfigApi.m */,
-				3E5DFC7E1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.h */,
-				3E5DFC7F1E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m */,
 				3E5DFC811E962BCC00D0CB2A /* UWrtGetSSHStatusApi.h */,
 				3E5DFC821E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m */,
+				653FD1091EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.h */,
+				653FD10A1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m */,
+				653FD1061EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.h */,
+				653FD1071EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m */,
 				3E5DFC841E962BED00D0CB2A /* UWrtGetWanStatusApi.h */,
 				3E5DFC851E962BED00D0CB2A /* UWrtGetWanStatusApi.m */,
 				3E5DFC871E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.h */,
@@ -252,7 +262,8 @@
 			children = (
 				3EDC40601E822995001700CA /* Constant.h */,
 			);
-			path = define;
+			name = define;
+			path = ../define;
 			sourceTree = "<group>";
 		};
 		3EDC40611E822C4E001700CA /* utils */ = {
@@ -271,6 +282,15 @@
 				3EDC40661E824777001700CA /* Config.plist */,
 			);
 			path = source;
+			sourceTree = "<group>";
+		};
+		653FD1011EEE273100E2FA57 /* files */ = {
+			isa = PBXGroup;
+			children = (
+				653FD1021EEE273100E2FA57 /* pdnsd.conf */,
+				653FD1041EEE296B00E2FA57 /* show_wifi_clients.sh */,
+			);
+			path = files;
 			sourceTree = "<group>";
 		};
 		65A127191E778F880097082F = {
@@ -296,10 +316,10 @@
 		65A127241E778F880097082F /* OpenwrtUtils */ = {
 			isa = PBXGroup;
 			children = (
+				653FD1011EEE273100E2FA57 /* files */,
 				3E5DFC701E96289E00D0CB2A /* api */,
 				3EDC40651E824777001700CA /* source */,
 				3EDC40611E822C4E001700CA /* utils */,
-				3EDC405E1E822901001700CA /* define */,
 				3E56F3561E7BB9B700694949 /* controllers */,
 				3E56F35B1E7BB9B700694949 /* managers */,
 				65AAE4AD1E791EC200C019CA /* vocore */,
@@ -446,8 +466,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				65A127351E778F880097082F /* LaunchScreen.storyboard in Resources */,
+				653FD1051EEE296B00E2FA57 /* show_wifi_clients.sh in Resources */,
 				3EDC40671E824777001700CA /* Config.plist in Resources */,
 				65A127321E778F880097082F /* Assets.xcassets in Resources */,
+				653FD1031EEE273100E2FA57 /* pdnsd.conf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,11 +543,11 @@
 				3E5DFC9B1E962C6A00D0CB2A /* UWrtApplyApi.m in Sources */,
 				3E5DFC861E962BED00D0CB2A /* UWrtGetWanStatusApi.m in Sources */,
 				653CD00E1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m in Sources */,
+				653FD10B1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m in Sources */,
 				3EDC40641E822C4E001700CA /* Utils.m in Sources */,
 				3EDC40171E7F75E6001700CA /* UWiFiPwdViewController.m in Sources */,
 				3E5DFC951E962C3D00D0CB2A /* UWrtSetShadowsocksConfigApi.m in Sources */,
 				3E5DFC9E1E962C7A00D0CB2A /* UWrtCommitApi.m in Sources */,
-				3E5DFC801E962BBC00D0CB2A /* UWrtGetLanDHCPApi.m in Sources */,
 				3EDC401D1E7FA7D6001700CA /* URouter.m in Sources */,
 				653CD00B1EBC5E2500CCB0A4 /* UAboutViewController.m in Sources */,
 				3E5DFC8C1E962C0C00D0CB2A /* UWrtGetShadowsocksConfigApi.m in Sources */,
@@ -542,6 +564,7 @@
 				3E5DFC891E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m in Sources */,
 				3EDC405D1E821F37001700CA /* UWiFiSearchResultCell.m in Sources */,
 				3E5DFC7D1E962BA800D0CB2A /* UWrtGetLanConfigApi.m in Sources */,
+				653FD1081EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m in Sources */,
 				653CD0111EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m in Sources */,
 				3EDC401A1E7FA648001700CA /* URouterConfig.m in Sources */,
 				3E5DFC761E96296D00D0CB2A /* UWrtCheckUBusApi.m in Sources */,

@@ -19,6 +19,9 @@
 @property (nonatomic, strong) NSDictionary *systemInfo;
 @property (nonatomic, strong) NSDictionary *systemBoard;
 @property (nonatomic, strong) NSDictionary *diskInfo;
+@property (nonatomic, strong) NSDictionary *networkState;
+@property (nonatomic, strong) NSString *lanDHCP;
+
 @end
 
 @implementation URouterConfig
@@ -83,6 +86,8 @@
     [self getSystemInfo];
     [self getSystemBoard];
     [self getDiskInfo];
+    [self getNetworkState];
+    [self getLanDHCP];
 }
 
 - (void)getWanStatus{
@@ -109,5 +114,16 @@
     }];
 }
 
+- (void)getNetworkState{
+    [[UBus sharedInstance] getNetworkState:^(NSDictionary *networkState) {
+        self.networkState = networkState;
+    }];
+}
+
+- (void)getLanDHCP{
+    [[UBus sharedInstance] getLanDHCP:^(NSString *lanDHCP) {
+        self.lanDHCP = lanDHCP;
+    }];
+}
 
 @end

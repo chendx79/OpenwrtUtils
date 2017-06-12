@@ -11,5 +11,6 @@
 @interface UWanViewController : UBaseViewController
 
 @property (nonatomic, strong) NSDictionary *wanStatus;
+@property (nonatomic, strong) NSDictionary *networkState;
 
 @end

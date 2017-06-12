@@ -55,7 +55,7 @@ static BOOL _bypassAllocMethod = YES;
         ssServer = [data objectForKey:@"ssServer"];
         ssPort = [data objectForKey:@"ssPort"];
         ssPassword = [data objectForKey:@"ssPassword"];
-        NSString *gatewayIP = [[Utils sharedInstance] GetGetwayIP];
+        gatewayIP = [[Utils sharedInstance] GetGetwayIP];
         URLString = [NSString stringWithFormat:@"http://%@/ubus", gatewayIP];
         //for test
         //URLString = @"http://192.168.20.183/ubus";
@@ -475,8 +475,29 @@ static BOOL _bypassAllocMethod = YES;
                                    }];
 }
 
+- (void)getNetworkState:(void (^)(NSDictionary *networkState))result {
+    UWrtGetNetworkStateApi *api = [UWrtGetNetworkStateApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetNetworkStateApi *obj) {
+                                       if (result) {
+                                           result(obj.networkState);
+                                       }
+                                   }];
+}
+
+- (void)getLanDHCP:(void (^)(NSString *lanDHCP))result {
+    UWrtGetLanDHCPApi *api = [UWrtGetLanDHCPApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetLanDHCPApi *obj) {
+                                       if (result) {
+                                           result(obj.lanDHCP);
+                                       }
+                                   }];
+}
+
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result {
-    NSString *gatewayIP = @"192.168.20.1";
     NSDictionary *diskInfo = [[Utils sharedInstance] GetDiskInfo:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
     result(diskInfo);
 }

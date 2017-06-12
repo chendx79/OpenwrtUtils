@@ -1,14 +1,14 @@
 //
-//  UWrtGetLanDHCPApi.m
+//  UWrtGetNetworkStateApi.m
 //  OpenwrtUtils
 //
 //  Created by coconut on 2017/4/6.
 //  Copyright © 2017年 陈鼎星. All rights reserved.
 //
 
-#import "UWrtGetLanDHCPApi.h"
+#import "UWrtGetNetworkStateApi.h"
 
-@implementation UWrtGetLanDHCPApi
+@implementation UWrtGetNetworkStateApi
 
 - (NSDictionary *)parameters {
     NSDictionary *parameters = @{ @"jsonrpc" : @"2.0",
@@ -16,9 +16,8 @@
                                   @"method" : @"call",
                                   @"params" : @[ self.sessionToken,
                                                  @"uci",
-                                                 @"get",
-                                                 @{@"config" : @"dhcp",
-                                                   @"section" : @"lan"} ]
+                                                 @"state",
+                                                 @{@"config" : @"network"}]
                                   };
     return parameters;
 }
@@ -29,8 +28,8 @@
 
 - (void)decodeResponse:(id)response {
     NSArray *result = [response objectForKey:@"result"];
-    self.lanDHCP = [[[[[result objectAtIndex:1] objectForKey:@"values"] objectForKey:@"dhcp_option"] objectAtIndex:0] componentsSeparatedByString:@","][1];
-    NSLog(@"lanDHCP=%@", self.lanDHCP);
+    self.networkState = [[result objectAtIndex:1] objectForKey:@"values"];
+    NSLog(@"NetworkState=%@", self.networkState);
 }
 
 
