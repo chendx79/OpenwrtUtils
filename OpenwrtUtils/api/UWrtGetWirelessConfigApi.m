@@ -29,16 +29,14 @@
 - (void)decodeResponse:(id)response {
     NSArray *result = [response objectForKey:@"result"];
     
-    self.wirelessConfig = [[result objectAtIndex:1] objectForKey:@"values"];
-    //NSLog(@"wirelessConfig=%@", wirelessConfig);
-    for (int i = 0; i < [self.wirelessConfig allKeys].count; i++) {
-        NSString *key = [self.wirelessConfig allKeys][i];
-        NSDictionary *value = [self.wirelessConfig objectForKey:key];
-        //NSLog(@"%@ = %@", key, value);
+    NSDictionary *allWirelessConfig = [[result objectAtIndex:1] objectForKey:@"values"];
+    for (int i = 0; i < [allWirelessConfig allKeys].count; i++) {
+        NSString *key = [allWirelessConfig allKeys][i];
+        NSDictionary *value = [allWirelessConfig objectForKey:key];
         if ([[value objectForKey:@".type"] isEqualToString:@"wifi-iface"]) {
-            NSLog(@"Wifi配置：SSID=%@, 加密方式=%@, 密码=%@", [value objectForKey:@"ssid"], [value objectForKey:@"encryption"], [value objectForKey:@"key"]);
-            self.wifiDevice = [value objectForKey:@"device"];
-            //NSLog(@"wifi设备=%@", [value objectForKey:@"device"]);
+            self.wirelessConfig = value;
+            NSLog(@"Wifi配置%@", self.wirelessConfig);
+            self.wifiDevice = [self.wirelessConfig objectForKey:@"device"];
         }
     }
 }

@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSDictionary *diskInfo;
 @property (nonatomic, strong) NSDictionary *networkState;
 @property (nonatomic, strong) NSString *lanDHCP;
+@property (nonatomic, strong) NSDictionary *wirelessConfig;
+@property (nonatomic, strong) NSString *iwInfoDevice;
+@property (nonatomic, strong) NSDictionary *iwInfoInfo;
 
 @end
 
@@ -88,6 +91,8 @@
     [self getDiskInfo];
     [self getNetworkState];
     [self getLanDHCP];
+    [self getWirelessConfig];
+    [self getIWInfoDevice];
 }
 
 - (void)getWanStatus{
@@ -123,6 +128,25 @@
 - (void)getLanDHCP{
     [[UBus sharedInstance] getLanDHCP:^(NSString *lanDHCP) {
         self.lanDHCP = lanDHCP;
+    }];
+}
+
+- (void)getWirelessConfig{
+    [[UBus sharedInstance] getWirelessConfig:^(NSDictionary *wirelessConfig) {
+        self.wirelessConfig = wirelessConfig;
+    }];
+}
+
+- (void)getIWInfoDevice{
+    [[UBus sharedInstance] getIWInfoDevice:^(NSString *iwInfoDevice) {
+        self.iwInfoDevice = iwInfoDevice;
+        [self getIWInfoInfo];
+    }];
+}
+
+- (void)getIWInfoInfo{
+    [[UBus sharedInstance] getIWInfoInfo:^(NSDictionary *iwInfoInfo) {
+        self.iwInfoInfo = iwInfoInfo;
     }];
 }
 

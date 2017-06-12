@@ -13,6 +13,7 @@
 @interface UBus ()
 @property (nonatomic, copy) NSString *sessionToken;
 @property (nonatomic, copy) NSString *wifiDevice;
+@property (nonatomic, copy) NSString *iwInfoDevice;
 @end
 
 @implementation UBus
@@ -493,6 +494,41 @@ static BOOL _bypassAllocMethod = YES;
                                    result:^(BOOL rst, UWrtGetLanDHCPApi *obj) {
                                        if (result) {
                                            result(obj.lanDHCP);
+                                       }
+                                   }];
+}
+
+- (void)getWirelessConfig:(void (^)(NSDictionary *wirelessConfig))result {
+    UWrtGetWirelessConfigApi *api = [UWrtGetWirelessConfigApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetWirelessConfigApi *obj) {
+                                       if (result) {
+                                           result(obj.wirelessConfig);
+                                       }
+                                   }];
+}
+
+- (void)getIWInfoDevice:(void (^)(NSString *iwInfoDevice))result {
+    UWrtGetIWInfoDeviceApi *api = [UWrtGetIWInfoDeviceApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetIWInfoDeviceApi *obj) {
+                                       if (result) {
+                                           self.iwInfoDevice = obj.iwInfoDevice;
+                                           result(obj.iwInfoDevice);
+                                       }
+                                   }];
+}
+
+- (void)getIWInfoInfo:(void (^)(NSDictionary *iwInfoInfo))result {
+    UWrtGetIWInfoInfoApi *api = [UWrtGetIWInfoInfoApi new];
+    api.sessionToken = self.sessionToken;
+    api.device = self.iwInfoDevice;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetIWInfoInfoApi *obj) {
+                                       if (result) {
+                                           result(obj.iwInfoInfo);
                                        }
                                    }];
 }

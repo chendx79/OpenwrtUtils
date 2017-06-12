@@ -41,6 +41,8 @@
 		653FD1051EEE296B00E2FA57 /* show_wifi_clients.sh in Resources */ = {isa = PBXBuildFile; fileRef = 653FD1041EEE296B00E2FA57 /* show_wifi_clients.sh */; };
 		653FD1081EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653FD1071EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m */; };
 		653FD10B1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653FD10A1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m */; };
+		653FD10E1EEE8FC100E2FA57 /* UWrtGetIWInfoDeviceApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653FD10D1EEE8FC100E2FA57 /* UWrtGetIWInfoDeviceApi.m */; };
+		653FD1111EEE923F00E2FA57 /* UWrtGetIWInfoInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653FD1101EEE923F00E2FA57 /* UWrtGetIWInfoInfoApi.m */; };
 		65A127271E778F880097082F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127261E778F880097082F /* main.m */; };
 		65A1272A1E778F880097082F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A127291E778F880097082F /* AppDelegate.m */; };
 		65A127321E778F880097082F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A127311E778F880097082F /* Assets.xcassets */; };
@@ -134,6 +136,10 @@
 		653FD1071EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetNetworkStateApi.m; sourceTree = "<group>"; };
 		653FD1091EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetLanDHCPApi.h; sourceTree = "<group>"; };
 		653FD10A1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetLanDHCPApi.m; sourceTree = "<group>"; };
+		653FD10C1EEE8FC100E2FA57 /* UWrtGetIWInfoDeviceApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetIWInfoDeviceApi.h; sourceTree = "<group>"; };
+		653FD10D1EEE8FC100E2FA57 /* UWrtGetIWInfoDeviceApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetIWInfoDeviceApi.m; sourceTree = "<group>"; };
+		653FD10F1EEE923F00E2FA57 /* UWrtGetIWInfoInfoApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetIWInfoInfoApi.h; sourceTree = "<group>"; };
+		653FD1101EEE923F00E2FA57 /* UWrtGetIWInfoInfoApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UWrtGetIWInfoInfoApi.m; sourceTree = "<group>"; };
 		65A127221E778F880097082F /* OpenwrtUtils.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenwrtUtils.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65A127261E778F880097082F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		65A127281E778F880097082F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -229,6 +235,10 @@
 				3E5DFC821E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m */,
 				653FD1091EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.h */,
 				653FD10A1EEE6CA900E2FA57 /* UWrtGetLanDHCPApi.m */,
+				653FD10C1EEE8FC100E2FA57 /* UWrtGetIWInfoDeviceApi.h */,
+				653FD10D1EEE8FC100E2FA57 /* UWrtGetIWInfoDeviceApi.m */,
+				653FD10F1EEE923F00E2FA57 /* UWrtGetIWInfoInfoApi.h */,
+				653FD1101EEE923F00E2FA57 /* UWrtGetIWInfoInfoApi.m */,
 				653FD1061EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.h */,
 				653FD1071EEE6B3C00E2FA57 /* UWrtGetNetworkStateApi.m */,
 				3E5DFC841E962BED00D0CB2A /* UWrtGetWanStatusApi.h */,
@@ -536,8 +546,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E5DFC7A1E962B9B00D0CB2A /* UWrtLoginApi.m in Sources */,
+				653FD1111EEE923F00E2FA57 /* UWrtGetIWInfoInfoApi.m in Sources */,
 				3E5DFC981E962C5100D0CB2A /* UWrtGetDHCPLeasesApi.m in Sources */,
 				3E56F35D1E7BB9B700694949 /* USearchWiFiViewController.m in Sources */,
+				653FD10E1EEE8FC100E2FA57 /* UWrtGetIWInfoDeviceApi.m in Sources */,
 				3E5DFC921E962C2A00D0CB2A /* UWrtScanWiFiApi.m in Sources */,
 				653CD0231EC9A68B00CCB0A4 /* UShadowsocksViewController.m in Sources */,
 				3E5DFC9B1E962C6A00D0CB2A /* UWrtApplyApi.m in Sources */,

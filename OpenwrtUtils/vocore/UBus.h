@@ -85,6 +85,9 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result;
 - (void)getNetworkState:(void (^)(NSDictionary *networkState))result;
 - (void)getLanDHCP:(void (^)(NSString *lanDHCP))result;
+- (void)getWirelessConfig:(void (^)(NSDictionary *wirelessConfig))result;
+- (void)getIWInfoDevice:(void (^)(NSString *iwInfoDevice))result;
+- (void)getIWInfoInfo:(void (^)(NSDictionary *iwInfoInfo))result;
 
 @end
 

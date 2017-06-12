@@ -29,24 +29,8 @@
 
     [self.view addSubview:self.tableView];
 
-//    [[URouterConfig sharedInstance] showSystemInfo:^(NSDictionary *systemInfo) {
-//      self.systemInfo = systemInfo;
-//    }];
-//
-//    [[URouterConfig sharedInstance] showSystemBoard:^(NSDictionary *systemBoard) {
-//      self.systemBoard = systemBoard;
-//      [self.tableView reloadData];
-//    }];
-    
-    //在多线程里执行长时间操作，在主线程刷新界面
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [[URouterConfig sharedInstance] showDiskInfo:^(NSDictionary *diskInfo) {
-//            self.diskInfo = diskInfo;
-//        }];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.tableView reloadData];
-//        });
-//    });
+    self.wirelessConfig = [[URouterConfig sharedInstance] wirelessConfig];
+    self.iwInfoInfo = [[URouterConfig sharedInstance] iwInfoInfo];
 }
 
 - (void)backBarButtonPressed:(UIButton *)sender {
@@ -105,12 +89,12 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-            //            if (self.systemInfo) {
-            //                UILabel *labelHostname = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-            //                labelHostname.textAlignment = NSTextAlignmentRight;
-            //                labelHostname.text = self.systemBoard[@"hostname"];
-            //                [cell.contentView addSubview:labelHostname];
-            //            }
+            if (self.wirelessConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                labelValue.text = self.wirelessConfig[@"ssid"];
+                [cell.contentView addSubview:labelValue];
+            }
         }
     }
     if (indexPath.section == 1) {
@@ -120,12 +104,12 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-//            if (self.systemInfo) {
-//                UILabel *labelModel = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-//                labelModel.textAlignment = NSTextAlignmentRight;
-//                labelModel.text = self.systemBoard[@"model"];
-//                [cell.contentView addSubview:labelModel];
-//            }
+            if (self.wirelessConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                labelValue.text = self.wirelessConfig[@"encryption"];
+                [cell.contentView addSubview:labelValue];
+            }
         }
         if (indexPath.row == 1) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
@@ -133,12 +117,12 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-//            if (self.systemInfo) {
-//                UILabel *labelDesp = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-//                labelDesp.textAlignment = NSTextAlignmentRight;
-//                labelDesp.text = self.systemBoard[@"release"][@"description"];
-//                [cell.contentView addSubview:labelDesp];
-//            }
+            if (self.wirelessConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                labelValue.text = @"自动";
+                [cell.contentView addSubview:labelValue];
+            }
         }
         if (indexPath.row == 2) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
@@ -146,43 +130,32 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-//            if (self.systemInfo) {
-//                UILabel *labelUptime = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-//                labelUptime.textAlignment = NSTextAlignmentRight;
-//                int num_seconds = [self.systemInfo[@"uptime"] intValue];
-//                
-//                int days = num_seconds / (60 * 60 * 24);
-//                num_seconds -= days * (60 * 60 * 24);
-//                int hours = num_seconds / (60 * 60);
-//                num_seconds -= hours * (60 * 60);
-//                int minutes = num_seconds / 60;
-//                num_seconds -= minutes * 60;
-//                if (days > 0) {
-//                    labelUptime.text = [NSString stringWithFormat:@"%d天%d小时%d分钟%d秒", days, hours, minutes, num_seconds];
-//                } else if (hours > 0){
-//                    labelUptime.text = [NSString stringWithFormat:@"%d小时%d分钟%d秒", hours, minutes, num_seconds];
-//                } else if (minutes > 0){
-//                    labelUptime.text = [NSString stringWithFormat:@"%d分钟%d秒", minutes, num_seconds];
-//                } else {
-//                    labelUptime.text = [NSString stringWithFormat:@"%d秒", num_seconds];
-//                }
-//                [cell.contentView addSubview:labelUptime];
-//            }
+            if (self.wirelessConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                NSMutableString *dottedPassword = [NSMutableString new];
+                for (int i = 0; i < [self.wirelessConfig[@"key"] length]; i++)
+                {
+                    [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
+                }
+                labelValue.text = dottedPassword;
+                [cell.contentView addSubview:labelValue];
+            }
         }
     }
     if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
-            label.text = @"MAC地址";
+            label.text = @"BSSID";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-            //            if (self.systemInfo) {
-            //                UILabel *labelHostname = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-            //                labelHostname.textAlignment = NSTextAlignmentRight;
-            //                labelHostname.text = self.systemBoard[@"hostname"];
-            //                [cell.contentView addSubview:labelHostname];
-            //            }
+            if (self.iwInfoInfo) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                labelValue.text = self.iwInfoInfo[@"bssid"];
+                [cell.contentView addSubview:labelValue];
+            }
         }
     }
     return cell;

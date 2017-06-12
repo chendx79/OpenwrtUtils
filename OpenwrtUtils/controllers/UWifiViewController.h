@@ -10,8 +10,7 @@
 
 @interface UWifiViewController : UBaseViewController
 
-//@property (nonatomic, strong) NSDictionary *systemInfo;
-//@property (nonatomic, strong) NSDictionary *systemBoard;
-//@property (nonatomic, strong) NSDictionary *diskInfo;
+@property (nonatomic, strong) NSDictionary *wirelessConfig;
+@property (nonatomic, strong) NSDictionary *iwInfoInfo;
 
 @end

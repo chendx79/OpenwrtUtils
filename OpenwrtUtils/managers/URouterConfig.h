@@ -37,5 +37,8 @@
 - (NSDictionary *)diskInfo;
 - (NSDictionary *)networkState;
 - (NSString *)lanDHCP;
+- (NSDictionary *)wirelessConfig;
+- (NSString *)iwInfoDevice;
+- (NSDictionary *)iwInfoInfo;
 
 @end

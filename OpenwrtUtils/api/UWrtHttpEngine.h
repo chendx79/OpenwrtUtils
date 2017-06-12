@@ -25,6 +25,8 @@
 #import "UWrtGetSystemInfoApi.h"
 #import "UWrtGetSystemBoardApi.h"
 #import "UWrtGetNetworkStateApi.h"
+#import "UWrtGetIWInfoDeviceApi.h"
+#import "UWrtGetIWInfoInfoApi.h"
 
 @interface UWrtHttpEngine : NSObject
 + (UWrtHttpEngine *)sharedInstance;
