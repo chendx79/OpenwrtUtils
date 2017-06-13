@@ -26,6 +26,7 @@
 - (void)getSystemInfo;
 - (void)getSystemBoard;
 - (void)getDiskInfo;
+- (void)getWifiClients;
 
 - (BOOL)isBoxAvailable;
 - (BOOL)isBoxLoggedin;
@@ -40,5 +41,6 @@
 - (NSDictionary *)wirelessConfig;
 - (NSString *)iwInfoDevice;
 - (NSDictionary *)iwInfoInfo;
+- (NSArray *)wifiClients;
 
 @end

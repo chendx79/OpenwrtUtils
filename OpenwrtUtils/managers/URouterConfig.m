@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSDictionary *wirelessConfig;
 @property (nonatomic, strong) NSString *iwInfoDevice;
 @property (nonatomic, strong) NSDictionary *iwInfoInfo;
+@property (nonatomic, strong) NSArray *wifiClients;
 
 @end
 
@@ -93,6 +94,7 @@
     [self getLanDHCP];
     [self getWirelessConfig];
     [self getIWInfoDevice];
+    [self getWifiClients];
 }
 
 - (void)getWanStatus{
@@ -147,6 +149,12 @@
 - (void)getIWInfoInfo{
     [[UBus sharedInstance] getIWInfoInfo:^(NSDictionary *iwInfoInfo) {
         self.iwInfoInfo = iwInfoInfo;
+    }];
+}
+
+- (void)getWifiClients{
+    [[UBus sharedInstance] getWifiClients:^(NSArray *wifiClients) {
+        self.wifiClients = wifiClients;
     }];
 }
 

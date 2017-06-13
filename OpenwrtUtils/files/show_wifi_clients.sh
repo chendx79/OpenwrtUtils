@@ -4,9 +4,9 @@
 # Shows MAC, IP address and any hostname info for all connected wifi devices
 # written for openwrt 12.09 Attitude Adjustment
  
-echo    "# All connected wifi devices, with IP address,"
-echo    "# hostname (if available), and MAC address."
-echo -e "# IP address\tname\tMAC address"
+#echo    "# All connected wifi devices, with IP address,"
+#echo    "# hostname (if available), and MAC address."
+#echo -e "# IP address\tname\tMAC address"
 # list all wireless network interfaces
 # (for universal driver; see wiki article for alternative commands)
 for interface in `iwinfo | grep ESSID | cut -f 1 -s -d" "`

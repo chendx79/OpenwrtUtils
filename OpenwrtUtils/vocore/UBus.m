@@ -58,6 +58,7 @@ static BOOL _bypassAllocMethod = YES;
         ssPassword = [data objectForKey:@"ssPassword"];
         gatewayIP = [[Utils sharedInstance] GetGetwayIP];
         URLString = [NSString stringWithFormat:@"http://%@/ubus", gatewayIP];
+    
         //for test
         //URLString = @"http://192.168.20.183/ubus";
         //gatewayIP = @"192.168.20.183";
@@ -536,6 +537,11 @@ static BOOL _bypassAllocMethod = YES;
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result {
     NSDictionary *diskInfo = [[Utils sharedInstance] GetDiskInfo:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
     result(diskInfo);
+}
+
+- (void)getWifiClients:(void (^)(NSArray *wifiClients))result {
+    NSArray *wifiClients = [[Utils sharedInstance] GetWifiClients:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
+    result(wifiClients);
 }
 
 @end

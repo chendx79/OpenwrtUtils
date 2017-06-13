@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSDictionary *wirelessConfig;
 @property (nonatomic, strong) NSDictionary *iwInfoInfo;
+@property (nonatomic, strong) NSArray *wifiClients;
 
 @end

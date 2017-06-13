@@ -31,6 +31,7 @@
 
     self.wirelessConfig = [[URouterConfig sharedInstance] wirelessConfig];
     self.iwInfoInfo = [[URouterConfig sharedInstance] iwInfoInfo];
+    self.wifiClients = [[URouterConfig sharedInstance] wifiClients];
 }
 
 - (void)backBarButtonPressed:(UIButton *)sender {
@@ -73,6 +74,9 @@
     if (section == 2) {
         return 1;
     }
+    if (section == 3) {
+        return [self.wifiClients count];
+    }
     return 0;
 }
 
@@ -88,7 +92,7 @@
             label.text = @"SSID";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
-            
+
             if (self.wirelessConfig) {
                 UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
                 labelValue.textAlignment = NSTextAlignmentRight;
@@ -103,7 +107,7 @@
             label.text = @"加密方式";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
-            
+
             if (self.wirelessConfig) {
                 UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
                 labelValue.textAlignment = NSTextAlignmentRight;
@@ -116,7 +120,7 @@
             label.text = @"加密算法";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
-            
+
             if (self.wirelessConfig) {
                 UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
                 labelValue.textAlignment = NSTextAlignmentRight;
@@ -129,13 +133,12 @@
             label.text = @"密码";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
-            
+
             if (self.wirelessConfig) {
                 UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
                 labelValue.textAlignment = NSTextAlignmentRight;
                 NSMutableString *dottedPassword = [NSMutableString new];
-                for (int i = 0; i < [self.wirelessConfig[@"key"] length]; i++)
-                {
+                for (int i = 0; i < [self.wirelessConfig[@"key"] length]; i++) {
                     [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
                 }
                 labelValue.text = dottedPassword;
@@ -149,13 +152,32 @@
             label.text = @"BSSID";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
-            
+
             if (self.iwInfoInfo) {
                 UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
                 labelValue.textAlignment = NSTextAlignmentRight;
                 labelValue.text = self.iwInfoInfo[@"bssid"];
                 [cell.contentView addSubview:labelValue];
             }
+        }
+    }
+    if (indexPath.section == 3) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
+        label.text = self.wifiClients[indexPath.row][@"name"];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [cell.contentView addSubview:label];
+
+        if (self.iwInfoInfo) {
+            UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+            labelValue.textAlignment = NSTextAlignmentRight;
+            labelValue.text = self.wifiClients[indexPath.row][@"ip"];
+            [cell.contentView addSubview:labelValue];
+            
+            UILabel *labelElse = [[UILabel alloc] initWithFrame:CGRectMake(120, 31, 250, 10)];
+            labelElse.textAlignment = NSTextAlignmentRight;
+            labelElse.font = [UIFont fontWithName:@"Arial" size:10];
+            labelElse.text = self.wifiClients[indexPath.row][@"mac"];
+            [cell.contentView addSubview:labelElse];
         }
     }
     return cell;

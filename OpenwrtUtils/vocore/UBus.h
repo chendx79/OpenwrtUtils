@@ -46,6 +46,9 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
     UBUS_STATUS_CONNECTION_FAILED = 10,
 };
 
+//NSString * const SSH_PORT = @"22";
+//NSString * const SSH_USERNAME = @"root";
+
 @interface UBus : NSObject {
    @private
     NSString *rootPassword;
@@ -88,6 +91,7 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
 - (void)getWirelessConfig:(void (^)(NSDictionary *wirelessConfig))result;
 - (void)getIWInfoDevice:(void (^)(NSString *iwInfoDevice))result;
 - (void)getIWInfoInfo:(void (^)(NSDictionary *iwInfoInfo))result;
+- (void)getWifiClients:(void (^)(NSArray *wifiClients))result;
 
 @end
 

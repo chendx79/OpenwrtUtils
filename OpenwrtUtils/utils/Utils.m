@@ -203,4 +203,36 @@ static BOOL _bypassAllocMethod = YES;
     return nil;
 }
 
+- (NSArray *)GetWifiClients:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password {
+    NSString *host = [NSString stringWithFormat:@"%@:%@", ip, port];
+    NMSSHSession *session = [NMSSHSession connectToHost:host
+                                           withUsername:username];
+    if (session.isConnected) {
+        [session authenticateByPassword:password];
+        
+        if (session.isAuthorized) {
+            NSLog(@"Authentication succeeded");
+        }
+        
+        NSError *error = nil;
+        
+        NSString *response;
+        response = [session.channel execute:@"show_wifi_clients.sh" error:&error];
+        NSArray* respArray = [response componentsSeparatedByString: @"\n"];
+        NSMutableArray* wifiClients = [[NSMutableArray alloc] init];
+        for(NSString *s in respArray){
+            if (![s isEqual: @""]) {
+                NSArray* client = [s componentsSeparatedByString: @"\t"];
+                NSDictionary *clientInfo = [[NSDictionary alloc]initWithObjectsAndKeys:client[0], @"ip", client[1], @"name", client[2] , @"mac", nil];
+                [wifiClients addObject:clientInfo];
+            }
+        }
+        
+        [session disconnect];
+        
+        return wifiClients;
+    }
+    return nil;
+}
+
 @end

@@ -31,6 +31,7 @@
 - (NSString *)GetGetwayIP;
 - (void)SystemPrepare:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
 - (NSDictionary *)GetDiskInfo:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
+- (NSArray *)GetWifiClients:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
 
 @end
 
