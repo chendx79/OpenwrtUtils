@@ -7,7 +7,6 @@
 //
 
 #import "Utils.h"
-#import <NMSSH/NMSSH.h>
 
 @implementation Utils
 
@@ -142,18 +141,23 @@ static BOOL _bypassAllocMethod = YES;
     return address;
 }
 
-- (void)SystemPrepare:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password {
-    NSString *host = [NSString stringWithFormat:@"%@:%@", ip, port];
-    NMSSHSession *session = [NMSSHSession connectToHost:host
-                                           withUsername:username];
-
+- (BOOL)SSHLogin:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password{
+    host = [NSString stringWithFormat:@"%@:%@", ip, port];
+    session = [NMSSHSession connectToHost:host withUsername:username];
+    
     if (session.isConnected) {
         [session authenticateByPassword:password];
-
+        
         if (session.isAuthorized) {
             NSLog(@"Authentication succeeded");
+            return YES;
         }
+    }
+    return NO;
+}
 
+- (void)SystemPrepare{
+    if (session.isConnected) {
         NSError *error = nil;
 
         NSString *response;
@@ -172,17 +176,8 @@ static BOOL _bypassAllocMethod = YES;
     }
 }
 
-- (NSDictionary *)GetDiskInfo:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password {
-    NSString *host = [NSString stringWithFormat:@"%@:%@", ip, port];
-    NMSSHSession *session = [NMSSHSession connectToHost:host
-                                           withUsername:username];
+- (NSDictionary *)GetDiskInfo{
     if (session.isConnected) {
-        [session authenticateByPassword:password];
-        
-        if (session.isAuthorized) {
-            NSLog(@"Authentication succeeded");
-        }
-        
         NSError *error = nil;
         
         NSString *response;
@@ -196,24 +191,13 @@ static BOOL _bypassAllocMethod = YES;
         }
         NSDictionary *diskInfo = [[NSDictionary alloc]initWithObjectsAndKeys:diskInfoArray[1], @"total", diskInfoArray[2], @"used", diskInfoArray[3] , @"available", diskInfoArray[4], @"usedPercent", nil];
         
-        [session disconnect];
-        
         return diskInfo;
     }
     return nil;
 }
 
-- (NSArray *)GetWifiClients:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password {
-    NSString *host = [NSString stringWithFormat:@"%@:%@", ip, port];
-    NMSSHSession *session = [NMSSHSession connectToHost:host
-                                           withUsername:username];
+- (NSArray *)GetWifiClients {
     if (session.isConnected) {
-        [session authenticateByPassword:password];
-        
-        if (session.isAuthorized) {
-            NSLog(@"Authentication succeeded");
-        }
-        
         NSError *error = nil;
         
         NSString *response;
@@ -227,9 +211,7 @@ static BOOL _bypassAllocMethod = YES;
                 [wifiClients addObject:clientInfo];
             }
         }
-        
-        [session disconnect];
-        
+
         return wifiClients;
     }
     return nil;

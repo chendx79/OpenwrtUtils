@@ -85,12 +85,14 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
 - (void)getWanStatus:(void (^)(NSDictionary *wanStatus))result;
 - (void)getSystemInfo:(void (^)(NSDictionary *systemInfo))result;
 - (void)getSystemBoard:(void (^)(NSDictionary *systemInfo))result;
-- (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result;
 - (void)getNetworkState:(void (^)(NSDictionary *networkState))result;
 - (void)getLanDHCP:(void (^)(NSString *lanDHCP))result;
 - (void)getWirelessConfig:(void (^)(NSDictionary *wirelessConfig))result;
 - (void)getIWInfoDevice:(void (^)(NSString *iwInfoDevice))result;
 - (void)getIWInfoInfo:(void (^)(NSDictionary *iwInfoInfo))result;
+
+- (void)sshLogin:(void (^)(BOOL success))result;
+- (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result;
 - (void)getWifiClients:(void (^)(NSArray *wifiClients))result;
 
 @end

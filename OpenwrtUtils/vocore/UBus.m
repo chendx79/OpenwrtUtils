@@ -534,13 +534,19 @@ static BOOL _bypassAllocMethod = YES;
                                    }];
 }
 
+- (void)sshLogin:(void (^)(BOOL success))result {
+    BOOL success = [[Utils sharedInstance] SSHLogin:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
+    result(success);
+}
+
+
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result {
-    NSDictionary *diskInfo = [[Utils sharedInstance] GetDiskInfo:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
+    NSDictionary *diskInfo = [[Utils sharedInstance] GetDiskInfo];
     result(diskInfo);
 }
 
 - (void)getWifiClients:(void (^)(NSArray *wifiClients))result {
-    NSArray *wifiClients = [[Utils sharedInstance] GetWifiClients:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
+    NSArray *wifiClients = [[Utils sharedInstance] GetWifiClients];
     result(wifiClients);
 }
 

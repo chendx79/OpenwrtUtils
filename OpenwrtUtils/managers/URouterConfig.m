@@ -15,6 +15,7 @@
 @property (nonatomic, assign) BOOL isBoxAvailable;
 @property (nonatomic, assign) BOOL isBoxLoggedin;
 @property (nonatomic, assign) BOOL isWiFiConnected;
+@property (nonatomic, assign) BOOL isSSHLoggedin;
 @property (nonatomic, strong) NSDictionary *wanStatus;
 @property (nonatomic, strong) NSDictionary *systemInfo;
 @property (nonatomic, strong) NSDictionary *systemBoard;
@@ -89,12 +90,11 @@
     [self getWanStatus];
     [self getSystemInfo];
     [self getSystemBoard];
-    [self getDiskInfo];
     [self getNetworkState];
     [self getLanDHCP];
     [self getWirelessConfig];
     [self getIWInfoDevice];
-    [self getWifiClients];
+    [self sshLogin];
 }
 
 - (void)getWanStatus{
@@ -112,12 +112,6 @@
 - (void)getSystemBoard{
     [[UBus sharedInstance] getSystemBoard:^(NSDictionary *systemBoard) {
         self.systemBoard = systemBoard;
-    }];
-}
-
-- (void)getDiskInfo{
-    [[UBus sharedInstance] getDiskInfo:^(NSDictionary *diskInfo) {
-        self.diskInfo = diskInfo;
     }];
 }
 
@@ -149,6 +143,20 @@
 - (void)getIWInfoInfo{
     [[UBus sharedInstance] getIWInfoInfo:^(NSDictionary *iwInfoInfo) {
         self.iwInfoInfo = iwInfoInfo;
+    }];
+}
+
+- (void)sshLogin{
+    [[UBus sharedInstance] sshLogin:^(BOOL success) {
+        self.isSSHLoggedin = success;
+        [self getDiskInfo];
+        [self getWifiClients];
+    }];
+}
+
+- (void)getDiskInfo{
+    [[UBus sharedInstance] getDiskInfo:^(NSDictionary *diskInfo) {
+        self.diskInfo = diskInfo;
     }];
 }
 

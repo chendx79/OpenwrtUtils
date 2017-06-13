@@ -31,6 +31,7 @@
 - (BOOL)isBoxAvailable;
 - (BOOL)isBoxLoggedin;
 - (BOOL)isWiFiConnected;
+- (BOOL)isSSHLoggedin;
 
 - (NSDictionary *)wanStatus;
 - (NSDictionary *)systemInfo;

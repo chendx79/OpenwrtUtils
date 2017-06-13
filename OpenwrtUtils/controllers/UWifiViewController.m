@@ -162,12 +162,12 @@
         }
     }
     if (indexPath.section == 3) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
-        label.text = self.wifiClients[indexPath.row][@"name"];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        [cell.contentView addSubview:label];
-
         if (self.iwInfoInfo) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
+            label.text = self.wifiClients[indexPath.row][@"name"];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [cell.contentView addSubview:label];
+            
             UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
             labelValue.textAlignment = NSTextAlignmentRight;
             labelValue.text = self.wifiClients[indexPath.row][@"ip"];

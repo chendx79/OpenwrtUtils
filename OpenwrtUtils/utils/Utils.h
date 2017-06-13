@@ -10,6 +10,8 @@
 #define Utils_h
 
 #import <Foundation/Foundation.h>
+#import <NMSSH/NMSSH.h>
+
 #if TARGET_IPHONE_SIMULATOR
 #include <net/route.h>
 #else
@@ -23,15 +25,18 @@
 
 @interface Utils : NSObject {
    @private
+    NSString *host;
+    NMSSHSession *session;
 }
 
 + (id)sharedInstance;
 
 - (NSString *)GetLocalIP;
 - (NSString *)GetGetwayIP;
-- (void)SystemPrepare:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
-- (NSDictionary *)GetDiskInfo:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
-- (NSArray *)GetWifiClients:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
+- (BOOL)SSHLogin:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
+- (void)SystemPrepare;
+- (NSDictionary *)GetDiskInfo;
+- (NSArray *)GetWifiClients;
 
 @end
 
