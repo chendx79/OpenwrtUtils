@@ -15,6 +15,7 @@
 #define IMAGE_ROUTER [UIImage imageNamed:@"access_point"]
 #define IMAGE_SEARCH [UIImage imageNamed:@"search_wifi"]
 #define IMAGE_BOX [UIImage imageNamed:@"openwrtbox"]
+#define IMAGE_GREEN_LIGHT [UIImage imageNamed:@"green_light"]
 
 /**
  逻辑
@@ -43,6 +44,18 @@
     self.navigationItem.title = @"Openwrt实用工具";
     NSLog(@"CheckUBus started...");
 
+    //背景渐变色
+    UIColor *startColor = [UIColor colorWithRed:44.0/255.0 green:51.0/255.0 blue:60.0/255.0 alpha:1.0]; // 开始的颜色
+    UIColor *endColor = [UIColor colorWithRed:104.0/255.0 green:111.0/255.0 blue:120.0/255.0 alpha:1.0]; // 结束的颜色
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = self.view.bounds;
+    gradientLayer.startPoint = CGPointMake(0.5, 0);
+    gradientLayer.endPoint = CGPointMake(0.5, 1);
+    gradientLayer.locations = @[@(0.0f), @(1.0f)]; // 设置起始点、结束点，中间也可以穿插中间值，范围[0, 1]
+    gradientLayer.colors = @[(id)startColor.CGColor, (id)endColor.CGColor]; // 和locations属性对应
+    [self.view.layer addSublayer:gradientLayer];
+    //背景
+
     [self.view addSubview:self.internetButton];
     [self.view addSubview:self.wifiButton];
     [self.view addSubview:self.boxButton];
@@ -56,17 +69,41 @@
 
     [self.wifiButton mas_makeConstraints:^(MASConstraintMaker *make) {
       make.centerX.mas_equalTo(self.internetButton.mas_centerX);
-      make.top.mas_equalTo(self.internetButton.mas_bottom).offset(40);
+      make.top.mas_equalTo(self.internetButton.mas_bottom).offset(100);
       make.width.mas_equalTo(100);
       make.height.mas_equalTo(100);
     }];
 
     [self.boxButton mas_makeConstraints:^(MASConstraintMaker *make) {
       make.centerX.mas_equalTo(self.internetButton.mas_centerX);
-      make.top.mas_equalTo(self.wifiButton.mas_bottom).offset(40);
+      make.top.mas_equalTo(self.wifiButton.mas_bottom).offset(100);
       make.width.mas_equalTo(100);
       make.height.mas_equalTo(100);
     }];
+
+    //绿灯和互联网
+    UIImageView *internetGreenLight = [[UIImageView alloc] initWithImage:IMAGE_GREEN_LIGHT];
+    internetGreenLight.frame = CGRectMake(150, 188, 15, 15); // 设置图片位置和大小
+    [self.view addSubview:internetGreenLight];
+
+    UILabel *internet = [[UILabel alloc] init];
+    internet.frame = CGRectMake(170, 185, 120, 20); // 设置图片位置和大小
+    internet.textColor = [UIColor whiteColor];
+    internet.text = @"互联网";
+    [self.view addSubview:internet];
+    //
+
+    UILabel *searching = [[UILabel alloc] init];
+    searching.frame = CGRectMake(40, 600, 300, 20); // 设置图片位置和大小
+    searching.textColor = [UIColor whiteColor];
+    searching.text = @"未找到Openwrt路由器，继续搜索中……";
+    [self.view addSubview:searching];
+
+
+    UIActivityIndicatorView *searchActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    searchActivityIndicator.center = CGPointMake(180, 580);//只能设置中心，不能设置大小
+    [self.view addSubview:searchActivityIndicator];
+    [searchActivityIndicator startAnimating];
 
     self.wifiButton.hidden = YES;
     self.boxButton.hidden = YES;
@@ -77,6 +114,9 @@
                        }] subscribeNext:^(NSNumber *rst) {
       if (rst.boolValue) {
           self.boxButton.hidden = NO;
+          searching.hidden = YES;
+          [searchActivityIndicator stopAnimating];
+          searchActivityIndicator.hidden = YES;
       } else {
           self.boxButton.hidden = YES;
       }
@@ -87,7 +127,18 @@
                          return @(isBoxLoggedin.boolValue);
                        }] subscribeNext:^(NSNumber *rst) {
       if (rst.boolValue) {
-          self.wifiButton.hidden = NO;
+          //self.wifiButton.hidden = NO;
+          //绿灯和路由器
+          UIImageView *internetGreenLight = [[UIImageView alloc] initWithImage:IMAGE_GREEN_LIGHT];
+          internetGreenLight.frame = CGRectMake(120, 578, 15, 15); // 设置图片位置和大小
+          [self.view addSubview:internetGreenLight];
+
+          UILabel *internet = [[UILabel alloc] init];
+          internet.frame = CGRectMake(140, 575, 120, 20); // 设置图片位置和大小
+          internet.textColor = [UIColor whiteColor];
+          internet.text = @"Openwrt路由器";
+          [self.view addSubview:internet];
+          //
           [[URouterConfig sharedInstance] getRouterInfo];
       } else {
           self.wifiButton.hidden = YES;
@@ -118,6 +169,14 @@
     [[URouterConfig sharedInstance] loginWithPassword:rootPassword
                                                result:^(BOOL success){
                                                }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
 - (void)didReceiveMemoryWarning {
