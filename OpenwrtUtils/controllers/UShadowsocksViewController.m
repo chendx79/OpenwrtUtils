@@ -29,24 +29,7 @@
 
     [self.view addSubview:self.tableView];
 
-//    [[URouterConfig sharedInstance] showSystemInfo:^(NSDictionary *systemInfo) {
-//      self.systemInfo = systemInfo;
-//    }];
-//
-//    [[URouterConfig sharedInstance] showSystemBoard:^(NSDictionary *systemBoard) {
-//      self.systemBoard = systemBoard;
-//      [self.tableView reloadData];
-//    }];
-//    
-//    //在多线程里执行长时间操作，在主线程刷新界面
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        [[URouterConfig sharedInstance] showDiskInfo:^(NSDictionary *diskInfo) {
-//            self.diskInfo = diskInfo;
-//        }];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.tableView reloadData];
-//        });
-//    });
+    self.shadowsocksConfig = [[URouterConfig sharedInstance] shadowsocksConfig];
 }
 
 - (void)backBarButtonPressed:(UIButton *)sender {
@@ -97,7 +80,12 @@
             [cell.contentView addSubview:label];
             
             UISwitch *enabled = [[UISwitch alloc] initWithFrame:CGRectMake(320, 7, 0, 0)];
-            [enabled setOn:YES];
+            [enabled setOn:NO];
+            if (self.shadowsocksConfig) {
+                if ([self.shadowsocksConfig[@"enable"] isEqualToString:@"1"]) {
+                    [enabled setOn:YES];
+                }
+            }
             [cell.contentView addSubview:enabled];
         }
     }
@@ -107,6 +95,13 @@
             label.text = @"服务器地址";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
+
+            if (self.shadowsocksConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                labelValue.text = self.shadowsocksConfig[@"server"];
+                [cell.contentView addSubview:labelValue];
+            }
         }
         if (indexPath.row == 1) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
@@ -114,12 +109,12 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-//            if (self.systemInfo) {
-//                UILabel *labelDesp = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-//                labelDesp.textAlignment = NSTextAlignmentRight;
-//                labelDesp.text = self.systemBoard[@"release"][@"description"];
-//                [cell.contentView addSubview:labelDesp];
-//            }
+            if (self.shadowsocksConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                labelValue.text = self.shadowsocksConfig[@"server_port"];
+                [cell.contentView addSubview:labelValue];
+            }
         }
         if (indexPath.row == 2) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
@@ -127,28 +122,16 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-//            if (self.systemInfo) {
-//                UILabel *labelUptime = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-//                labelUptime.textAlignment = NSTextAlignmentRight;
-//                int num_seconds = [self.systemInfo[@"uptime"] intValue];
-//                
-//                int days = num_seconds / (60 * 60 * 24);
-//                num_seconds -= days * (60 * 60 * 24);
-//                int hours = num_seconds / (60 * 60);
-//                num_seconds -= hours * (60 * 60);
-//                int minutes = num_seconds / 60;
-//                num_seconds -= minutes * 60;
-//                if (days > 0) {
-//                    labelUptime.text = [NSString stringWithFormat:@"%d天%d小时%d分钟%d秒", days, hours, minutes, num_seconds];
-//                } else if (hours > 0){
-//                    labelUptime.text = [NSString stringWithFormat:@"%d小时%d分钟%d秒", hours, minutes, num_seconds];
-//                } else if (minutes > 0){
-//                    labelUptime.text = [NSString stringWithFormat:@"%d分钟%d秒", minutes, num_seconds];
-//                } else {
-//                    labelUptime.text = [NSString stringWithFormat:@"%d秒", num_seconds];
-//                }
-//                [cell.contentView addSubview:labelUptime];
-//            }
+            if (self.shadowsocksConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                NSMutableString *dottedPassword = [NSMutableString new];
+                for (int i = 0; i < [self.shadowsocksConfig[@"password"] length]; i++) {
+                    [dottedPassword appendString:@"●"]; // BLACK CIRCLE Unicode: U+25CF, UTF-8: E2 97 8F
+                }
+                labelValue.text = dottedPassword;
+                [cell.contentView addSubview:labelValue];
+            }
         }
         if (indexPath.row == 3) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(30, 11, 150, 21)];
@@ -156,12 +139,12 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             [cell.contentView addSubview:label];
             
-//            if (self.diskInfo) {
-//                UILabel *labelTotal = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
-//                labelTotal.textAlignment = NSTextAlignmentRight;
-//                labelTotal.text = self.diskInfo[@"total"];
-//                [cell.contentView addSubview:labelTotal];
-//            }
+            if (self.shadowsocksConfig) {
+                UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(120, 11, 250, 21)];
+                labelValue.textAlignment = NSTextAlignmentRight;
+                labelValue.text = self.shadowsocksConfig[@"encrypt_method"];
+                [cell.contentView addSubview:labelValue];
+            }
         }
     }
     return cell;

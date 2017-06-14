@@ -15,6 +15,7 @@
 #import "ULanViewController.h"
 #import "UWifiViewController.h"
 #import "UShadowsocksViewController.h"
+#import "UPdnsdViewController.h"
 
 @interface UBoxViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -88,6 +89,10 @@
     if (indexPath.section == 2) {
         if (indexPath.row == 0){
             UShadowsocksViewController *vc = [[UShadowsocksViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (indexPath.row == 1){
+            UPdnsdViewController *vc = [[UPdnsdViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

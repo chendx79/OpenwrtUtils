@@ -26,6 +26,8 @@
 @property (nonatomic, strong) NSString *iwInfoDevice;
 @property (nonatomic, strong) NSDictionary *iwInfoInfo;
 @property (nonatomic, strong) NSArray *wifiClients;
+@property (nonatomic, strong) NSDictionary *shadowsocksConfig;
+@property (nonatomic, strong) NSString *pdnsdConfig;
 
 @end
 
@@ -94,6 +96,8 @@
     [self getLanDHCP];
     [self getWirelessConfig];
     [self getIWInfoDevice];
+    [self getShadowsocksConfig];
+    [self getPdnsdConfig];
     [self sshLogin];
 }
 
@@ -163,6 +167,18 @@
 - (void)getWifiClients{
     [[UBus sharedInstance] getWifiClients:^(NSArray *wifiClients) {
         self.wifiClients = wifiClients;
+    }];
+}
+
+- (void)getShadowsocksConfig{
+    [[UBus sharedInstance] getShadowsocksConfig:^(NSDictionary *shadowsocksConfig) {
+        self.shadowsocksConfig = shadowsocksConfig;
+    }];
+}
+
+- (void)getPdnsdConfig{
+    [[UBus sharedInstance] getPdnsdConfig:^(NSString *pdnsdConfig) {
+        self.pdnsdConfig = pdnsdConfig;
     }];
 }
 

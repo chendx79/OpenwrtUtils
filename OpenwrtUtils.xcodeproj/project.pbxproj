@@ -30,6 +30,8 @@
 		3EDC405D1E821F37001700CA /* UWiFiSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC405C1E821F37001700CA /* UWiFiSearchResultCell.m */; };
 		3EDC40641E822C4E001700CA /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDC40631E822C4E001700CA /* Utils.m */; };
 		3EDC40671E824777001700CA /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC40661E824777001700CA /* Config.plist */; };
+		650294101EF0C5A2006B3673 /* superuser.json in Resources */ = {isa = PBXBuildFile; fileRef = 6502940F1EF0C5A2006B3673 /* superuser.json */; };
+		650294131EF0C695006B3673 /* UPdnsdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 650294121EF0C695006B3673 /* UPdnsdViewController.m */; };
 		653CD00B1EBC5E2500CCB0A4 /* UAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD00A1EBC5E2500CCB0A4 /* UAboutViewController.m */; };
 		653CD00E1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD00D1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.m */; };
 		653CD0111EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 653CD0101EC932CD00CCB0A4 /* UWrtGetSystemBoardApi.m */; };
@@ -116,6 +118,9 @@
 		3EDC40621E822C4E001700CA /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		3EDC40631E822C4E001700CA /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		3EDC40661E824777001700CA /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		6502940F1EF0C5A2006B3673 /* superuser.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = superuser.json; sourceTree = "<group>"; };
+		650294111EF0C695006B3673 /* UPdnsdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPdnsdViewController.h; sourceTree = "<group>"; };
+		650294121EF0C695006B3673 /* UPdnsdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UPdnsdViewController.m; sourceTree = "<group>"; };
 		653CD0091EBC5E2500CCB0A4 /* UAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAboutViewController.h; sourceTree = "<group>"; };
 		653CD00A1EBC5E2500CCB0A4 /* UAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAboutViewController.m; sourceTree = "<group>"; };
 		653CD00C1EBC7A7200CCB0A4 /* UWrtGetSystemInfoApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UWrtGetSystemInfoApi.h; sourceTree = "<group>"; };
@@ -203,6 +208,8 @@
 				653CD01B1EC9A2C400CCB0A4 /* ULanViewController.m */,
 				653CD0221EC9A68B00CCB0A4 /* UShadowsocksViewController.h */,
 				653CD0211EC9A68B00CCB0A4 /* UShadowsocksViewController.m */,
+				650294111EF0C695006B3673 /* UPdnsdViewController.h */,
+				650294121EF0C695006B3673 /* UPdnsdViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -299,6 +306,7 @@
 			children = (
 				653FD1021EEE273100E2FA57 /* pdnsd.conf */,
 				653FD1041EEE296B00E2FA57 /* show_wifi_clients.sh */,
+				6502940F1EF0C5A2006B3673 /* superuser.json */,
 			);
 			path = files;
 			sourceTree = "<group>";
@@ -475,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650294101EF0C5A2006B3673 /* superuser.json in Resources */,
 				65A127351E778F880097082F /* LaunchScreen.storyboard in Resources */,
 				653FD1051EEE296B00E2FA57 /* show_wifi_clients.sh in Resources */,
 				3EDC40671E824777001700CA /* Config.plist in Resources */,
@@ -571,6 +580,7 @@
 				65A127271E778F880097082F /* main.m in Sources */,
 				653CD01D1EC9A2C400CCB0A4 /* ULanViewController.m in Sources */,
 				3E5DFC831E962BCC00D0CB2A /* UWrtGetSSHStatusApi.m in Sources */,
+				650294131EF0C695006B3673 /* UPdnsdViewController.m in Sources */,
 				3E5DFC8F1E962C1A00D0CB2A /* UWrtGetPdnsdConfigApi.m in Sources */,
 				653CD0171EC9A0DD00CCB0A4 /* UWanViewController.m in Sources */,
 				3E5DFC891E962BFB00D0CB2A /* UWrtGetWirelessConfigApi.m in Sources */,

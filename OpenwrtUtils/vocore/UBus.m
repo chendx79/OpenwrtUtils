@@ -534,6 +534,28 @@ static BOOL _bypassAllocMethod = YES;
                                    }];
 }
 
+- (void)getShadowsocksConfig:(void (^)(NSDictionary *shadowsocksConfig))result {
+    UWrtGetShadowsocksConfigApi *api = [UWrtGetShadowsocksConfigApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetShadowsocksConfigApi *obj) {
+                                       if (result) {
+                                           result(obj.shadowsocksConfig);
+                                       }
+                                   }];
+}
+
+- (void)getPdnsdConfig:(void (^)(NSString *pdnsdConfig))result {
+    UWrtGetPdnsdConfigApi *api = [UWrtGetPdnsdConfigApi new];
+    api.sessionToken = self.sessionToken;
+    [[UWrtHttpEngine sharedInstance] post:api
+                                   result:^(BOOL rst, UWrtGetPdnsdConfigApi *obj) {
+                                       if (result) {
+                                           result(obj.pdnsdConfig);
+                                       }
+                                   }];
+}
+
 - (void)sshLogin:(void (^)(BOOL success))result {
     BOOL success = [[Utils sharedInstance] SSHLogin:gatewayIP Port:@"22" Username:@"root" Password:rootPassword];
     result(success);

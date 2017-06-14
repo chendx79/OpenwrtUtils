@@ -90,6 +90,8 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
 - (void)getWirelessConfig:(void (^)(NSDictionary *wirelessConfig))result;
 - (void)getIWInfoDevice:(void (^)(NSString *iwInfoDevice))result;
 - (void)getIWInfoInfo:(void (^)(NSDictionary *iwInfoInfo))result;
+- (void)getShadowsocksConfig:(void (^)(NSDictionary *shadowsocksConfig))result;
+- (void)getPdnsdConfig:(void (^)(NSString *pdnsdConfig))result;
 
 - (void)sshLogin:(void (^)(BOOL success))result;
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result;

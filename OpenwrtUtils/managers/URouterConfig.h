@@ -27,6 +27,7 @@
 - (void)getSystemBoard;
 - (void)getDiskInfo;
 - (void)getWifiClients;
+- (void)getShadowsocksConfig;
 
 - (BOOL)isBoxAvailable;
 - (BOOL)isBoxLoggedin;
@@ -43,5 +44,7 @@
 - (NSString *)iwInfoDevice;
 - (NSDictionary *)iwInfoInfo;
 - (NSArray *)wifiClients;
+- (NSDictionary *)shadowsocksConfig;
+- (NSString *)pdnsdConfig;
 
 @end
