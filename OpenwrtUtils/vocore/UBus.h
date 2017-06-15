@@ -93,6 +93,7 @@ typedef NS_OPTIONS(NSUInteger, UbusError) {
 - (void)getShadowsocksConfig:(void (^)(NSDictionary *shadowsocksConfig))result;
 - (void)getPdnsdConfig:(void (^)(NSString *pdnsdConfig))result;
 
+- (void)systemPrepare:(void (^)(BOOL isSystemPrepared))result;
 - (void)sshLogin:(void (^)(BOOL success))result;
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result;
 - (void)getWifiClients:(void (^)(NSArray *wifiClients))result;

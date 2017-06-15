@@ -18,21 +18,30 @@
 
 + (URouterConfig *)sharedInstance;
 
-- (void)checkBoxAvailable:(void (^)(BOOL available))resultBlock;
+- (void)checkUbusAvailable:(void (^)(BOOL available))resultBlock;
 - (void)loginWithPassword:(NSString *)pwd result:(void (^)(BOOL))resultBlock;
 - (void)searchingRouters:(id<URouterConfigProtocol>)delegate;
 - (void)getRouterInfo;
 - (void)getWanStatus;
 - (void)getSystemInfo;
 - (void)getSystemBoard;
+- (void)sshLogin;
+- (void)systemPrepare;
 - (void)getDiskInfo;
 - (void)getWifiClients;
 - (void)getShadowsocksConfig;
 
-- (BOOL)isBoxAvailable;
+- (BOOL)isWifi;
+- (BOOL)isUBusAvailable;
 - (BOOL)isBoxLoggedin;
 - (BOOL)isWiFiConnected;
 - (BOOL)isSSHLoggedin;
+- (BOOL)isSystemPrepared;
+- (BOOL)isUBusNotFullAccess;
+
+@property (nonatomic, assign) BOOL isWifi;
+@property (nonatomic, assign) BOOL isUBusNotFullAccess;
+@property (nonatomic, assign) BOOL isSystemPrepared;
 
 - (NSDictionary *)wanStatus;
 - (NSDictionary *)systemInfo;

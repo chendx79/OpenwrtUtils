@@ -31,6 +31,7 @@
 @property (nonatomic, strong) UIButton *internetButton;
 @property (nonatomic, strong) UIButton *wifiButton;
 @property (nonatomic, strong) UIButton *boxButton;
+@property (nonatomic, strong) UIButton *prepareButton;
 @end
 
 @implementation UHomeViewController
@@ -45,20 +46,21 @@
     NSLog(@"CheckUBus started...");
 
     //背景渐变色
-    UIColor *startColor = [UIColor colorWithRed:44.0/255.0 green:51.0/255.0 blue:60.0/255.0 alpha:1.0]; // 开始的颜色
-    UIColor *endColor = [UIColor colorWithRed:104.0/255.0 green:111.0/255.0 blue:120.0/255.0 alpha:1.0]; // 结束的颜色
+    UIColor *startColor = [UIColor colorWithRed:44.0 / 255.0 green:51.0 / 255.0 blue:60.0 / 255.0 alpha:1.0];  // 开始的颜色
+    UIColor *endColor = [UIColor colorWithRed:104.0 / 255.0 green:111.0 / 255.0 blue:120.0 / 255.0 alpha:1.0]; // 结束的颜色
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = self.view.bounds;
     gradientLayer.startPoint = CGPointMake(0.5, 0);
     gradientLayer.endPoint = CGPointMake(0.5, 1);
-    gradientLayer.locations = @[@(0.0f), @(1.0f)]; // 设置起始点、结束点，中间也可以穿插中间值，范围[0, 1]
-    gradientLayer.colors = @[(id)startColor.CGColor, (id)endColor.CGColor]; // 和locations属性对应
+    gradientLayer.locations = @[ @(0.0f), @(1.0f) ];                          // 设置起始点、结束点，中间也可以穿插中间值，范围[0, 1]
+    gradientLayer.colors = @[ (id)startColor.CGColor, (id)endColor.CGColor ]; // 和locations属性对应
     [self.view.layer addSublayer:gradientLayer];
     //背景
 
     [self.view addSubview:self.internetButton];
     [self.view addSubview:self.wifiButton];
     [self.view addSubview:self.boxButton];
+    [self.view addSubview:self.prepareButton];
 
     [self.internetButton mas_makeConstraints:^(MASConstraintMaker *make) {
       make.centerX.mas_equalTo(self.view.mas_centerX);
@@ -81,6 +83,13 @@
       make.height.mas_equalTo(100);
     }];
 
+    [self.prepareButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.boxButton.mas_top);
+        make.left.mas_equalTo(self.boxButton.mas_right).offset(30);
+        make.width.mas_equalTo(80);
+        make.height.mas_equalTo(30);
+    }];
+
     //绿灯和互联网
     UIImageView *internetGreenLight = [[UIImageView alloc] initWithImage:IMAGE_GREEN_LIGHT];
     internetGreenLight.frame = CGRectMake(150, 188, 15, 15); // 设置图片位置和大小
@@ -99,24 +108,31 @@
     searching.text = @"未找到Openwrt路由器，继续搜索中……";
     [self.view addSubview:searching];
 
-
-    UIActivityIndicatorView *searchActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    searchActivityIndicator.center = CGPointMake(180, 580);//只能设置中心，不能设置大小
+    UIActivityIndicatorView *searchActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    searchActivityIndicator.center = CGPointMake(180, 580); //只能设置中心，不能设置大小
     [self.view addSubview:searchActivityIndicator];
     [searchActivityIndicator startAnimating];
 
     self.wifiButton.hidden = YES;
     self.boxButton.hidden = YES;
+    self.prepareButton.hidden = YES;
 
-    [[RACSignal combineLatest:@[ RACObserve([URouterConfig sharedInstance], isBoxAvailable) ]
-                       reduce:^(NSNumber *isBoxAvailable) {
-                         return @(isBoxAvailable.boolValue);
+    [[RACSignal combineLatest:@[ RACObserve([URouterConfig sharedInstance], isUBusAvailable) ]
+                       reduce:^(NSNumber *isUBusAvailable) {
+                         return @(isUBusAvailable.boolValue);
                        }] subscribeNext:^(NSNumber *rst) {
       if (rst.boolValue) {
           self.boxButton.hidden = NO;
           searching.hidden = YES;
           [searchActivityIndicator stopAnimating];
           searchActivityIndicator.hidden = YES;
+
+          //画Openwrt路由器
+          UILabel *openwrtRouterLabel = [[UILabel alloc] init];
+          openwrtRouterLabel.frame = CGRectMake(140, 575, 120, 20); // 设置图片位置和大小
+          openwrtRouterLabel.textColor = [UIColor whiteColor];
+          openwrtRouterLabel.text = @"Openwrt路由器";
+          [self.view addSubview:openwrtRouterLabel];
       } else {
           self.boxButton.hidden = YES;
       }
@@ -128,18 +144,14 @@
                        }] subscribeNext:^(NSNumber *rst) {
       if (rst.boolValue) {
           //self.wifiButton.hidden = NO;
-          //绿灯和路由器
-          UIImageView *internetGreenLight = [[UIImageView alloc] initWithImage:IMAGE_GREEN_LIGHT];
-          internetGreenLight.frame = CGRectMake(120, 578, 15, 15); // 设置图片位置和大小
-          [self.view addSubview:internetGreenLight];
+          //画路由器的绿灯
+          UIImageView *routerGreenLight = [[UIImageView alloc] initWithImage:IMAGE_GREEN_LIGHT];
+          routerGreenLight.frame = CGRectMake(120, 578, 15, 15); // 设置图片位置和大小
+          [self.view addSubview:routerGreenLight];
 
-          UILabel *internet = [[UILabel alloc] init];
-          internet.frame = CGRectMake(140, 575, 120, 20); // 设置图片位置和大小
-          internet.textColor = [UIColor whiteColor];
-          internet.text = @"Openwrt路由器";
-          [self.view addSubview:internet];
-          //
-          [[URouterConfig sharedInstance] getRouterInfo];
+          if ([URouterConfig sharedInstance].isSystemPrepared) {
+              [[URouterConfig sharedInstance] getRouterInfo];
+          }
       } else {
           self.wifiButton.hidden = YES;
       }
@@ -156,8 +168,19 @@
       }
     }];
 
-    //启动时自动检测盒子是否存在
-    [[URouterConfig sharedInstance] checkBoxAvailable:^(BOOL available){
+    [[RACSignal combineLatest:@[ RACObserve([URouterConfig sharedInstance], isUBusNotFullAccess) ]
+                       reduce:^(NSNumber *isUBusFullAccess) {
+                           return @(isUBusFullAccess.boolValue);
+                       }] subscribeNext:^(NSNumber *rst) {
+                           if (rst.boolValue) {
+                               self.prepareButton.hidden = NO;
+                           } else {
+                               self.prepareButton.hidden = YES;
+                           }
+                       }];
+
+    //启动时自动检测路由器UBus是否可用
+    [[URouterConfig sharedInstance] checkUbusAvailable:^(BOOL available){
 
     }];
 
@@ -167,15 +190,21 @@
     NSString *rootPassword = [data objectForKey:@"rootPassword"];
 
     [[URouterConfig sharedInstance] loginWithPassword:rootPassword
-                                               result:^(BOOL success){
+                                               result:^(BOOL success) {
+                                                 if (success) {
+                                                     [[URouterConfig sharedInstance] sshLogin];
+                                                 } else {
+                                                     //登录失败
+                                                     [self toast:@"Openwrt路由器登录失败"];
+                                                 }
                                                }];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
@@ -213,6 +242,17 @@
     return _boxButton;
 }
 
+- (UIButton *)prepareButton {
+    if (!_prepareButton) {
+        _prepareButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [_prepareButton setTitle:@"系统准备" forState:UIControlStateNormal];
+        [_prepareButton setBackgroundColor:[UIColor darkGrayColor]];
+        [_prepareButton setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
+        [_prepareButton addTarget:self action:@selector(actionPrepare:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _prepareButton;
+}
+
 - (void)toast:(NSString *)message {
     [[[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
 }
@@ -221,9 +261,9 @@
 
 - (void)actionInternet:(id)sender {
     if ([[URouterConfig sharedInstance] isBoxLoggedin]) {
-            [self hideLoading];
-            NSString *message = [[[[[URouterConfig sharedInstance] wanStatus] objectForKey:@"ipv4-address"] objectAtIndex:0] objectForKey:@"address"];
-            [self toast:message];
+        [self hideLoading];
+        NSString *message = [[[[[URouterConfig sharedInstance] wanStatus] objectForKey:@"ipv4-address"] objectAtIndex:0] objectForKey:@"address"];
+        [self toast:message];
     }
 }
 
@@ -241,6 +281,11 @@
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
         [alert show];
     }
+}
+
+- (void)actionPrepare:(id)sender {
+    [[URouterConfig sharedInstance] systemPrepare];
+    [[URouterConfig sharedInstance] sshLogin];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

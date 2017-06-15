@@ -561,6 +561,10 @@ static BOOL _bypassAllocMethod = YES;
     result(success);
 }
 
+- (void)systemPrepare:(void (^)(BOOL isSystemPrepared))result {
+    BOOL isSystemPrepared = [[Utils sharedInstance] SystemPrepare];
+    result(isSystemPrepared);
+}
 
 - (void)getDiskInfo:(void (^)(NSDictionary *diskInfo))result {
     NSDictionary *diskInfo = [[Utils sharedInstance] GetDiskInfo];

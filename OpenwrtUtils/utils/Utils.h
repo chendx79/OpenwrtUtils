@@ -34,7 +34,7 @@
 - (NSString *)GetLocalIP;
 - (NSString *)GetGetwayIP;
 - (BOOL)SSHLogin:(NSString *)ip Port:(NSString *)port Username:(NSString *)username Password:(NSString *)password;
-- (void)SystemPrepare;
+- (BOOL)SystemPrepare;
 - (NSDictionary *)GetDiskInfo;
 - (NSArray *)GetWifiClients;
 

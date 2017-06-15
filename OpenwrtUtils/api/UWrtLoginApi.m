@@ -7,6 +7,7 @@
 //
 
 #import "UWrtLoginApi.h"
+#import "URouterConfig.h"
 
 @interface UWrtLoginApi ()
 @property (nonatomic, copy) NSString *sessionToken;
@@ -33,6 +34,13 @@
 - (void)decodeResponse:(id)response {
     NSArray *result = [response objectForKey:@"result"];
     self.sessionToken = [[result objectAtIndex:1] objectForKey:@"ubus_rpc_session"];
+    NSDictionary *accessGroup = [result objectAtIndex:1][@"acls"][@"access-group"];
+    if ([accessGroup objectForKey:@"superuser"]) {
+        [URouterConfig sharedInstance].isUBusNotFullAccess = NO;
+        [URouterConfig sharedInstance].isSystemPrepared = YES;
+    } else {
+        [URouterConfig sharedInstance].isUBusNotFullAccess = YES;
+    }
 }
 
 @end

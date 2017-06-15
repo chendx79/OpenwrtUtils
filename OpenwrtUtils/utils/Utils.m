@@ -156,24 +156,43 @@ static BOOL _bypassAllocMethod = YES;
     return NO;
 }
 
-- (void)SystemPrepare{
+- (BOOL)SystemPrepare{
     if (session.isConnected) {
         NSError *error = nil;
-
         NSString *response;
-        response = [session.channel execute:@"opkg update" error:&error];
-        NSLog(@"%@", response);
-        response = [session.channel execute:@"opkg install rpcd-mod-iwinfo rpcd-mod-file iwinfo" error:&error];
-        NSLog(@"%@", response);
-        response = [session.channel execute:@"echo \"{\n    \\\"superuser\\\": {\n        \\\"description\\\": \\\"Super user access role\\\",\n        \\\"read\\\": {\n            \\\"ubus\\\": {\n                \\\"*\\\": [ \\\"*\\\" ]\n            },\n            \\\"uci\\\": [ \\\"*\\\" ]\n        },\n        \\\"write\\\": {\n            \\\"ubus\\\": {\n                \\\"*\\\": [ \\\"*\\\" ]\n            },\n            \\\"uci\\\": [ \\\"*\\\" ]\n        }\n    }\n}\n\" > /usr/share/rpcd/acl.d/superuser.json" error:&error];
 
-        NSLog(@"%@", response);
-        response = [session.channel execute:@"reboot" error:&error];
-        NSLog(@"%@", response);
-        //BOOL success = [session.channel uploadFile:@"~/index.html" to:@"/usr/share/rpcd/acl.d/superuser.json"];
+        //开启root的全部ubus权限
+        {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"superuser.json" ofType:nil];
+            BOOL success = [session.channel uploadFile:filePath to:@"/usr/share/rpcd/acl.d/superuser.json"];
+            if (success) {
+                NSLog(@"上传superuser.json到路由器成功");//ubus重新登录生效，不需要重启
+            }
+        }
 
-        [session disconnect];
+        //上传show_wifi_clients.sh脚本到/sbin
+        {
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"show_wifi_clients.sh" ofType:nil];
+            BOOL success = [session.channel uploadFile:filePath to:@"/sbin/show_wifi_clients.sh"];
+            if (success) {
+                NSLog(@"上传show_wifi_clients.sh到路由器成功");
+                response = [session.channel execute:@"chmod +x /sbin/show_wifi_clients.sh" error:&error];
+                NSLog(@"%@", response);
+                NSLog(@"成功给予show_wifi_clients.sh脚本可执行权限");//可以获取无线客户端列表，不需要重启
+            }
+        }
+
+        response = [session.channel execute:@"opkg update" error:&error];//更新opkg
+        NSLog(@"%@", response);
+        response = [session.channel execute:@"opkg install rpcd-mod-iwinfo rpcd-mod-file iwinfo" error:&error];//安装wifi访问模块和文件访问模块
+        NSLog(@"%@", response);
+        response = [session.channel execute:@"/etc/init.d/rpcd restart && /etc/init.d/uhttpd restart" error:&error];//重启ubus
+        NSLog(@"%@", response);
+
+        return YES;
     }
+
+    return NO;
 }
 
 - (NSDictionary *)GetDiskInfo{

@@ -12,7 +12,7 @@
 @interface URouterConfig ()
 @property (nonatomic, weak) id<URouterConfigProtocol> searchRouterDelegate;
 @property (nonatomic, strong) NSMutableArray *searchedRouters;
-@property (nonatomic, assign) BOOL isBoxAvailable;
+@property (nonatomic, assign) BOOL isUBusAvailable;
 @property (nonatomic, assign) BOOL isBoxLoggedin;
 @property (nonatomic, assign) BOOL isWiFiConnected;
 @property (nonatomic, assign) BOOL isSSHLoggedin;
@@ -50,9 +50,9 @@
     return self;
 }
 
-- (void)checkBoxAvailable:(void (^)(BOOL available))resultBlock {
+- (void)checkUbusAvailable:(void (^)(BOOL available))resultBlock {
     [[UBus sharedInstance] checkUBusAvailable:^(BOOL available) {
-      self.isBoxAvailable = available;
+      self.isUBusAvailable = available;
       if (resultBlock) {
           resultBlock(available);
       }
@@ -89,6 +89,7 @@
 }
 
 - (void)getRouterInfo{
+    [self sshLogin];
     [self getWanStatus];
     [self getSystemInfo];
     [self getSystemBoard];
@@ -98,7 +99,9 @@
     [self getIWInfoDevice];
     [self getShadowsocksConfig];
     [self getPdnsdConfig];
-    [self sshLogin];
+
+    [self getDiskInfo];
+    [self getWifiClients];
 }
 
 - (void)getWanStatus{
@@ -153,8 +156,12 @@
 - (void)sshLogin{
     [[UBus sharedInstance] sshLogin:^(BOOL success) {
         self.isSSHLoggedin = success;
-        [self getDiskInfo];
-        [self getWifiClients];
+    }];
+}
+
+- (void)systemPrepare{
+    [[UBus sharedInstance] systemPrepare:^(BOOL isSystemPrepared) {
+        self.isSystemPrepared = isSystemPrepared;
     }];
 }
 

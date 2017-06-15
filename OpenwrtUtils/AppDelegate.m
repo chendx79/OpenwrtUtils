@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "UHomeViewController.h"
+#import "AFNetworking.h"
+#import "URouterConfig.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UINavigationController *navigation;
@@ -24,7 +26,32 @@
     self.navigation = [[UINavigationController alloc] initWithRootViewController:[UHomeViewController new]];
     self.window.rootViewController = self.navigation;
     [self.window makeKeyAndVisible];
+
+    // 1.获得网络监控的管理者
+    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
+
+    // 2.设置网络状态改变后的处理
+    [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        // 当网络状态改变了, 就会调用这个block
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown: // 未知网络
+                [URouterConfig sharedInstance].isWifi = NO;
+                break;
+            case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
+                [URouterConfig sharedInstance].isWifi = NO;
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
+                [URouterConfig sharedInstance].isWifi = NO;
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
+                [URouterConfig sharedInstance].isWifi = YES;
+                break;
+        }
+    }];
     
+    // 3.开始监控
+    [mgr startMonitoring];
+
     return YES;
 }
 
